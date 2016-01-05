@@ -3,6 +3,7 @@ Lock_File="lock.txt"                                #锁定文件
 F_Auth = open(Auth_File)
 Read_Auth=F_Auth.readlines()                          #执行前前将文件读取到变量，避免循环读取
 F_Auth.close()
+User_Exit=[]
 while True:
     LoginSusses=False                               #循环开始前先定义登陆成功失败的变量。方便循环嵌套跳转
     count = 0                                        #定义计数器，错误三次锁定
@@ -13,6 +14,13 @@ while True:
         a = Lock_List.append(line)
     Read_Lock.close()
     Name=input('请输入你的账户:').strip()
+    for i in Read_Auth:
+        print (type(i))
+        i = i.split()
+        User_Exit.extend(i[0].split())
+    if Name not in User_Exit:
+        print ('你输入的用户名不存在，请重新输入')
+        break
     if Name in Lock_List:
         A=input("你的账户已经被锁定！！请联系管理员解锁！输入Y解锁，任意键退出:")             #，用户登陆前先判断用户是否被锁定后在进行密码判断。
         if A == 'Y':
