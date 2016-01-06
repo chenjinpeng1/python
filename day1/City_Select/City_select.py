@@ -1,11 +1,9 @@
 import CityList
 SelectSuccess=True
-Print_City = ''
-Print_Area = ''
 City_List=list(CityList.info.keys())      #获取省份列表
-City_Key = enumerate(CityList.info.keys())  #通过enumerate将省份按照阿序号排列，通过for循环取值
 while SelectSuccess:
-    for i,val in City_Key:
+    Print_City = ''
+    for i,val in enumerate(City_List):  #通过enumerate将省份按照阿序号排列，通过for循环取值
       i = str(i)
       Print_City += i + '\t' + val + '  |  '
     print ('\033[36;1m欢迎登陆查询系统，请根据提示进行查询\033[0m')
@@ -17,12 +15,12 @@ while SelectSuccess:
     if City.isdigit() is False:                                #判断用户输入的是不是数字 不是继续输入
         print ('\033[1;31;40m请输入正确的指令\033[0m')
         continue
-    if len(City) != 0 and int(City) < len(City_List):          #判断用户输入是不是为空（可取消） and 用户输入的数字是否超过省份列表的索引值
+    if len(City) != 0 and int(City) < len(City_List):         #判断用户输入是不是为空（可取消） and 用户输入的数字是否超过省份列表的索引值
+        Print_Area = ''
         Area_List = list(CityList.info[City_List[int(City)]])   #将用户选择的省份取出其区域的keys转换为列表
-        Area_Key = enumerate(CityList.info[City_List[int(City)]].keys())    #取出用户输入的省份的keys添加序列号 for循环取出
-        for i,val in Area_Key:
+        for i,val in enumerate(Area_List):  #取出用户输入的省份的keys添加序列号 for循环取出
             i = str(i)
-            Print_Area +=i + '\t' + val + ' | '
+            Print_Area += i + '\t' + val + ' | '
         while SelectSuccess:
             User_Input=input  ('''\033[36;1m
     ===============================================================================================
