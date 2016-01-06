@@ -15,12 +15,11 @@ while True:
     Read_Lock.close()
     Name=input('请输入你的账户:').strip()
     for i in Read_Auth:
-        print (type(i))
         i = i.split()
         User_Exit.extend(i[0].split())
     if Name not in User_Exit:
         print ('你输入的用户名不存在，请重新输入')
-        break
+        continue
     if Name in Lock_List:
         A=input("你的账户已经被锁定！！请联系管理员解锁！输入Y解锁，任意键退出:")             #，用户登陆前先判断用户是否被锁定后在进行密码判断。
         if A == 'Y':
