@@ -1,3 +1,7 @@
+#python 3.5环境，解释器在linux需要改变
+#城市查询功能,阅读手册请查询readme文件
+#调用文件 CityList.py
+#作者：S12-陈金彭
 import CityList                          #导入城市列表
 SelectSuccess=True                       #定义while判断值
 City_List=list(CityList.info.keys())      #获取省份列表
@@ -39,7 +43,6 @@ while SelectSuccess:
                 print ('\033[1;31;40m请输入正确的指令\033[0m')
                 continue
             if len(User_Input) != 0 and int(User_Input) < len(Area_List):  #判断用户输入是不是为空（可取消） and 用户输入的数字是否超过区域列表的索引值
-            # if int(User_Input) <= len(Area_List):
                 print ('\033[36;1m')
                 print (CityList.info[City_List[int(City)]][Area_List[int(User_Input)]])  #打印用户选择的区域的信息
                 print ('\033[0m')

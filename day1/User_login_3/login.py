@@ -1,3 +1,7 @@
+#python 3.5环境，解释器在linux需要改变
+#用户登陆认证，阅读手册查询readme文件
+#调用文件 login.txt,lock.txt
+#作者：S12-陈金彭
 Auth_File="login.txt"                               #认证登陆文件
 Lock_File="lock.txt"                                #锁定文件
 F_Auth = open(Auth_File)
