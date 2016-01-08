@@ -1,5 +1,5 @@
-import CityList
-SelectSuccess=True
+import CityList                          #导入城市列表
+SelectSuccess=True                       #定义while判断值
 City_List=list(CityList.info.keys())      #获取省份列表
 while SelectSuccess:
     Print_City = ''
@@ -39,16 +39,14 @@ while SelectSuccess:
                 print ('\033[1;31;40m请输入正确的指令\033[0m')
                 continue
             if len(User_Input) != 0 and int(User_Input) < len(Area_List):  #判断用户输入是不是为空（可取消） and 用户输入的数字是否超过区域列表的索引值
-                if int(User_Input) <= len(Area_List):
-                    print ('\033[36;1m')
-                    print (CityList.info[City_List[int(City)]][Area_List[int(User_Input)]])  #打印用户选择的区域的信息
-                    print ('\033[0m')
-                    Exit=input('\033[36;1m查询结束，Q退出，任意键继续查询\033[0m')
-                    if Exit == 'Q':
-                        SelectSuccess=False
-                        break
-                else:
-                    print ('\033[1;31;40m请输入正确的序列号\033[')
+            # if int(User_Input) <= len(Area_List):
+                print ('\033[36;1m')
+                print (CityList.info[City_List[int(City)]][Area_List[int(User_Input)]])  #打印用户选择的区域的信息
+                print ('\033[0m')
+                Exit=input('\033[36;1m查询结束，Q退出，任意键继续查询\033[0m')
+                if Exit == 'Q':
+                    SelectSuccess=False
+                    break
             else:
                 print ('\033[1;31;40m请输入正确的序列号\033[0m')
     else:

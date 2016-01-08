@@ -1,7 +1,7 @@
 Auth_File="login.txt"                               #认证登陆文件
 Lock_File="lock.txt"                                #锁定文件
 F_Auth = open(Auth_File)
-Read_Auth=F_Auth.readlines()                          #执行前前将文件读取到变量，避免循环读取
+Read_Auth=F_Auth.readlines()                          #执行前将账号密码文件读取到变量，避免循环读取
 F_Auth.close()
 User_Exit=[]
 while True:
