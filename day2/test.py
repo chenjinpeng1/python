@@ -33,5 +33,48 @@
 #     print (i,val)
 
 # 作业1：购物车
-result = 'dengyu' if 1==1 else 'budengyu'
-print (result)
+# result = 'dengyu' if 1==1 else 'budengyu'
+# print (result)
+# print (int('f',base=16)) #将任意类型的禁制按照指定的禁制转换为10禁制
+num = -11
+# aa = num.__radd__(+3)
+# print (aa)
+# print (num.__sizeof__())
+# print (num.bit_length())
+print (num.conjugate())
+# print (num.__invert__())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
