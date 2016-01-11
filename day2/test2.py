@@ -78,3 +78,58 @@ Name = 'chen'
 # Name = 'Aaad Aa'
 # A = Name.istitle()
 # print (A)
+# #是否全部为大写，返回True；否则返回False
+# Name='CHEN'
+# A = Name.isupper()
+# print (A)
+#判断是否为十进制字符，返回True
+# Name = '123'
+# A=Name.isdecimal()
+# print (A)
+# #判断是否只有数字字符 返回True
+# Name = '123'
+# A=Name.isnumeric()
+# print (A)
+#字符串拼接‘’.join()
+# A = '陈'
+# B = '金彭'
+# print(''.join([A,B]))
+# #返回字符串左对齐，填充符号（5表示算是chen4个字符串，因此只会填充一个#号）
+# A = Name.ljust(5,'#')
+# print (A)
+#返回的字符串转换为小写
+# Name='CHEN'
+# A = Name.lower()
+# print (A)
+# #去除字符串左边的空格
+# Name='   chenjin  peng  '
+# A = Name.lstrip()
+# print (A)
+
+####maketrans以及translate方法解释：
+#Python maketrans() 方法用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。注：两个字符串的长度必须相同，为一一对应的关系。
+#Python translate() 方法根据参数table给出的表(包含 256 个字符)转换字符串的字符, 要过滤掉的字符放到 del 参数中。
+# A='abcde'
+# B='12345'
+# AA = str.maketrans(A,B)
+# CC='my name is chen...abe'
+# print(CC.translate(AA))
+
+#将字符串转换为全大写（字符串：ASCII字符）
+# A = Name.upper()
+# print (A)
+#字符串以制定字符分割为元祖
+# A=Name.partition('e')
+# print(type(A))
+#replace替换字符串
+# A=Name.replace('h','a')
+# print (A)
+#Python rindex() 返回子字符串 str 在字符串中最后出现的位置，如果没有匹配的字符串会报异常，可制定字符串的起始以及结束的索引值
+# A=Name.rfind('n',0,4)
+# print(A)
+#返回字符串最后一次出现的位置，如果没有匹配项则返回-1
+# A=Name.rindex('c')
+# print (A)
+#Python rjust() 返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串。如果指定的长度小于字符串的长度则返回原字符串
+# A=Name.rjust(5,'#')
+# print (A)
