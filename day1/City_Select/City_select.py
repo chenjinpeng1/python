@@ -8,8 +8,7 @@ City_List=list(CityList.info.keys())      #获取省份列表
 while SelectSuccess:
     Print_City = ''
     for i,val in enumerate(City_List):  #通过enumerate将省份按照阿序号排列，通过for循环取值
-      i = str(i)
-      Print_City += i + '\t' + val + '  |  '
+        Print_City += ''.join([str(i),'\t',val,' | '])
     print ('\033[36;1m欢迎登陆查询系统，请根据提示进行查询\033[0m')
     print ('\033[36;1m%s\033[0m'%(Print_City))
     City=input('\033[36;1m请输入序列号选择你要查询的城市，Q退出:\033[0m').strip()
@@ -23,15 +22,14 @@ while SelectSuccess:
         Print_Area = ''
         Area_List = list(CityList.info[City_List[int(City)]])   #将用户选择的省份取出其区域的keys转换为列表
         for i,val in enumerate(Area_List):  #取出用户输入的省份的keys添加序列号 for循环取出
-            i = str(i)
-            Print_Area += i + '\t' + val + ' | '
+            Print_Area += ''.join([str(i),'\t',val,' | '])
         while SelectSuccess:
             User_Input=input  ('''\033[36;1m
-    ===============================================================================================
+===============================================================================================
                                            欢迎来到 %s:
                                          %s区域分布如下：
-     %s
-    ===============================================================================================
+%s
+===============================================================================================
     请输入您选择的城市编号，按Q退出,B返回上一级:\033[0m
     '''%(City_List[int(City)],City_List[int(City)],Print_Area)).strip()
             if User_Input == 'B':
