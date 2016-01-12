@@ -1,26 +1,3 @@
-# name = 'Chen'
-# aa = name.__contains__('hen')
-# print (aa)
-####等价于
-# aa = 'hen' in name
-# print (aa)
-# aa = name.capitalize()
-# print (aa)
-# aa = name.casefold()
-# print (aa)
-# aa = name.center(20,'=')
-# print (aa)
-# name = 'asasasadsfdsfdggfgthy'
-# aa = name.count('s',0,5)
-# print (aa)
-# name = '陈金彭'
-# aa=name.encode('gbk')
-# print (aa)
-# aa=name.endswith('e',0,3) #判断第0-3个字符串结尾是否是e
-# print (aa)
-# a = list((1,2,3))
-# print (a)
-#
 # dic = {}
 # Nul = [11,22,33,44,55,66,77,88,99]
 # for i in  Nul:
@@ -36,14 +13,54 @@
 # result = 'dengyu' if 1==1 else 'budengyu'
 # print (result)
 # print (int('f',base=16)) #将任意类型的禁制按照指定的禁制转换为10禁制
-num = -11
-# aa = num.__radd__(+3)
-# print (aa)
-# print (num.__sizeof__())
-# print (num.bit_length())
-print (num.conjugate())
-# print (num.__invert__())
-str
+
+# aa={'a':'b','b':'c'}
+# print(type(aa.keys()))
+
+dic = {}
+Nul = [11,22,33,44,55,66,77,88,99]
+for i in Nul:
+    if i > 66:
+        if 'k1' in dic.keys():
+            dic['k1'].append(i)
+        else:
+            dic['k1']=[i,]
+    if i <= 66:
+        if 'k2' in dic.keys():
+            dic['k2'].append(i)
+        else:
+            dic['k2']=[i,]
+print(dic)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

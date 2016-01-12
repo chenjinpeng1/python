@@ -31,5 +31,5 @@ a = 'aaab'
 # a.split()分割字符串为列表
 # a.swapcase()大小写转换
 # a.title()字符串首字母大写
-dict
+int
 
