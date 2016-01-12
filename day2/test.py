@@ -17,23 +17,20 @@
 # aa={'a':'b','b':'c'}
 # print(type(aa.keys()))
 
-dic = {}
-Nul = [11,22,33,44,55,66,77,88,99]
-for i in Nul:
-    if i > 66:
-        if 'k1' in dic.keys():
-            dic['k1'].append(i)
-        else:
-            dic['k1']=[i,]
-    if i <= 66:
-        if 'k2' in dic.keys():
-            dic['k2'].append(i)
-        else:
-            dic['k2']=[i,]
-print(dic)
-
-
-
+# dic = {}
+# Nul = [11,22,33,44,55,66,77,88,99]
+# for i in Nul:
+#     if i > 66:
+#         if 'k1' in dic.keys():
+#             dic['k1'].append(i)
+#         else:
+#             dic['k1']=[i,]
+#     if i <= 66:
+#         if 'k2' in dic.keys():
+#             dic['k2'].append(i)
+#         else:
+#             dic['k2']=[i,]
+# print(dic)
 
 
 

@@ -426,99 +426,99 @@
 
 ##########################字典##########################
 
-Dic={'k1':'value1','k2':'value2'}
-
-clear()
-clear() 函数用于删除字典内所有元素。
-语法：dict.clear()
-Dic.clear()
-print(Dic)
-
-dict.copy()
-Python 字典(Dictionary) copy() 函数返回一个字典的浅复制。
-何为浅复制：(浅拷贝 在副本中替换值的时候 原字典不受影响， 如果修改或者删除了深层（非第一层）的值 原始的字典也会改变，为了避免这种情况，就使用深拷贝)
-语法：dict.copy()
-Dic={'k1':{'value1':['aaaa',123]},'k2':'value2'}
-Dic2=Dic.copy()
+# Dic={'k1':'value1','k2':'value2'}
+#
+# clear()
+# clear() 函数用于删除字典内所有元素。
+# 语法：dict.clear()
+# Dic.clear()
+# print(Dic)
+#
+# dict.copy()
+# Python 字典(Dictionary) copy() 函数返回一个字典的浅复制。
+# 何为浅复制：(浅拷贝 在副本中替换值的时候 原字典不受影响， 如果修改或者删除了深层（非第一层）的值 原始的字典也会改变，为了避免这种情况，就使用深拷贝)
+# 语法：dict.copy()
+# Dic={'k1':{'value1':['aaaa',123]},'k2':'value2'}
+# Dic2=Dic.copy()
+# # print(Dic2)
+# Dic2['k1']['value1'][1]=1234
+# Dic2['k1']['value1'].remove('aaaa')
 # print(Dic2)
-Dic2['k1']['value1'][1]=1234
-Dic2['k1']['value1'].remove('aaaa')
-print(Dic2)
-print(Dic)
-另一案例
-a={'k1':'v1','k2':[11,22,33]}
-print(id(a),a)
-print(id(a['k2']),a['k2'])
-b=dict.copy(a)
-print(id(b),b)
-print(id(b['k2']),b['k2'])
-print(id(a['k1']),a['k1'])
-print(id(b['k1']),b['k1'])
-print(a.keys(),id(a.keys()))
-print(b.keys(),id(b.keys()))
-
-fromkeys()
-Python 字典(Dictionary) fromkeys() 函数用于创建一个新字典，以序列seq中元素做字典的键，value为字典所有键对应的初始值。
-语法：dict.fromkeys(seq[, value]))
-Seq=['name','age','sex']
-Dic=dict.fromkeys(Seq)
-print(Dic)
-Dic=dict.fromkeys(Seq,10)
-print(Dic)
-
-get()
-Python 字典(Dictionary) get() 函数返回指定键的值，如果值不在字典中返回默认值None。
-语法：dict.get(key, default=None)
-A=Dic.get('k1')
-print(A)
-
-items()
-Python 字典(Dictionary) items() 函数以列表返回可遍历的(键, 值) 元组数组。
-语法:dict.items()
-A=Dic.items()
-print(A)
-
-keys()
-Python 字典(Dictionary) keys() 函数以列表返回一个字典所有的键。
-语法:dict.keys()
-A=Dic.keys()
-print(A)
-
-pop()
-pop() 函数用于移除字典中指定的keys，并将其value删除，并且返回该元素的值。
-语法:dict.pop(obj)
-A=Dic.pop('k1')
-print(A,Dic)
-
-popitem()
-dict.popitem()方法删除字典中随机的键，值
-语法：dict.popitem()
-A=Dic.popitem()
-print(A,Dic)
-
-setdefault()
-Python 字典(Dictionary) setdefault() 函数和get()方法类似,如果键存在，打印value，如果键不存在于字典中，将会添加键并将值设为默认值。
-语法:dict.setdefault(key, default=None)
-A=Dic.setdefault('k3','noexit')
-print(A,Dic)
-
- update()
-Python 字典(Dictionary) update() 函数把字典dict2的键/值对更新到dict里。
-语法:dict.update(dict2)
-A={'name','chen'}
-B={'age','18'}
-A.update(B)
-print(A)
-
-values()
-Python 字典(Dictionary) values() 函数以列表返回字典中的所有值。
-语法:dict.values()
-A=Dic.values()
-print(A)
-
-dict.__contains__() #查找字符串是否存在字典中的keys，返回True或者False
-Search='k1'
-print(Dic)
-A=Dic.__contains__(Search)
-print(A)
+# print(Dic)
+# 另一案例
+# a={'k1':'v1','k2':[11,22,33]}
+# print(id(a),a)
+# print(id(a['k2']),a['k2'])
+# b=dict.copy(a)
+# print(id(b),b)
+# print(id(b['k2']),b['k2'])
+# print(id(a['k1']),a['k1'])
+# print(id(b['k1']),b['k1'])
+# print(a.keys(),id(a.keys()))
+# print(b.keys(),id(b.keys()))
+#
+# fromkeys()
+# Python 字典(Dictionary) fromkeys() 函数用于创建一个新字典，以序列seq中元素做字典的键，value为字典所有键对应的初始值。
+# 语法：dict.fromkeys(seq[, value]))
+# Seq=['name','age','sex']
+# Dic=dict.fromkeys(Seq)
+# print(Dic)
+# Dic=dict.fromkeys(Seq,10)
+# print(Dic)
+#
+# get()
+# Python 字典(Dictionary) get() 函数返回指定键的值，如果值不在字典中返回默认值None。
+# 语法：dict.get(key, default=None)
+# A=Dic.get('k1')
+# print(A)
+#
+# items()
+# Python 字典(Dictionary) items() 函数以列表返回可遍历的(键, 值) 元组数组。
+# 语法:dict.items()
+# A=Dic.items()
+# print(A)
+#
+# keys()
+# Python 字典(Dictionary) keys() 函数以列表返回一个字典所有的键。
+# 语法:dict.keys()
+# A=Dic.keys()
+# print(A)
+#
+# pop()
+# pop() 函数用于移除字典中指定的keys，并将其value删除，并且返回该元素的值。
+# 语法:dict.pop(obj)
+# A=Dic.pop('k1')
+# print(A,Dic)
+#
+# popitem()
+# dict.popitem()方法删除字典中随机的键，值
+# 语法：dict.popitem()
+# A=Dic.popitem()
+# print(A,Dic)
+#
+# setdefault()
+# Python 字典(Dictionary) setdefault() 函数和get()方法类似,如果键存在，打印value，如果键不存在于字典中，将会添加键并将值设为默认值。
+# 语法:dict.setdefault(key, default=None)
+# A=Dic.setdefault('k3','noexit')
+# print(A,Dic)
+#
+#  update()
+# Python 字典(Dictionary) update() 函数把字典dict2的键/值对更新到dict里。
+# 语法:dict.update(dict2)
+# A={'name','chen'}
+# B={'age','18'}
+# A.update(B)
+# print(A)
+#
+# values()
+# Python 字典(Dictionary) values() 函数以列表返回字典中的所有值。
+# 语法:dict.values()
+# A=Dic.values()
+# print(A)
+#
+# dict.__contains__() #查找字符串是否存在字典中的keys，返回True或者False
+# Search='k1'
+# print(Dic)
+# A=Dic.__contains__(Search)
+# print(A)
 
