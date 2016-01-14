@@ -1,7 +1,3 @@
-#python 3.5环境，解释器在linux需要改变
-#用户登陆认证，阅读手册查询readme文件
-#调用文件 login.txt,lock.txt
-#作者：S12-陈金彭
 Auth_File="login.txt"                               #认证登陆文件
 Lock_File="lock.txt"                                #锁定文件
 F_Auth = open(Auth_File)
@@ -25,15 +21,8 @@ while True:
         print ('你输入的用户名不存在，请重新输入')
         continue
     if Name in Lock_List:
-        A=input("你的账户已经被锁定！！请联系管理员解锁！输入Y解锁，任意键退出:")             #，用户登陆前先判断用户是否被锁定后在进行密码判断。
-        if A == 'Y':
-            f = open('lock.txt')
-            line = f.read()
-            b = line.replace("%s\n"%Name,"")
-            f = open("lock.txt","w")
-            f.write(b)                                                                          #解锁用户，先将文件内容读出到内存，之后将解锁的用户名替换掉在写入即可。以下是2种方式
-            print ("锁定已解除，请继续输入密码")
-        else:break
+        print("你的账户已经被锁定！！请联系管理员解锁！")             #，用户登陆前先判断用户是否被锁定后在进行密码判断。
+        break
     for line in Read_Auth:
         line = line.split()
         if Name in line:

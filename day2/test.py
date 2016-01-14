@@ -31,7 +31,7 @@
 #         else:
 #             dic['k2']=[i,]
 # print(dic)
-import login
+
 Shopping={
     'Macbook Air':[10,7999],
     'Iphone 6s  ':[10,6543],
@@ -42,8 +42,9 @@ Shopping={
 # for k,val in enumerate(aa):
 #    a+=''.join([str(k),''.center(20,' '),str(val[0]),''.center(30,' '),str(val[1][0]),''.center(30,' '),str(val[1][1]),'\n'])
 # print(a)
-
-print(type(Shopping['冰箱       '][1]))
+aa=list(Shopping.keys())
+print(aa)
+print(Shopping[aa[1]][0])
 # bb=list(Shopping.keys())
 # print(bb)
 # print(Shopping[bb[0]][1])
@@ -55,10 +56,7 @@ print(type(Shopping['冰箱       '][1]))
 # A=[0,1,2,3,4,5]
 # A.remove(A[1])
 # print(A)
-a=2
-b=1
-a-=b
-print(a)
+
 
 
 
