@@ -20,10 +20,21 @@ while True:
     Name=input('请输入你的账户:').strip()
     for i in Read_Auth:
         i = i.split()
-        User_Exit.extend(i[0].split())
+        if len(i) != 0:
+            User_Exit.append(i[0])
     if Name not in User_Exit:
-        print ('你输入的用户名不存在，请重新输入')
-        continue
+        Zhuce =  input('你输入的用户名不存在！，是否注册 Y/N')
+        if Zhuce == 'N':
+            print('谢谢使用，再见')
+            break
+        if Zhuce == 'Y':
+            Name=input('注册用户名：')
+            Pass=input('输入密码')
+            Dir_File=open('login.txt',"a")
+            Dir_File.write('%s %s %d\n'%(Name,Pass,0))
+            Dir_File.close()
+            LoginSusses=True
+            break
     if Name in Lock_List:
         print("你的账户已经被锁定！！请联系管理员解锁！")             #，用户登陆前先判断用户是否被锁定后在进行密码判断。
         break
@@ -34,7 +45,7 @@ while True:
                 Passwd=input('请输入你的密码：')
                 if Passwd == line[1]:
                     LoginSusses=True
-                    print ("Good，欢迎您登陆：%s" %Name)
+                    # print ("Good，欢迎您登陆：%s" %Name)
                     break
                 else:
                     print ("你的密码错误，请重新输入")
@@ -48,8 +59,12 @@ while True:
     if count ==3:                                                     #锁定用户后跳出2层循环
         break
     if LoginSusses is True:                                             #跳出2层循环
+        # print("Good，欢迎您登陆：%s" %Name)
         break
 if LoginSusses==True:
+    print("Good，欢迎您登陆：%s" %Name)
+    # for i in Read_Auth:
+    #     print(i)
     #----------------------------------------------------------购物车字典--------------------------------------------------------------------------------#
     Shopping={
         'Macbook Air':[10,7999],
@@ -59,10 +74,11 @@ if LoginSusses==True:
     #----------------------------------------------------------用到的变量--------------------------------------------------------------------------------#
     Shopping_cart_goods=[] #购物车物品
     Shopping_cart_money=0    #购物车金额
-    Wallet=5000             #账户金额
+    for i in open('login.txt','r'):  #  #账户金额
+        i=i.split()
+        if i[0] == Name:
+            Wallet=int(i[2])
     Num=10           #购物车件数
-
-
     #--------------------------------------------------------------------进入循环------------------------------------------------------------------------#
     while True:
         LoginSusses=True
@@ -75,7 +91,7 @@ if LoginSusses==True:
      #-------------------------------------------------------------进入循环，美化打印--------------------------------------------------------------------#
         print('欢迎来到我的购物中心'.center(100,'❀'))
         print(''.ljust(1,'❀'),''.rjust(165,' '),''.rjust(1,'❀'))
-        print('账户名称：陈金彭'.rjust(25,' '),'账户余额：%d'.center(90,' ')%(Wallet),'购物车:%d'.ljust(30,' ')%(len(Shopping_cart_goods)))
+        print('账户名称：%s'.rjust(25,' ')%(Name),'账户余额：%d'.center(90,' ')%(Wallet),'购物车:%d'.ljust(30,' ')%(len(Shopping_cart_goods)))
         print(''.ljust(1,'❀'),''.rjust(165,' '),''.rjust(1,'❀'))
         print(''.center(102,'❀'),'\n')
         print('商品列表'.center(163,' '))
@@ -105,8 +121,8 @@ if LoginSusses==True:
             while True:
                 if LoginSusses==False:
                     break
-                Go_on=input('是否进入购物车结算，Y/N：')
-                if Go_on == 'N':
+                Go_on=input('是否进入购物车结算，Y/(任意键继续)：')
+                if Go_on != 'Y':
                     break
                 if Go_on == 'Y':
                     while True:
@@ -118,6 +134,16 @@ if LoginSusses==True:
                             Wallet-=Shopping_cart_money
                             print('购买成功,你花费了%d元，剩余%d元'%(Shopping_cart_money,Wallet))
                             Shopping_cart_money=0
+ #----------------------------------------------------------金额写入文件------------------------------------------------------------------------------#
+                            b=''
+                            with open('login.txt','r') as f:
+                                for i in f.readlines():
+                                    a=i.split()
+                                    if 'chenjinpeng' in i:
+                                        i=i.replace(str(a[2]),str(Wallet))
+                                    b+=i
+                            with open('login.txt','w') as f:
+                                f.write(b)
                             LoginSusses=False
                             break
     #----------------------------------------------------------金额超出判断------------------------------------------------------------------------------#
@@ -127,11 +153,20 @@ if LoginSusses==True:
                             if Go_on_1 == 'Q':
                                 LoginSusses2=False
                                 LoginSusses=False
-                                break
+    #----------------------------------------------------------退出时，金额写入文件------------------------------------------------------------------------------#
+                                b=''
+                                with open('login.txt','r') as f:
+                                    for i in f.readlines():
+                                        a=i.split()
+                                        if 'chenjinpeng' in i:
+                                            i=i.replace(str(a[2]),str(Wallet))
+                                        b+=i
+                                with open('login.txt','w') as f:
+                                    f.write(b)
+                                    break
     #----------------------------------------------------------充值----------------------------------------------------------------------------------#
                             elif Go_on_1 == 'C':
                                 while True:
-                                    print(Wallet)
                                     C_money=input('充值金额：').strip()
                                     if C_money.isdigit()is not True:
                                         print('\033[1;31;40m请输入正确的金额\033[0m')
