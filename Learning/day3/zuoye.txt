@@ -1,0 +1,56 @@
+global
+        log 127.0.0.1 local2
+        daemon
+        maxconn 256
+        log 127.0.0.1 local2 info
+defaults
+        log global
+        mode http
+        timeout connect 5000ms
+        timeout client 50000ms
+        timeout server 50000ms
+        option  dontlognull
+
+listen stats :8888
+        stats enable
+        stats uri       /admin
+        stats auth      admin:1234
+
+frontend oldboy.org
+        bind 0.0.0.0:80
+        option httplog
+        option httpclose
+        option  forwardfor
+        log global
+        acl www hdr_reg(host) -i www.oldboy.org
+        use_backend www.oldboy.org if www
+
+backend test.oldboy.org
+        server 100.1.7.9 100.1.7.9 weight 20 maxconn 3000
+		server 100.1.7.9 100.1.7.999 weight 20 maxconn 3000
+
+
+backend buy.oldboy.org
+        server 100.1.7.90 100.1.7.90 weight 20 maxconn 3000
+
+
+{"backend": "test.oldboy.org",
+ "record":{
+		"server": "100.1.7.999",
+		"weight": 20,
+		"maxconn": 30
+  }
+}
+1、用户输入字符串
+	‘{"backend": "test.oldboy.org","record":{"server": "100.1.7.999","weight": 20,"maxconn": 30}}’
+2、字典
+	dic
+
+3、添加
+2、删除（可选、）
+http://www.cnblogs.com/wupeiqi/articles/4950799.html
+
+1.denglu chengxu
+2.用户输入 字符串
+3.对用户输入进行字符串格式化
+4.
