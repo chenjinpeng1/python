@@ -149,8 +149,10 @@ import collections
 # A.update(name='chenjinpeng')
 # A.update(time=2016)
 # print(A)
+# A.move_to_end('name') # 将元素（k,val）移动到最后
+# print(A)
 
-# -------------------------------------defaultDict有序字典------------------------------------------#
+# -------------------------------------defaultDict默认字典------------------------------------------#
 
 # A=collections.defaultdict(list)
 # A[1]=11
@@ -170,8 +172,6 @@ import collections
 #         A['k2'].append(i)
 # print(A)
 # #>>> defaultdict(<class 'list'>, {'k2': [11, 22, 33, 44, 55], 'k1': [66, 77, 88, 99]})
-
-# -------------------------------------defaultdDict有序字典------------------------------------------#
 
 # -------------------------------------可命名元组------------------------------------------#
 # Mytuple = collections.namedtuple('Mytuple',['x', 'y', 'z'])
@@ -219,16 +219,174 @@ import collections
 # '''
 
 # -------------------------------------单向队列------------------------------------------#
-#
 # import queue
 # B=queue.Queue()
-# print(B.empty())
-# B.put('aaaa')
+# print(B.empty()) #如果队列为空，返回True,反之False
+# print(B.full()) #如果队列满了，返回True,反之False
+# B.put('aaaa') #队列里插入数据
 # B.put('bbbb')
-# print(B.qsize())
-# print(B.get())
+# print(B.qsize()) #返回队列里的个数
+# print(B.get()) #获取队列的第一个元素
 # print(B.get_nowait())
 
+'''
+ Queue.qsize() 返回队列的大小
+Queue.empty() 如果队列为空，返回True,反之False
+Queue.full() 如果队列满了，返回True,反之False
+Queue.full 与 maxsize 大小对应
+Queue.get([block[, timeout]]) 获取队列，timeout等待时间
+Queue.get_nowait() 相当Queue.get(False)
+Queue.put(item) 写入队列，timeout等待时间
+Queue.put_nowait(item) 相当Queue.put(item, False)
+Queue.task_done() 在完成一项工作之后，Queue.task_done() 函数向任务已经完成的队列发送一个信号
+Queue.join() 实际上意味着等到队列为空，再执行别的操作
+'''
+
+#-----------------------------函数--------------------------------#
+# def mail(user):   #定义函数名称mail def定义函数开始 user表示形参（形式参数）
+#     n=123
+#     n+=1
+#     print(user)  #这里调用形参
+#     return n  #return 定义函数规定一个返回值
+# f=mail('chen')
+# f=mail('Python')  #这里（）内部的就表示用户输入的实参
+# print(f) # >>> chen Python  124
+#
+# def show(arg,xxx): #如果指定了2个形参，调用时必须输出两个形参
+#     print(arg,xxx)
+# show('chen','Python') #
+#
+# 默认参数
+# def show(a1,a2=27): #a2=27 表示默认参数，默认参数必须指定在形参的最后。如果只指定了1个实参，则执行默认形参
+#     print(a1,a2)
+# show('chen') #>>> chen 27
+
+# 指定参数
+# def show(a1,a2):
+#     print(a1,a2)
+# show(a2='Python',a1='Love')  # >>> Love Python
+#
+# 传入列表
+# def show(arg):
+#     print(arg)
+# show([1,2,3,4])
+
+#动态参数
+# def show(*arg): #*表示实参为元祖
+#     print(arg,type(arg))
+# show(1,2,3) # (1, 2, 3) <class 'tuple'>
+
+# def show(**args): #**表示实参为字典
+#     print(args,type(args))
+# show(name='chen') # >>>{'name': 'chen'} <class 'dict'>  name代表字典的keys,chen代表字典的values
+
+# def show(*arg,**args): #约定：形参*必须放在前面**放在后面
+#     print(arg,type(arg))
+#     print(args,type(args))
+# show(1,2,3,4,name='chen') #约定：实参与形参一直
+#>>>(1, 2, 3, 4) <class 'tuple'>
+#   {'name': 'chen'} <class 'dict
+# 注意：如果1,2,3,4为一个列表,name='chen'位一个字典比如a=[1,2,3,4] b={'name':'chen'} 实参传入时必须指定*和**,否则将列表和字典会全部写入到元组
+'''
+#例：
+def show(*arg,**args): #约定：形参*必须放在前面**放在后面
+    print(arg,type(arg))
+    print(args,type(args))
+a=[1,2,3,4]
+b={'name':'chen'}
+show(*a,**b)
+# (1, 2, 3, 4) <class 'tuple'> {'name': 'chen'} <class 'dict'>
+'''
+#>>>
+# 函数发送邮件案例
+#------------------------函数测试发送邮件------------------------------#
+# import smtplib
+# from email.mime.text import MIMEText
+# from email.utils import formataddr
+# def mail(user):
+#     ret = True
+#     try:
+#         msg = MIMEText('邮件内容：函数发送邮件测试！', 'plain', 'utf-8')
+#         msg['From'] = formataddr(["武沛齐",'wptawy@126.com'])
+#         msg['To'] = formataddr(["走人",'1585742649@qq.com'])
+#         msg['Subject'] = "主题aaa"
+#
+#         server = smtplib.SMTP("smtp.126.com", 25)
+#         server.login("wptawy@126.com", "WW.3945.59")
+#         server.sendmail('wptawy@126.com', [user], msg.as_string())
+#         server.quit()
+#     except Exception:
+#         ret = False
+#     return ret
+# ret = mail('1585742649@qq.com')
+# if ret:
+#     print('发送成功')
+# else:
+#     print('发送失败')
+'''
+#try案例解释
+try:
+    1/0
+    print('OK')
+except Exception:
+    print('NO')
+    # >>> no   如果try里的程序执行正确打印OK 否则执行except Exception里面的内容 NO
+    '''
+#lambda表达式
+# func = lambda a: a+1
+# count = func(4)
+# print(count)  #>>> 5
+
+#Python内置函数
+# all() #()里指定一个序列，如果传入的所有的元素都为真，返回True，否则返回False
+# #何为假 None，"",['',],(),{}
+# any() #序列中只要有一个为真，返回True
+# ascii() #传入一个对象时，自动执行int.__repr__() 例如print(ascii(8)) #>>> 8
+# bin() #转换二进制 例：print(bin(10)) #>>> 0b1010 0b表示二进制
+# bool() # 判断真假，返回True，False 例：print(bool(0)) >>> False
+# bytearray() #将字符串转换为字节数组 print(bytearray('晨',encoding='utf-8')) # >>>bytearray(b'\xe6\x99\xa8')，一个汉字占3个字节
+# callable() #是否可执行
+# 例如：
+# f=lambda x:x+1
+# print(callable(f)) #>>> True f后面可以加（）代表可执行返回True
+# print(callable(abs)) # 同理
+# chr()把数字转换为ascii码 ord() 把ascii码转换为数字
+# 例：
+# print(chr(88)) #>>> X
+# print(ord('X')) #>>> 88
+# compile() #将字符串编译成python代码
+# complex()复数
+# delattr() # 反射用
+# dir() #当前变量所有的key
+# divmod() #取商和余数，返回元组
+# enumerate() #将序列加上序号
+# eval() #计算 print(eval('1+2*10+3-23')) >>> 1
+# map()做条件判断操作
+# map() #示例
+# a=[1,2,3,4,5]
+# b=map(lambda x:x+100,a) #lambda可替换为函数
+# c = list(b)
+# print(c) #>>>[101, 102, 103, 104, 105]
+# filter() #用来过滤
+# a=[1,2,3,4,5]
+# b=filter(lambda x:x>4,a)
+# print(list(b)) #>>> 5
+# format() #调用__format__()
+# frozenset() # 不能增加和修改的集合
+# globals() #返回所有全局变量
+# hex() #转换为十六进制 *0x表示16进制*
+# locals() #局部变量
+# max() #获取最大值
+# min() #获取最小值
+# oct() #八进制 *0o代表八进制*
+# round()#四舍五入
+# super()#通过子类执行父类
+# vars() # 和dir()不同的是返回所有的k，val 为字典
+# zip() 对应列相加
+# a=['a','b','c']
+# b=[1,2,3]
+# b = zip(a,b)
+# print(list(b)) #>>>[('a', 1), ('b', 2), ('c', 3)]
 
 
-#迭代器
+#---------------------------open文件操作---------------------#

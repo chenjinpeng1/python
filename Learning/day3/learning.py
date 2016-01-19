@@ -79,9 +79,9 @@ import collections
 # a[1]=2
 # print(a)
 # ------------------------------------------conllections默认字典------------------------------------------#
-aa = collections.defaultdict(list)
-aa[1].append(1)
-print(aa)
+# aa = collections.defaultdict(list)
+# aa[1].append(1)
+# print(aa)
 # ------------------------------------------深浅copy------------------------------------------#
 # Dic={'k1':{'value1':['aaaa',123]},'k2':'value2'}
 # Dic2=Dic.copy()
