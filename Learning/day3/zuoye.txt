@@ -54,3 +54,4 @@ http://www.cnblogs.com/wupeiqi/articles/4950799.html
 2.用户输入 字符串
 3.对用户输入进行字符串格式化
 4.
+str

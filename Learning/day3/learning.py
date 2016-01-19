@@ -69,7 +69,7 @@
 # for i in obj.keys():  #打印经过Counter处理的数据
 #     print(i)
 # ------------------------------------------conllections有序字典------------------------------------------#
-
+import collections
 # a = collections.OrderedDict()
 # a[1]=1
 # a[2]=2
@@ -79,9 +79,9 @@
 # a[1]=2
 # print(a)
 # ------------------------------------------conllections默认字典------------------------------------------#
-# aa = collections.defaultdict(list)
-# aa[1].append(1)
-# print(aa)
+aa = collections.defaultdict(list)
+aa[1].append(1)
+print(aa)
 # ------------------------------------------深浅copy------------------------------------------#
 # Dic={'k1':{'value1':['aaaa',123]},'k2':'value2'}
 # Dic2=Dic.copy()
