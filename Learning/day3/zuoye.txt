@@ -42,7 +42,7 @@ backend buy.oldboy.org
   }
 }
 1、用户输入字符串
-	‘{"backend": "test.oldboy.org","record":{"server": "100.1.7.999","weight": 20,"maxconn": 30}}’
+	‘{"backend": "add.oldboy.org","record":{"server": "100.1.7.999","weight": 20,"maxconn": 30}}’
 2、字典
 	dic
 

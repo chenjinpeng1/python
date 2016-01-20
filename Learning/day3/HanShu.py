@@ -11,3 +11,13 @@ def Search(arg):
         A=ha.Order[arg]
         for i in A:
             print(i.strip('\n'))
+# def Write(**arg):
+#     with open('test.log','w')as Q:
+#         for i,val in arg.items():
+#             i=i+'\n'
+#             print(i)
+#             if isinstance(val,dict) is True:
+#                 print(val)
+#             else:
+#                 for i in range(len(val)):
+#                     print(val[i])

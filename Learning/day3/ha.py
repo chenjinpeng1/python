@@ -31,6 +31,8 @@ import collections
 
 import HanShu
 import collections
+import json
+Options=['增加','删除','修改','查询']
 Order=collections.OrderedDict()
 with open('ha.txt') as obj:
     for i in obj.readlines():
@@ -41,10 +43,38 @@ with open('ha.txt') as obj:
             Order[B].append(i.strip('\n'))
 AA=list(Order.keys())
 if __name__=="__main__":
-    for n,val in enumerate(AA,1):
-        print(n,val)
-    Input=input('输入查询的内容或者序列号：')
-    HanShu.Search(Input)
+    for i,val in enumerate(Options,1):
+        print(i,val)
+    Input=input('请输入你要执行的操作：')
+    if int(Input) == 1:
+        Add_Input=input('请输入你要增加的信息：')
+        B=[]
+        Order_Input=json.loads(Add_Input)
+        for i,val in Order_Input.items():
+            if i == 'backend':
+                A=(i+' '+val)
+            if i == 'record':
+                for i,k in Order_Input['record'].items():
+                    if i =='server':
+                        B.append(i)
+                        B.append(k)
+                        if i=='weight':
+                            B.append(i)
+                            B.append(k)
+                            if i =='maxconn':
+                                B.append(i)
+                                B.append(k)
+        print(A)
+        Order[A]=B
+        # print(Order[str(A)])
+        print(Order)
+        # HanShu.Write(**Order)
+    if int(Input) == 4:
+        for n,val in enumerate(AA,1):
+            print(n,val)
+        Input=input('输入查询的内容或者序列号：')
+        HanShu.Search(Input)            # 调用查询操作函数
+
 
 
 
