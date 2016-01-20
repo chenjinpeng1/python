@@ -136,21 +136,21 @@ import collections
 # print(A)
 
 # -------------------------------------OrderedDict有序字典------------------------------------------#
-# import collections
+import collections
 # # a = collections.OrderedDict()
 # # a[1]='a'
 # # a[2]='b'
 # # print(a) #>>> OrderedDict([(1, 'a'), (2, 'b')])
 #
-# A=collections.OrderedDict(name='chen',age='25',job='it')
-# print(A)
-# print(A.keys())
-# print(A.values)
-# A.update(name='chenjinpeng')
-# A.update(time=2016)
-# print(A)
-# A.move_to_end('name') # 将元素（k,val）移动到最后
-# print(A)
+A=collections.OrderedDict(name='chen',age='25',job='it')
+print(A)
+print(A.keys())
+print(A.values)
+A.update(name='chenjinpeng')
+A.update(time=2016)
+print(A)
+A.move_to_end('name') # 将元素（k,val）移动到最后
+print(A)
 
 # -------------------------------------defaultDict默认字典------------------------------------------#
 
@@ -337,7 +337,7 @@ except Exception:
 # count = func(4)
 # print(count)  #>>> 5
 
-#Python内置函数
+# Python内置函数
 # all() #()里指定一个序列，如果传入的所有的元素都为真，返回True，否则返回False
 # #何为假 None，"",['',],(),{}
 # any() #序列中只要有一个为真，返回True
