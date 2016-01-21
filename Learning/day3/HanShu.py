@@ -11,8 +11,23 @@ def Search(arg):
         A=ha.Order[arg]
         for i in A:
             print(i.strip('\n'))
+def Str_matching(arg):
+    try:
+        Zh_Input_Dict=ha.json.loads(arg)
+        Order_Zh_Input=ha.collections.OrderedDict()
+        Order_Zh_Input['server']=Zh_Input_Dict['record']['server']
+        Order_Zh_Input['weight']=Zh_Input_Dict['record']['weight']
+        Order_Zh_Input['maxconn']=Zh_Input_Dict['record']['maxconn']
+        Zh_list=[]
+        Zh_Str=' '*8
+        Variables=[Zh_Input_Dict,Order_Zh_Input,Zh_list,Zh_Str]
+        return Variables
+    except Exception:
+        Return=False
+        return Return
+        print('输入格式错误！')
 def Write(arg):
-    with open('ha.txt','r+')as Q:
+    with open('ha.txt','w')as Q:
         for i,val in arg.items():
             i=i+'\n'
             Q.write(i)

@@ -27,17 +27,7 @@ frontend oldboy.org
         use_backend www.oldboy.org if www
 
 backend test.oldboy.org
-        server 100.1.7.999  weight 20  maxconn 30  
 backend buy.oldboy.org
         server 100.1.7.90 100.1.7.90 weight 20 maxconn 3000
-backend chen.oldboy.org
-        server 100.1.7.999  weight 20  maxconn 30  
-backend add.oldboy.org
-        server 100.1.7.999  weight 21  maxconn 30  
-backend chen.jin.peng
-        server 100.1.7.999  weight 20  maxconn 30
-        server 100.1.7.999  weight 20  maxconn 30  
-backend taaaaaoldboy.org
-        server 100.1.7.999  weight 20  maxconn 30  
-backend test.oldssssssssssboy.org
-        server 100.1.7.999  weight 20  maxconn 30  
+        server 100.1.7.9 100.1.7.999 weight 20 maxconn 3000
+backend chen.aa.com
