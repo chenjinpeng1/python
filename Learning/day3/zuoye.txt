@@ -55,7 +55,7 @@ http://www.cnblogs.com/wupeiqi/articles/4950799.html
 
 2、写程序
 	用户输入
-		‘{"backend": "test.oldboy.org","record":{"server": "100.1.7.999","weight": 20,"maxconn": 30}}’
+		‘{"backend": "chen.aa.com","record":{"server": "100.1.7.999","weight": 20,"maxconn": 30}}’
 
 	字符串格式化，、
 		test.oldboy.org

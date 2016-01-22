@@ -34,3 +34,12 @@ def Write(arg):
             for i in range(len(val)):
                     Q.write(val[i])
                     # print(val[i])
+def Zt_PD(arg):
+            Del_Input=''.join(['backend ',arg])
+            if Del_Input in list(ha.Order.keys()):
+                Return=True
+            else:
+                Return=False
+                print('主体不存在！')
+            Var=[Del_Input,Return]
+            return Var
