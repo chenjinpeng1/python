@@ -28,3 +28,5 @@ frontend oldboy.org
 
 backend chen.aa.com
         server 100.2.7.999 weight 20 maxconn 30 
+backend add.oldboy.org
+        server 100.1.7.999 weight 20 maxconn 30 

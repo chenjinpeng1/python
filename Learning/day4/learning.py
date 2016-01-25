@@ -48,10 +48,24 @@
 #         c.send(i)
 #         c2.send(i)
 # zuo('chen','qiu')
-
-
+# def chi(name,num):
+#     print('%s来买包子,买%s个'%(name,num))
+#     while True:
+#         baozi = yield
+#         print('包子%s来了，被%s吃了'%(baozi,name))
+# def zuo(name,name2):
+#     A=chi(name,10)
+#     B=chi(name2,10)
+#     A.__next__()
+#     B.__next__()
+#     print('老子开始做包子了')
+#     for i in range(1,20,2):
+#         print('做了两个包子！')
+#         A.send(i)
+#         B.send(i+1)
+# zuo('陈','邱')
 # def login(func):
-#     if 1==2:
+#     if 1==1:
 #      print('passed user verification...')
 #      return func
 #     else:
@@ -61,57 +75,80 @@
 # def aa(aa):
 #     print('aaaaa')
 # tv = login(tv)
-# tv('Tv电视台')
+# tv('Tv')
+
 
 #-----------------------装饰器
-# def login(func):  #tv
-#     def inner(arg):  # tv
+# def login(func):
+#     def inner(arg):
 #         print('passwd user verification')
-#         func(arg)  # tv  tv
-#     return inner #none
+#         func(arg)
+#     return inner
 # @login
 # def tv(name):
 #     print('Welcome %s to tv page!!'%name)
 # tv('tv')
-# # tv= login(tv)
+# #tv = login(tv)('tv')
 
 #-----------------------------
 
-# def Before(request,kargs):
-#     print 'before'
-#
-# def After(request,kargs):
-#     print 'after'
-#
-#
-# def Filter(before_func,after_func):
-#     def outer(main_func):
-#         def wrapper(request,kargs):
-#
-#             before_result = before_func(request,kargs)
-#             if(before_result != None):
-#                 return before_result;
-#
-#             main_result = main_func(request,kargs)
-#             if(main_result != None):
-#                 return main_result;
-#
-#             after_result = after_func(request,kargs)
-#             if(after_result != None):
-#                 return after_result;
-#
-#         return wrapper
-#     return outer
-#
-# @Filter(Before, After)
-# def Index(request,kargs):
-#     print 'index'
-#
-#
-# if __name__ == '__main__':
-#     Index(1,2)
+def Before(request,kargs):
+    print ('before')
+# print(Before(1,2))
+def After(request,kargs):
+    print ('after')
+def Filter(before_func,after_func):
+    def outer(main_func):
+        def wrapper(request,kargs):
+            before_result = before_func(request,kargs)
+            # if(before_result != None):
+            #     return before_result;
+            main_result = main_func(request,kargs)
+            # if(main_result != None):
+            #     return main_result;
+            after_result = after_func(request,kargs)
+            # if(after_result != None):
+            #     return after_result;
+        return wrapper
+    return outer
+@Filter(Before, After)
+def Index(request,kargs):
+    print ('index')
+if __name__ == '__main__':
+    Index(1,2)    #Filter(Before,After)(Index)('1','2')
+                                #outer (Index)('1','2')
+                                     #wrapper ('1','2')
+                                           #Before(1,2)
+                                            #Index(1,2)
+                                            #After(1,2)
 
 
+
+
+# def w1(func):
+#     def inner(*args,**kwargs):
+#         # 验证1
+#         # 验证2
+#         # 验证3
+#         print('yz1')
+#         return func(*args,**kwargs)
+#     return inner
+
+# def w2(func):
+#     def inner(*args,**kwargs):
+#         # 验证1
+#         # 验证2
+#         # 验证3
+#         print('yz2')
+#         return func(*args,**kwargs)
+#     return inner
+#
+#
+# @w1
+# @w2
+# def f1(arg1,arg2,arg3):
+#     print ('f1')
+# f1(1,2,3)
 #-----------------------------迭代器
 # def calc(n):
 #     print(n)
