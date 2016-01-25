@@ -16,37 +16,40 @@
 # print(name.__next__())
 # print(name.__next__())
 # print(name.__next__()) #最后一次会报错
-# def cash_money(money):
+# def cash_money(money,num):
 #     while money > 0:
-#         money-=500
-#         yield 500
-#         pri
-# atm=cash_money(1000)
-# print(atm.__next__())
-# print(atm.__next__())
+#         money-=num
+#         yield num,money
+#         print('又来取钱了啊，败家子！！')
+# atm=cash_money(1000,200)
+# print('取了%s,还剩下%s'%atm.__next__())
+# print('取了%s,还剩下%s'%atm.__next__())
 # print('交个大保健')
-# print(atm.__next__())
+# print('取了%s,还剩下%s'%atm.__next__())
+# print('取了%s,还剩下%s'%atm.__next__())
 
 # import time
 # def chi(name):
-#     print('%s 准备吃包子啦！'%name)
+#     print('%s 来买包子了！'%name)
 #     while True:
 #         baozi = yield
 #         print('包子 %s 来了，被%s 吃了！'%(baozi,name))
-# def zuo(name):
-#     A='cc'
-#     B='c'
+# def zuo(name,name2):
+#     A=name
+#     B=name2
 #     c = chi(A)
 #     c2 = chi(B)
 #     c.__next__()
 #     c2.__next__()
 #     print('老子开始准备做包子了！')
-#     for i in range(10):
+#     for i in range(1):
 #         time.sleep(1)
 #         print('做了两个包子！')
 #         c.send(i)
 #         c2.send(i)
-# zuo('chen')
+# zuo('chen','qiu')
+
+
 # def login(func):
 #     if 1==2:
 #      print('passed user verification...')
@@ -131,19 +134,19 @@
 #         func(b,d,c)
 # func(0,1,50)
 #----------------------二分法------------------#
-def func(yuan,find):
-    zhongjian = int(len(yuan) / 2)  #300 = 600/2
-    if len(yuan) >=1:    #600 /0
-        if yuan[zhongjian] > find:   # [1-599][300] > 8
-            func(yuan[:zhongjian],find) #func(yuan[:zhongjian],find)
-        elif  yuan[zhongjian] < find:
-            func(yuan[zhongjian:],find)
-        else:
-            print('found find',yuan[zhongjian])
-    else:
-        print('no found')
-data = list(range(1,600))
-func(data,480)
+# def func(yuan,find):
+#     zhongjian = int(len(yuan) / 2)  #300 = 600/2
+#     if len(yuan) >=1:    #600 /0
+#         if yuan[zhongjian] > find:   # [1-599][300] > 8
+#             func(yuan[:zhongjian],find) #func(yuan[:zhongjian],find)
+#         elif  yuan[zhongjian] < find:
+#             func(yuan[zhongjian:],find)
+#         else:
+#             print('found find',yuan[zhongjian])
+#     else:
+#         print('no found')
+# data = list(range(1,600))
+# func(data,480)
 '''
 2分算法思路：
 1、func(data,8)调用函数func 传入的实参为data列表，8
