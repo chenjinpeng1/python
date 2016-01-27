@@ -92,35 +92,35 @@
 
 #-----------------------------
 
-def Before(request,kargs):
-    print ('before')
-# print(Before(1,2))
-def After(request,kargs):
-    print ('after')
-def Filter(before_func,after_func):
-    def outer(main_func):
-        def wrapper(request,kargs):
-            before_result = before_func(request,kargs)
-            # if(before_result != None):
-            #     return before_result;
-            main_result = main_func(request,kargs)
-            # if(main_result != None):
-            #     return main_result;
-            after_result = after_func(request,kargs)
-            # if(after_result != None):
-            #     return after_result;
-        return wrapper
-    return outer
-@Filter(Before, After)
-def Index(request,kargs):
-    print ('index')
-if __name__ == '__main__':
-    Index(1,2)    #Filter(Before,After)(Index)('1','2')
-                                #outer (Index)('1','2')
-                                     #wrapper ('1','2')
-                                           #Before(1,2)
-                                            #Index(1,2)
-                                            #After(1,2)
+# def Before(request,kargs):
+#     print ('before')
+# # print(Before(1,2))
+# def After(request,kargs):
+#     print ('after')
+# def Filter(before_func,after_func):
+#     def outer(main_func):
+#         def wrapper(request,kargs):
+#             before_result = before_func(request,kargs)
+#             # if(before_result != None):
+#             #     return before_result;
+#             main_result = main_func(request,kargs)
+#             # if(main_result != None):
+#             #     return main_result;
+#             after_result = after_func(request,kargs)
+#             # if(after_result != None):
+#             #     return after_result;
+#         return wrapper
+#     return outer
+# @Filter(Before, After)
+# def Index(request,kargs):
+#     print ('index')
+# if __name__ == '__main__':
+#     Index(1,2)    #Filter(Before,After)(Index)('1','2')
+#                                 #outer (Index)('1','2')
+#                                      #wrapper ('1','2')
+#                                            #Before(1,2)
+#                                             #Index(1,2)
+#                                             #After(1,2)
 
 
 
@@ -171,10 +171,11 @@ if __name__ == '__main__':
 #         func(b,d,c)
 # func(0,1,50)
 #----------------------二分法------------------#
+
 # def func(yuan,find):
-#     zhongjian = int(len(yuan) / 2)  #300 = 600/2
-#     if len(yuan) >=1:    #600 /0
-#         if yuan[zhongjian] > find:   # [1-599][300] > 8
+#     zhongjian = int(len(yuan) / 2)
+#     if len(yuan) >=1:
+#         if yuan[zhongjian] > find:
 #             func(yuan[:zhongjian],find) #func(yuan[:zhongjian],find)
 #         elif  yuan[zhongjian] < find:
 #             func(yuan[zhongjian:],find)
@@ -182,8 +183,10 @@ if __name__ == '__main__':
 #             print('found find',yuan[zhongjian])
 #     else:
 #         print('no found')
-# data = list(range(1,600))
+# data = list(range(1,600,1))
+#
 # func(data,480)
+
 '''
 2分算法思路：
 1、func(data,8)调用函数func 传入的实参为data列表，8
@@ -192,9 +195,6 @@ if __name__ == '__main__':
 4、进入判断，原数据的中间值是否比查找的值大， 这里暂定300 > 8 , 因此进入了第一次判断进行的操作
 5、再次执行函数func(yuan[:zhongjian],find) 此时函数体里第一个形参就=600[:300] 大于索引往左切片
 6、之后进行依次循环 如果循环到yuan[zhongjian] < find 则执行<判断里面的函数体知道判断结束
-
-
-
 '''
 # a=[[i for i in range(4)] for ii in range(4) ]
 # for i in a:
