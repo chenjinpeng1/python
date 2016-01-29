@@ -1,48 +1,60 @@
-#python 3.5环境，解释器在linux需要改变
-#作者：S12-陈金彭
+# #-*- coding:utf-8 -*-
+# #/usr/bin/env python
+# import re
+# string ='1-2*((60-30+(-40.0/5)*(9-2*5/3+7/3*99/4*2998+10*568/14))-(-4*3)/(16-3*2))'
+# def format_add_sub(string):
+#     string = re.sub('\s*','',string)
+#     string = string.replace('--','+')
+#     string = string.replace('-+','-')
+#     string = string.replace('+-','-')
+#     string = string.replace('++','+')
+#     return string
+# #计算乘除
+# def mul_div(string):
+#     #调用格式化表达式方法format_add_sub（）对表达式进行格式化
+#     string = format_add_sub(string)
+#     if not re.search('\d+\.?\d*[\*\/]+[\+\-]?\d+\.?\d*',string):
+#         return string
+#     s = re.search('\d+\.*\d*[\*,\/]+[\+\-]?\d+\.*\d*',string).group()
+#     if re.search('\*',s):
+#         resuit = float(s.split('*')[0])*float(s.split('*')[1])
+#         string = string.replace(s,str(resuit),1)
+#     elif re.search('/',s):
+#         resuit = float(s.split('/')[0])/float(s.split('/')[1])
+#         string = string.replace(s,str(resuit),1)
+#     return mul_div(string)
+# #计算加减
+# def add_sub (string):
+#     string = format_add_sub(string)
+#     if not re.search('\d+\.?\d*[\+\-]\d+\.?\d*',string):
+#         return string
+#     s = re.search('\-?\d+\.*\d*[\+,\-]\d+\.*\d*',string).group()
+#     if re.search('\+',s):
+#         resuit = float(s.split('+')[0])+float(s.split('+')[1])
+#         string = string.replace(s,str(resuit),1)
+#     elif re.search('-',s):
+#         resuit = float(s.split('-')[0])-float(s.split('-')[1])
+#         string = string.replace(s,str(resuit),1)
+#     return add_sub(string)
+# def compute(string):
+#     string = mul_div(string)
+#     string = add_sub (string)
+#     return string
+# def remove_bracket (string):
+#     string = format_add_sub(string)
+#     if not re.search('\(([\+\-\*\/]*\d+\.*\d*){1,}\)',string):
+#         return compute(string)
+#     s = re.search('\(([\+\-\*\/]*\d+\.*\d*){2,}\)',string).group()
+#     ds = s.strip('\(\)')
+#     resut = compute(ds)
+#     string = string.replace(s,resut,1)
+#     return remove_bracket (string)
+# if __name__ == '__main__':
+#    print (remove_bracket (string))
 import re
-# def Count(num):
-#     b=[num,]
-#     bb=re.search('([\-|\/|\*]?\d+){4,}',b[0]).group()
-#     bbb=bb.split('*')
-#     print(bbb,bb)
-#     if '/' in bb:
-#         jieguo=int(bbb[0])/int(bbb[1])
-#         print(jieguo)
-# a='(9-2*5/3+7/3*99/4*2998+10*568/14)'
-# for i in range(10):
-#     if re.search('\d+\*\d+',a) is None:
-#         break
-#     b=re.search('\d+\*\d+',a).group()
-#     bb=b.split('*')
-#     if '*' in b:
-#         jieguo=int(bb[0])*int(bb[1])
-#         print(jieguo)
-#         a=a.replace(b,str(jieguo))
-#     print(a)
-# a='(9-10/3+7/300/42998+10*568/14)'
-# a=[a,]
-# b=re.search('((\d+)[\*]\d+)',a[0]).group()
-# print(b)
-# print(a)
-# A,B,C=re.split('((\d+)[\*]\d+)',a,1)
-# print(B)
-# a='1 - 2 * ( (60-30 +(-40/5) * (9-2*5/3 + 7 /3*99/4*2998 +10 * 568/14 )) - (-4*3)/ (16-3*2) )'
-# a=re.sub(' ','',a)
-# print(a)
-# a=[a,]
-# print(a)
-# b=re.search('\(([\+\-\*\/]?\d+){2,}\)',a[0]).group()
-# print(b)
-# A,B,C=re.split(b,a[0],maxsplit=1)
-# print(A)
-# print(C)
-#a=''\d+\*\d+''
-# a='1-2*((60-30-8.0*9-2*1.6666666666666667+2.3333333333333335*24.75*2998+10*40.57142857142857)+12/16-6)'
-# for i in range(5):
-#     content = re.search('\d+[\-|\d+|\.]?\d+\*\d+',a).group()
-#     print(content)
-#     a=a.replace(content,'aaa')
-
-a=eval('1-2*((60-30+(-8.0)*(9-3.3333333333333335+0.196539556112.60483+405.7142857142857))-(-12)/(16-3*2))')
-print(a)
+def aa(aa):
+    if  re.search('\-?\d+[\.?\d+]?[\*|\/]?\d+',a) is None:
+        return aa
+a='-8'
+b=aa(a)
+print(b)
