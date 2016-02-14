@@ -6,10 +6,12 @@ def jisuan(num):
     # String=jiajian(num)
     return num
 def chengchu(num):
-    if not re.search('\-?\d+[\.?\d+]?[\*|\/]?\d+',num):
+    # print(num)
+    # print(re.search('\d+[\.?\d+]?[\*|\/]\d+',num))
+    if  re.search('\-?\d+[\.?\d+]?[\*|\/]\d+',num) is None:
         return num
-        # print(re.search('\-?\d+[\.?\d+]?[\*|\/]?\d+',num))
-    String=re.search('\-?\d+[\.?\d+]?[\*|\/]?\d+',num).group()
+    String=re.search('\-?\d+\.?\d+?[\*|\/]\d+',num).group()
+    print(String)
     if '/' in String:
         b='%.2f'%(float(re.split('\/',String)[0])/float(re.split('\/',String)[1]))
         print('计算结果：%s'%b)
@@ -18,8 +20,7 @@ def chengchu(num):
         b='%.2f'%(float(re.split('\*',String)[0])*float(re.split('\*',String)[1]))
         print('计算结果：%s'%b)
         num=num.replace(String,str(b))
-    print(num)
-    # return chengchu(num)
+    return chengchu(num)
 def jiajian(num):
     pass
 def Sreach(num):
