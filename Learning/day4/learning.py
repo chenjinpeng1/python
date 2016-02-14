@@ -92,36 +92,35 @@
 
 #-----------------------------
 
-# def Before(request,kargs):
-#     print ('before')
-# # print(Before(1,2))
-# def After(request,kargs):
-#     print ('after')
-# def Filter(before_func,after_func):
-#     def outer(main_func):
-#         def wrapper(request,kargs):
-#             before_result = before_func(request,kargs)
-#             # if(before_result != None):
-#             #     return before_result;
-#             main_result = main_func(request,kargs)
-#             # if(main_result != None):
-#             #     return main_result;
-#             after_result = after_func(request,kargs)
-#             # if(after_result != None):
-#             #     return after_result;
-#         return wrapper
-#     return outer
-# @Filter(Before, After)
-# def Index(request,kargs):
-#     print ('index')
-# if __name__ == '__main__':
-#     Index(1,2)    #Filter(Before,After)(Index)('1','2')
-#                                 #outer (Index)('1','2')
-#                                      #wrapper ('1','2')
-#                                            #Before(1,2)
-#                                             #Index(1,2)
-#                                             #After(1,2)
- u
+def Before(request,kargs):
+    print ('before')
+# print(Before(1,2))
+def After(request,kargs):
+    print ('after')
+def Filter(before_func,after_func):
+    def outer(main_func):
+        def wrapper(request,kargs):
+            before_result = before_func(request,kargs)
+            # if(before_result != None):
+            #     return before_result;
+            main_result = main_func(request,kargs)
+            # if(main_result != None):
+            #     return main_result;
+            after_result = after_func(request,kargs)
+            # if(after_result != None):
+            #     return after_result;
+        return wrapper
+    return outer
+@Filter(Before, After)
+def Index(request,kargs):
+    print ('index')
+if __name__ == '__main__':
+    Index(1,2)    #Filter(Before,After)(Index)('1','2')
+                                #outer (Index)('1','2')
+                                     #wrapper ('1','2')
+                                           #Before(1,2)
+                                            #Index(1,2)
+                                            #After(1,2)
 
 
 
@@ -218,3 +217,4 @@
 
 # a=[[i for i in range(4)] for ii in range(4)]
 # print(a)
+
