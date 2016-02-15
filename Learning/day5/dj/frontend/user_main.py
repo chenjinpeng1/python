@@ -1,5 +1,10 @@
 #python 3.5环境,解释器在linux需要改变
 #商城购物，阅读手册查询readme文件
 #作者：S12-陈金彭
-from Learning.day5.dj.backend.logic.handle import home
-home()
+import sys
+import os
+DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(DIR)
+from backend.logic import handle
+handle.home()
+

@@ -44,22 +44,22 @@ import re
 
 
 #===================================   time模块
-import time
-import datetime
-# print(time.time())
-# print(time.ctime())
+# import time
+# import datetime
+# # print(time.time())
+# print(time.ctime(11111111111))
 # print(time.ctime(time.time()-10))
 # print(time.gmtime(time.time()-5))
 # print(time.gmtime(time.time()-10))
 
 ##################################  random模块
-# import random
-# print(random.random()) #生成小数
-# print(random)
+import random
+# print(random.randrange(1,10)) #生成小数
+
 
 
 # aa=''
-# for i in range(100):
+# for i in range(10):
 #     num = random.randrange(0,9)
 #     if num != i:
 #         tmp= chr(random.randint(65,90))
@@ -67,27 +67,50 @@ import datetime
 #         tmp = random.randint(0,9)
 #     aa+=str(tmp)
 # print(aa)
-
-
+# import random
+# checkcode = ''
+# for i in range(7):
+#     current = random.randrange(0,10)
+#     if current != i:
+#         temp = chr(random.randint(65,90))
+#     else:
+#         temp = random.randint(0,9)
+#     checkcode += str(temp)
+# print (checkcode)
 # func = lambda a,b:a+1
 # aa=func(99,'aaaaa')
-data = [10,4,33,21,54,3,8,11,5,22,2,1,17,13,6]
-print("before sort:",data)
-count = 0
-for j in range(1,len(data)):
-    tmp = 0
-    for i in range(len(data)-j):
-        if data[i] > data[i+1]:
-            tmp=data[i]
-            data[i] = data[i+1]
-            data[i+1] = tmp
-            count+=1
-    count+=1
-    print(data)
-print("after sort:",data)
-print(count)
+# data = [10,4,33,21,54,3,8,11,5,22,2,1,17,13,6]
+# print("before sort:",data)
+# count = 0
+# for j in range(1,len(data)):
+#     tmp = 0
+#     for i in range(len(data)-j):
+#         if data[i] > data[i+1]:
+#             tmp=data[i]
+#             data[i] = data[i+1]
+#             data[i+1] = tmp
+#             count+=1
+#             # print(count)
+#     # count+=1
+#     # print(count)
+#     # print(data)
+# print("after sort:",data)
+# print(count)
 
-
+# import sys
+# import time
+# for i in range(10):
+#     sys.stdout.write('#')
+#     sys.stdout.flush()
+#     time.sleep(0.3)
+import pickle
+f = open('test.txt','wb')
+info = {
+    'chen':'123',
+    'alex':'456',
+}
+f.write(pickle.dumps(info))
+f.close()
 
 
 
