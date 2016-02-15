@@ -92,35 +92,35 @@
 
 #-----------------------------
 
-def Before(request,kargs):
-    print ('before')
-# print(Before(1,2))
-def After(request,kargs):
-    print ('after')
-def Filter(before_func,after_func):
-    def outer(main_func):
-        def wrapper(request,kargs):
-            before_result = before_func(request,kargs)
-            # if(before_result != None):
-            #     return before_result;
-            main_result = main_func(request,kargs)
-            # if(main_result != None):
-            #     return main_result;
-            after_result = after_func(request,kargs)
-            # if(after_result != None):
-            #     return after_result;
-        return wrapper
-    return outer
-@Filter(Before, After)
-def Index(request,kargs):
-    print ('index')
-if __name__ == '__main__':
-    Index(1,2)    #Filter(Before,After)(Index)('1','2')
-                                #outer (Index)('1','2')
-                                     #wrapper ('1','2')
-                                           #Before(1,2)
-                                            #Index(1,2)
-                                            #After(1,2)
+# def Before(request,kargs):
+#     print ('before')
+# # print(Before(1,2))
+# def After(request,kargs):
+#     print ('after')
+# def Filter(before_func,after_func):
+#     def outer(main_func):
+#         def wrapper(request,kargs):
+#             before_result = before_func(request,kargs)
+#             # if(before_result != None):
+#             #     return before_result;
+#             main_result = main_func(request,kargs)
+#             # if(main_result != None):
+#             #     return main_result;
+#             after_result = after_func(request,kargs)
+#             # if(after_result != None):
+#             #     return after_result;
+#         return wrapper
+#     return outer
+# @Filter(Before, After)
+# def Index(request,kargs):
+#     print ('index')
+# if __name__ == '__main__':
+#     Index(1,2)    #Filter(Before,After)(Index)('1','2')
+#                                 #outer (Index)('1','2')
+#                                      #wrapper ('1','2')
+#                                            #Before(1,2)
+#                                             #Index(1,2)
+#                                             #After(1,2)
 
 
 
@@ -160,32 +160,37 @@ if __name__ == '__main__':
 # calc(10)
 
 #--------------斐波那契数列-----------------#
+# List=[]
 # def func(a,b,c):
 #     if a == 0:
 #         print(a,b)
 #     d=a+b
-#     print(d)
+#     List.append(d)
 #     if d < c:
-
+#
 #         func(b,d,c)
-# func(0,1,50)
+#     # print(List)
+# func(1,2,50)
+# print(List)
 #----------------------二分法------------------#
-
 # def func(yuan,find):
 #     zhongjian = int(len(yuan) / 2)
-#     if len(yuan) >=1:
+#     if zhongjian >= 1:
 #         if yuan[zhongjian] > find:
+#             print(yuan[:zhongjian])
 #             func(yuan[:zhongjian],find) #func(yuan[:zhongjian],find)
 #         elif  yuan[zhongjian] < find:
+#             print(yuan[zhongjian:])
 #             func(yuan[zhongjian:],find)
 #         else:
 #             print('found find',yuan[zhongjian])
 #     else:
 #         print('no found')
-# data = list(range(1,600,1))
-#
-# func(data,480)
-
+# if __name__== '__main__':
+#     data = [2, 3, 5, 7, 8,11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+#     print(data)
+#     func(data,3)
+    ##不能发现第一个。如果将if zhongjian >= 1: 换成len(yuan)的话可以发现 但是如果查找的字符串不在列表里则报错
 '''
 2分算法思路：
 1、func(data,8)调用函数func 传入的实参为data列表，8
@@ -195,9 +200,20 @@ if __name__ == '__main__':
 5、再次执行函数func(yuan[:zhongjian],find) 此时函数体里第一个形参就=600[:300] 大于索引往左切片
 6、之后进行依次循环 如果循环到yuan[zhongjian] < find 则执行<判断里面的函数体知道判断结束
 '''
-# a=[[i for i in range(4)] for ii in range(4) ]
-# for i in a:
-#     print(i)
+# data=[[i for i in range(4)] for ii in range(4) ]
+# for r_index,row in enumerate(data):
+#     for c_index in range(len(row)):
+#         data[r_index][c_index] = row[r_index]
+# print(data)
+#
+# data=[[i for i in range(4)] for ii in range(4) ]
+# for r_index,row in enumerate(data):
+#     for c_index in range(r_index,len(row)):
+#         tmp = data[c_index][r_index]
+#         data[c_index][r_index] = row[c_index]
+#         data[r_index][c_index] = tmp
+# print(data)
+
 '''
 [0, 1, 2, 3]
 [0, 1, 2, 3]

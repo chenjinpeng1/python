@@ -53,9 +53,9 @@ import datetime
 # print(time.gmtime(time.time()-10))
 
 ##################################  random模块
-import random
-print(random.random()) #生成小数
-print(random)
+# import random
+# print(random.random()) #生成小数
+# print(random)
 
 
 # aa=''
@@ -67,3 +67,56 @@ print(random)
 #         tmp = random.randint(0,9)
 #     aa+=str(tmp)
 # print(aa)
+
+
+# func = lambda a,b:a+1
+# aa=func(99,'aaaaa')
+data = [10,4,33,21,54,3,8,11,5,22,2,1,17,13,6]
+print("before sort:",data)
+count = 0
+for j in range(1,len(data)):
+    tmp = 0
+    for i in range(len(data)-j):
+        if data[i] > data[i+1]:
+            tmp=data[i]
+            data[i] = data[i+1]
+            data[i+1] = tmp
+            count+=1
+    count+=1
+    print(data)
+print("after sort:",data)
+print(count)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
