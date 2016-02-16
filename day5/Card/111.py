@@ -7,5 +7,5 @@
 # sys.path.append(DIR)
 # Read_File=open('config.txt','rb').read()
 # print(Read_File)
-a=0-10
-print(a)
+a=[1,2,3,4,5]
+print(a[-1:])
