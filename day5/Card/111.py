@@ -7,5 +7,28 @@
 # sys.path.append(DIR)
 # Read_File=open('config.txt','rb').read()
 # print(Read_File)
-a=[1,2,3,4,5]
-print(a[-1:])
+import time,datetime
+# print(time.ctime())
+# print(datetime)
+# a=time.strftime("%Y-%m-%d",time.gmtime())
+# b=time.strftime("%Y-%m-%d",time.gmtime())
+# print(a)
+# print(b)
+# lixi=int(a.replace('-',''))-int(time.strftime("%Y-%m-%d",time.gmtime()).replace('-',''))
+# print(lixi)
+# A='10'
+# print(time.strptime("2016-01-28","%Y-%m-%d") )
+# Curent_m=(time.strftime("%Y-%m-%d",time.gmtime()))
+# print(Curent_m)
+# Curent_m=Curent_m.replace(time.strftime("%m",time.gmtime()),str(int(time.strftime("%m",time.gmtime()))+1))
+# Bill_time=('%s-%s'%(Curent_m,A))
+# print(Bill_time)
+# A='10'
+# Curent_m=time.strftime("%Y-%m",time.gmtime())
+# Curent_m=Curent_m.replace(time.strftime("%m",time.gmtime()),str(int(time.strftime("%m",time.gmtime()))+1))
+# Bill_time=('%s-%s'%(Curent_m,A))
+# print(Bill_time)
+a=9999.999999999998
+b=float('%.3f' %a)
+print(a)
+print(b)

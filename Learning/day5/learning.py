@@ -68,9 +68,12 @@ import random
 #     aa+=str(tmp)
 # print(aa)
 # import random
+# print(random.random)
+# aa=random.randrange(0,10)
+# print(aa)
 # checkcode = ''
 # for i in range(7):
-#     current = random.randrange(0,10)
+#     current = random.randrange(0, 10)
 #     if current != i:
 #         temp = chr(random.randint(65,90))
 #     else:

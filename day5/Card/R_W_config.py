@@ -7,6 +7,7 @@ sys.path.append(DIR)
 def Write(info):
     File=open('Card/config.txt','wb')
     File.write(pickle.dumps(info))
+    File.flush()
     File.close()
 def Read():
     File=open('Card/config.txt','rb')
@@ -21,6 +22,15 @@ def Read_XF():
     File=open('Card/xiaofei.txt','r')
     info=File.read()
     print(info)
+    File.close()
+def Write_log(log):
+    File=open('Card/caozuo_log.txt','a')
+    File.write(log)
+    File.close()
+def Read_log():
+    File=open('Card/caozuo_log.txt','r')
+    log=File.read()
+    print(log)
     File.close()
 
 
