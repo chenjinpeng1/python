@@ -19,7 +19,6 @@ def Card_main(User):
 
             '''%(info[User][6],info[User][7],info[User][9][0],info[User][8]))
         if Options == '2':
-            lixi(User)
             info=R_W_config.Read()
             quxian=input('请输入你要取现的金额：')
             if int(quxian) > info[User][8]:
@@ -34,7 +33,6 @@ def Card_main(User):
                 info[User][7] = 余额
                 info[User][8] = 取现额度
                 info[User][9][0] = 欠款
-                print(info)
                 print('余额 %s，取现额度 %s'%(str(余额),str(取现额度)))
                 R_W_config.Write(info)
                 log='%s  %s     %s          %s  %s'%(User,time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime()) ,Main_Function[int(Options)-1],quxian,'\n')
@@ -44,12 +42,13 @@ def Card_main(User):
         if Options == '3':
             lixi(User)
             info=R_W_config.Read()
-            print('欠款 %s'%info[User][9][0])
+            print('欠款 %s'%abs(info[User][9][0]))
             huankuan=input('请输入还款的金额：')
             info[User][9][0]+=float(huankuan)
             if info[User][9][0] >= 0:
                 info[User][9][0] = 0
                 info[User][9][2] = 0
+                info[User][9][3] = 0
                 A='10'
                 Curent_m=time.strftime("%Y-%m",time.gmtime())
                 Curent_m=Curent_m.replace(time.strftime("%m",time.gmtime()),str(int(time.strftime("%m",time.gmtime()))+1))
@@ -91,14 +90,17 @@ def lixi(User):
     逾期月=int(A[1])-int(逾期[1])
     逾期日=int(A[2])-int(逾期[2])
     info[User][9][3]=(逾期年 * 365)+(逾期月)*30+逾期日
-    print(info[User][9][3])
     if abs(info[User][9][0]) !=0: #判断是否欠款
         if info[User][9][3] > 0:  #判断是否逾期
+            A=info[User][9][2]
             for i in range(info[User][9][3]):
-                info[User][9][2]=float('%.3f' %info[User][9][0] * 0.0005) #计算利息
+                A=info[User][9][0] * 0.0005 #计算利息
                 info[User][9][1]=Curent_m #重新赋值逾期时间
-                info[User][9][0]+=info[User][9][2]
-                info[User][7]+=info[User][9][2] #余额减去利息 由于利息为-值，则为加
-                # print(info)
-                R_W_config.Write(info)
-                R_W_config.Read()
+                info[User][9][0]+=A #欠款
+                info[User][9][2]+=A #利息
+                info[User][7]+=A #余额（减去利息 由于利息为-值，则为加）
+            info[User][9][0]=float('%.3f'%info[User][9][0])
+            info[User][9][2]=float('%.3f'%info[User][9][2])
+            info[User][7]=float('%.3f'%info[User][7])
+            R_W_config.Write(info)
+            R_W_config.Read()

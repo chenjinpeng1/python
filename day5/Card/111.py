@@ -28,7 +28,23 @@ import time,datetime
 # Curent_m=Curent_m.replace(time.strftime("%m",time.gmtime()),str(int(time.strftime("%m",time.gmtime()))+1))
 # Bill_time=('%s-%s'%(Curent_m,A))
 # print(Bill_time)
-a=9999.999999999998
-b=float('%.3f' %a)
-print(a)
-print(b)
+# a=9999.999999999998
+# b=float('%.3f' %a)
+# print(a)
+# print(b)
+# d=10000
+# b=-2000
+# c=0
+# for i in range(30):
+#     a=b*0.0005
+#     c+=a
+#     b+=a
+#     d+=a
+# b=float('%.3f'%b)
+# c=float('%.3f'%c)
+# d=float('%.3f'%d)
+# print(b)
+# print(c)
+# print(d-c)
+Curent_m=(time.strftime("%Y-%m-%d",time.gmtime())) #当前时间
+print(Curent_m)

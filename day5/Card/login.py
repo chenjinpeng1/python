@@ -7,7 +7,6 @@ DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(DIR)
 def login(user,passwd):
     info=R_W_config.Read()
-    print(info)
     if user in info.keys() and passwd == info[user][5]:
         State='登陆成功'
         print(State)
