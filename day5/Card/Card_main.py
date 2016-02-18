@@ -9,16 +9,14 @@ def Card_main(User):
     # info=R_W_config.Read()
     # A=info[User][8] # 设定临时变量存储取现额度，以便方便计算取现
     while True:
-        Main_Function=['账户信息','取现','还款','消费账单','操作日志','删除账户','Exit']
+        Main_Function=['账户信息','取现','还款','消费账单','操作日志','删除账户','查看所有账户','Exit']
         for index,i in enumerate(Main_Function,1):print(index,i)
         Options=input('请选择所作操作：')
         if Options == '1':
             lixi(User)
             info=R_W_config.Read()
-            print(info)
-            print('''信用额度：%s 余额：%s 欠款%s 取现额度%s
-
-            '''%(info[User][6],info[User][7],info[User][9][0],info[User][8]))
+            print('''信用额度：%s 余额：%s 欠款：%s 利息：%s 取现额度：%s
+            '''%(info[User][6],info[User][7],info[User][9][0],info[User][9][2],info[User][8]))
         if Options == '2':
             info=R_W_config.Read()
             quxian=input('请输入你要取现的金额：')
@@ -40,7 +38,7 @@ def Card_main(User):
                 R_W_config.Write(info)
                 log=R_W_config.Read_XF()
                 # log=collections.defaultdict(list)
-                log[User].append('%s  %s     %s          %s'%(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) ,Main_Function[int(Options)-1],quxian))
+                log[User].append('%s  %s     %s          %s'%(User,time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) ,Main_Function[int(Options)-1],quxian))
                 R_W_config.Write_XF(log)
         if Options == '3':
             lixi(User)
@@ -88,6 +86,13 @@ def Card_main(User):
                     R_W_config.Write_log(W_log)
                     print('删除成功')
         if Options == '7':
+            info=R_W_config.Read()
+            if info[User][0] != 'root':
+                print('非root,没有权限！')
+            else:
+                All_User=info.keys()
+                print(list(All_User))
+        if Options == '8':
             break
 def lixi(User):
     info = R_W_config.Read()

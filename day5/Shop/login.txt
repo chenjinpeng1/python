@@ -1,3 +1,2 @@
-chenjinpeng 123 0
-qiulunan    456 0
-cjp 123 0
+root @root199112309873 0 
+chen 123 0 

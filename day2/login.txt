@@ -1,3 +1,2 @@
-chenjinpeng 123 16459
-qiulunan    456 6000
-cjp 123 0
+chenjinpeng 123 10000
+aa aa 0

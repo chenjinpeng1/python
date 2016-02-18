@@ -4,15 +4,13 @@
 import sys,os,random,pickle,time
 DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(DIR)
-print(DIR)
 from Card import R_W_config,login
 def zhuce():
     Card=''
+    ZC=False
     while True:
-        # Info={}
+        if ZC=='Success':break
         Info=R_W_config.Read()
-        # Info.pop('root')
-        # Info.pop('陈金彭')
         User=input('请输入你的姓名：')
         ID=input('输入你的身份证号码（18位）：')
         City=input('所在城市：')
@@ -36,7 +34,9 @@ def zhuce():
         W_log=R_W_config.Read_log()
         W_log[User].append('%s       %s      %s'%(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()),User,State))
         R_W_config.Write_log(W_log)
-        print('你好 %s 你的卡号为%s 信用额度为%s'%(User,Card,信用额度))
+        print('你好 %s 你的卡号为%s 信用额度为%s,还款日期为每月10日'%(User,Card,信用额度))
+        print('请牢记用户名以及密码')
+        ZC='Success'
         login.login(User,Passwd)
 
 

@@ -14,10 +14,8 @@ def main():
     if LZ == '1':
         print('进入注册接口')
         Panduan=zhuce.zhuce()
-        print('请牢记用户名以及密码')
     if LZ == '2':
         print('进入登陆接口')
         User=input('输入你的账号：')
         Passwd=input('输入你的密码：')
         f=login.login(User,Passwd)
-main()

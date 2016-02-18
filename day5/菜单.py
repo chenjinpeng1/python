@@ -6,7 +6,7 @@ DIR=os.path.dirname(os.path.abspath(__file__))
 sys.path.append(DIR)
 from Shop import shop
 from Card import main
-print(DIR)
+print('#-------使用前请先注册信用卡、购物商城用户   |    信用卡利息需更改完系统时间，再次查看账户信息-------#')
 mains=['登陆购物商城','登陆信用卡']
 for index,i in enumerate(mains,1):
     print(index,i)

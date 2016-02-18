@@ -27,7 +27,8 @@ def Card_fk(Money):
                 info[User][9][0]-=Money
                 print('付款成功')
                 R_W_config.Write(info)
-                log='%s  %s     %s          %s  %s'%(User,time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime()) ,'银联消费',Money,'\n')
+                log=R_W_config.Read_XF()
+                log[User].append('%s  %s     %s      %s'%(User,time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) ,'银联消费',Money))
                 R_W_config.Write_XF(log)
                 return True
             else:

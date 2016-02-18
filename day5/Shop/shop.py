@@ -15,6 +15,7 @@ def shop():
     User_Exit=[]
     while True:
         LoginSusses=False                               #循环开始前先定义登陆成功失败的变量。方便循环嵌套跳转
+        Auth=True
         count = 0                                        #定义计数器，错误三次锁定
         Read_Lock=open(Lock_File)                        #读取锁文件到变量Lock_List
         Lock_List=[]
@@ -29,7 +30,7 @@ def shop():
             Name=input('注册用户名：')
             Pass=input('输入密码')
             Dir_File=open('Shop/login.txt',"a")
-            Dir_File.write('%s %s %d\n'%(Name,Pass,0))
+            Dir_File.write('%s %s %d %s'%(Name,Pass,0,'\n'))
             Dir_File.close()
             LoginSusses=True
             break
@@ -40,10 +41,12 @@ def shop():
                 if len(i) != 0:
                     User_Exit.append(i[0])
             if Name not in User_Exit:
-                Zhuce =  input('你输入的用户名不存在！')
+                print('你输入的用户名不存在！')
+                # Auth=False
                 break
             if Name in Lock_List:
                 print("你的账户已经被锁定！！请联系管理员解锁！")             #，用户登陆前先判断用户是否被锁定后在进行密码判断。
+                Auth=False
                 break
             for line in Read_Auth:
                 line = line.split()
@@ -61,11 +64,13 @@ def shop():
                             f.write('%s\n'%Name)
                             f.close()
                             print ("你的密码错误次数达到3次，已被锁定")
+                            Auth=False
                     if LoginSusses is True:break                                #跳出2层循环
                 if count ==3:                                                     #锁定用户后跳出2层循环
                     break
             if LoginSusses is True:                                             #跳出2层循环
                 break
+        if Auth==False:break
     if LoginSusses==True:
         print("Good，欢迎您登陆：%s" %Name)
 
@@ -206,4 +211,5 @@ def shop():
                 if LoginSusses2==False:
                     print('谢谢光临，再见!!!!!')
                     break
+
         #----------------------------------------------------------程序完成----------------------------------------------------------------------------------#
