@@ -1,7 +1,7 @@
 #python 3.5环境，解释器在linux需要改变
 #阅读手册查询readme文件
 #作者：S12-陈金彭
-import sys,os,pickle,time,datetime
+import sys,os,pickle,time,datetime,collections
 DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(DIR)
 from Card import R_W_config
@@ -15,6 +15,7 @@ def Card_main(User):
         if Options == '1':
             lixi(User)
             info=R_W_config.Read()
+            print(info)
             print('''信用额度：%s 余额：%s 欠款%s 取现额度%s
 
             '''%(info[User][6],info[User][7],info[User][9][0],info[User][8]))
@@ -23,6 +24,8 @@ def Card_main(User):
             quxian=input('请输入你要取现的金额：')
             if int(quxian) > info[User][8]:
                 print('超出取现额度，取现额度为%s'%str(info[User][8]))
+            elif int(quxian) > info[User][7]:
+                print('余额不足')
             else:
                 YueEduo=0
                 if info[User][7] > info[User][6]:
@@ -35,9 +38,9 @@ def Card_main(User):
                 info[User][9][0] = 欠款
                 print('余额 %s，取现额度 %s'%(str(余额),str(取现额度)))
                 R_W_config.Write(info)
-                log='%s  %s     %s          %s  %s'%(User,time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime()) ,Main_Function[int(Options)-1],quxian,'\n')
-                # log=('用户          交易时间        操作类型        金额\n')
-                print(log)
+                log=R_W_config.Read_XF()
+                # log=collections.defaultdict(list)
+                log[User].append('%s  %s     %s          %s'%(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) ,Main_Function[int(Options)-1],quxian))
                 R_W_config.Write_XF(log)
         if Options == '3':
             lixi(User)
@@ -51,22 +54,25 @@ def Card_main(User):
                 info[User][9][3] = 0
                 A='10'
                 Curent_m=time.strftime("%Y-%m",time.gmtime())
-                Curent_m=Curent_m.replace(time.strftime("%m",time.gmtime()),str(int(time.strftime("%m",time.gmtime()))+1))
+                Curent_m=Curent_m.replace(time.strftime("%m",time.gmtime()),str(int(time.strftime("%m",time.localtime()))+1))
                 Bill_time=('%s-%s'%(Curent_m,A))
                 info[User][9][1]=Bill_time
             info[User][7]+=float(huankuan )
             info[User][8] = info[User][6] /2 + (info[User][7]-info[User][6])
             R_W_config.Write(info)
-            log='%s  %s     %s          %s  %s'%(User,time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime()) ,Main_Function[int(Options)-1],huankuan,'\n')
+            log=R_W_config.Read_XF()
+            log[User].append('%s  %s     %s          %s'%(User,time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) ,Main_Function[int(Options)-1],huankuan))
             R_W_config.Write_XF(log)
             print('还款成功')
         if Options == '4':
-            R_W_config.Read_XF()
+            log=R_W_config.Read_XF()
+            for i in range(len(log[User])):print(log[User][i])
         if Options == '5':
-            R_W_config.Read_log()
+            log=R_W_config.Read_log()
+            for i in range(len(log[User])):print(log[User][i])
         if Options == '6':
             info=R_W_config.Read()
-            if info[User][10] != str(1):
+            if info[User][10] != '1':
                 print('非管理员，不具备删除权限，请联系管理员')
             else:
                 Del_user=input('请输入你要删除的账户：')
@@ -76,7 +82,9 @@ def Card_main(User):
                     info.pop(Del_user)
                     R_W_config.Write(info)
                     State='删除-%s'%Del_user
-                    W_log='%s       %s      %s %s'%(time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime()),User,State,'\n')
+                    # W_log=collections.defaultdict(list)
+                    W_log=R_W_config.Read_log()
+                    W_log[User].append('%s       %s      %s'%(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()),User,State))
                     R_W_config.Write_log(W_log)
                     print('删除成功')
         if Options == '7':

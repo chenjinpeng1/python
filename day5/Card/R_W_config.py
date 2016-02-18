@@ -4,33 +4,38 @@
 import pickle,os,sys
 DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(DIR)
+A='%s%s'%(DIR,'\Card\config.txt') #读取config.txt文件
+B='%s%s'%(DIR,'\Card\Xiaofei.txt') #读取xiaofei文件
+C='%s%s'%(DIR,'\Card\caozuo_log.txt') #读取caozuo_log.txt文件
 def Write(info):
-    File=open('Card/config.txt','wb')
+    File=open(A,'wb')
     File.write(pickle.dumps(info))
     File.flush()
     File.close()
 def Read():
-    File=open('Card/config.txt','rb')
+    File=open(A,'rb')
     info=pickle.loads(File.read())
     File.close()
     return info
 def Write_XF(log):
-    File=open('Card/xiaofei.txt','a')
-    File.write(log)
+    File=open(B,'wb')
+    File.write(pickle.dumps(log))
+    File.flush()
     File.close()
 def Read_XF():
-    File=open('Card/xiaofei.txt','r')
-    info=File.read()
-    print(info)
+    File=open(B,'rb')
+    info=pickle.loads(File.read())
     File.close()
+    return info
 def Write_log(log):
-    File=open('Card/caozuo_log.txt','a')
-    File.write(log)
+    File=open(C,'wb')
+    File.write(pickle.dumps(log))
+    File.flush()
     File.close()
 def Read_log():
-    File=open('Card/caozuo_log.txt','r')
-    log=File.read()
-    print(log)
+    File=open(C,'rb')
+    info=pickle.loads(File.read())
     File.close()
+    return info
 
 

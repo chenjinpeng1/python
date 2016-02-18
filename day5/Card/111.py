@@ -46,5 +46,31 @@ import time,datetime
 # print(b)
 # print(c)
 # print(d-c)
-Curent_m=(time.strftime("%Y-%m-%d",time.gmtime())) #当前时间
-print(Curent_m)
+# Curent_m=(time.strftime("%Y-%m-%d",time.gmtime())) #当前时间
+# print(Curent_m)
+# import pickle,os,sys
+# DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# sys.path.append(DIR)
+# print(DIR)
+# A='%s%s'%(DIR,'\Card\config.txt') #读取config.txt文件
+# print(A)
+# B='%s%s'%(DIR,'\Card\X.txt') #读取xiaofei文件
+# print(B)
+# C='%s%s'%(DIR,'\Card\caozuo_log.txt') #读取caozuo_log.txt文件
+# print(C)
+import collections
+log=collections.defaultdict(list)
+
+# print(a)
+# log['1']=[1,2,3,4]
+# print(log)
+# print(len(log['1']))
+# for i in range(len(log['1'])):
+#     print('aaa')
+# import pickle,datetime
+# File=open('caozuo_log.txt','rb')
+# info=pickle.loads(File.read())
+# File.close()
+# print(info['root'][0])
+print(time.strftime("%m",time.localtime())) #将struct_time格式转成指定的字符串格式)
+print(time.strftime("%m",time.gmtime()))

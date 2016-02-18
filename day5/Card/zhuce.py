@@ -33,7 +33,8 @@ def zhuce():
         Info[User]=[User,ID,City,Phone,str(Card),Passwd,int(信用额度),int(余额),取现额度,欠款,管理员账户]
         R_W_config.Write(Info)
         State='注册-%s'%User
-        W_log='%s       %s      %s %s'%(time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime()),User,State,'\n')
+        W_log=R_W_config.Read_log()
+        W_log[User].append('%s       %s      %s'%(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()),User,State))
         R_W_config.Write_log(W_log)
         print('你好 %s 你的卡号为%s 信用额度为%s'%(User,Card,信用额度))
         login.login(User,Passwd)
