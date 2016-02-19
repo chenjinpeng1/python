@@ -30,7 +30,7 @@ def shop():
             Name=input('注册用户名：')
             Pass=input('输入密码')
             Dir_File=open('Shop/login.txt',"a")
-            Dir_File.write('%s %s %d %s'%(Name,Pass,0,'\n'))
+            Dir_File.write('%s %s %d %s'%(Name,Pass,5000,'\n'))
             Dir_File.close()
             LoginSusses=True
             break
