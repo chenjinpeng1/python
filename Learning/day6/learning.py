@@ -32,3 +32,47 @@ print(os.sep) #    输出操作系统特定的路径分隔符，win下为"\\"
 # os.path.join(path1[, path2[, ...]])#  将多个路径组合后返回，第一个绝对路径之前的参数将被忽略
 # os.path.getatime(path)#  返回path所指向的文件或者目录的最后存取时间
 # os.path.getmtime(path)#  返回path所指向的文件或者目录的最后修改时间
+import xml.etree.ElementTree as ET
+
+# tree = ET.parse("test.xml")
+# root = tree.getroot()
+# print(root.tag)
+# for child in root:
+#     print(child.tag, child.attrib)
+#     for i in child:
+#         print(i.tag,i.text)
+# for node in root.iter('year'):
+#     print(node.tag,node.text)
+# for node in root.iter('year'):
+#     new_year = int(node.text) + 1
+#     node.text = str(new_year)
+#     node.set("updated","yes")
+#
+# tree.write("test.xml")
+#删除node
+# for country in root.findall('country'):
+#    rank = int(country.find('rank').text)
+#    if rank > 50:
+#      root.remove(country)
+#
+# tree.write('output.xml')
+import xml.etree.ElementTree as ET
+# new_xml = ET.Element("namelist")
+# name = ET.SubElement(new_xml,"name",attrib={"enrolled":"yes"})
+# age = ET.SubElement(name,"age",attrib={"checked":"no"})
+# sex = ET.SubElement(name,"sex")
+# sex.text = '33'
+# name2 = ET.SubElement(new_xml,"name",attrib={"enrolled":"no"})
+# age = ET.SubElement(name2,"age")
+# age.text = '19'
+#
+# et = ET.ElementTree(new_xml) #生成文档对象
+# et.write("test.xml", encoding="utf-8",xml_declaration=True)
+#
+# ET.dump(new_xml) #打印生成的格式
+a=ET.parse('test.xml')
+b=a.getroot()
+for i in b:
+    print(b.tag,b.attrib)
+    for ii in i:
+        print(ii.tag,i.text)
