@@ -11,11 +11,11 @@ import os
 # os.removedirs('test/aa') #若目录为空，则删除，并递归到上一级目录，如若也为空，则删除，依此类推,不为空报错
 # os.mkdir('test') #生成单级目录；相当于shell中mkdir dirname 文件存在则报错
 # os.rmdir('test')    #删除单级空目录，若目录不为空则无法删除，报错；相当于shell中rmdir dirname
-print(os.listdir())#列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印
+# print(os.listdir())#列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印
 # os.remove('aa.py')#删除一个文件
 # os.rename("learn.py","learning.py")# 重命名文件/目录
 # print(os.stat('learning.py'))#  获取文件/目录信息
-print(os.sep) #    输出操作系统特定的路径分隔符，win下为"\\",Linux下为"/"
+# print(os.sep) #    输出操作系统特定的路径分隔符，win下为"\\",Linux下为"/"
 # os.linesep#    输出当前平台使用的行终止符，win下为"\t\n",Linux下为"\n"
 # os.pathsep#    输出用于分割文件路径的字符串
 # os.name#    输出字符串指示当前使用平台。win->'nt'; Linux->'posix'
@@ -32,7 +32,7 @@ print(os.sep) #    输出操作系统特定的路径分隔符，win下为"\\"
 # os.path.join(path1[, path2[, ...]])#  将多个路径组合后返回，第一个绝对路径之前的参数将被忽略
 # os.path.getatime(path)#  返回path所指向的文件或者目录的最后存取时间
 # os.path.getmtime(path)#  返回path所指向的文件或者目录的最后修改时间
-import xml.etree.ElementTree as ET
+# import xml.etree.ElementTree as ET
 
 # tree = ET.parse("test.xml")
 # root = tree.getroot()
@@ -56,7 +56,7 @@ import xml.etree.ElementTree as ET
 #      root.remove(country)
 #
 # tree.write('output.xml')
-import xml.etree.ElementTree as ET
+# import xml.etree.ElementTree as ET
 # new_xml = ET.Element("namelist")
 # name = ET.SubElement(new_xml,"name",attrib={"enrolled":"yes"})
 # age = ET.SubElement(name,"age",attrib={"checked":"no"})
@@ -70,9 +70,119 @@ import xml.etree.ElementTree as ET
 # et.write("test.xml", encoding="utf-8",xml_declaration=True)
 #
 # ET.dump(new_xml) #打印生成的格式
-a=ET.parse('test.xml')
-b=a.getroot()
-for i in b:
-    print(b.tag,b.attrib)
-    for ii in i:
-        print(ii.tag,i.text)
+# a=ET.parse('test.xml')
+# b=a.getroot()
+# for i in b:
+#     print(b.tag,b.attrib)
+#     for ii in i:
+#         print(ii.tag,i.text)
+
+
+# import configparser
+#
+# config = configparser.ConfigParser()
+# config["DEFAULT"] = {'ServerAliveInterval': '45',
+#                       'Compression': 'yes',
+#                      'CompressionLevel': '9'}
+# config["aaa"] = {'ServerAliveInterval': '45',
+#                       'Compression': 'yes',
+#                      'CompressionLevel': '9'}
+#  # 第二种写入方式
+# config['bitbucket.org'] = {}
+# config['bitbucket.org']['User'] = 'hg'
+#
+# config['topsecret.server.com'] = {}
+# topsecret = config['topsecret.server.com']
+# topsecret['Host Port'] = '50022'     # mutates the parser
+# topsecret['ForwardX11'] = 'no'  # same here
+# config['DEFAULT']['ForwardX11'] = 'yes'
+# with open('example.ini', 'w') as configfile:
+#    config.write(configfile)
+# #
+# import configparser
+# config=configparser.ConfigParser()
+# print(config.sections())
+#
+# config.read('example.ini')
+#
+# print('bitbucket.org' in config)
+# print(config['bitbucket.org']['user'])
+# print(config['DEFAULT']['Compression'])
+# topsecret = config['topsecret.server.com']
+# print(topsecret['forwardX11'])
+# print(topsecret['host port'])
+# for key in config['bitbucket.org']: print(key)
+# print(config['bitbucket.org']['ForwardX11'])
+#
+#
+# import configparser
+#
+# config = configparser.ConfigParser()
+# config.read('example.ini')
+#
+#
+# # ########## 移除全部类似1层keys ##########
+# sec = config.remove_section('aaa')
+# config.write(open('example2.ini', "w"))
+# # ######### 增加 ##########
+# sec = config.has_section('wupeiqi') # 查询如果没有就增加
+# sec = config.add_section('wupeiqi')
+# config['wupeiqi']['age'] = '21'
+# config.write(open('example2.ini', "w"))
+#
+# # ######## 修改 #########
+# config.set('wupeiqi','age','22')
+# config.write(open('example2.ini', "w"))
+# # ######  删除2层keys
+# config.remove_option('wupeiqi','age')
+# config.write(open('example2.ini', "w"))
+
+
+# import hashlib
+# ######## md5 ########
+#
+# a = hashlib.md5()
+# a.update(b'Hello')
+# a.update(b'It,s me')
+# print(a.digest())  # 2禁制格式
+# print(a.hexdigest()) # 16禁制格式
+# a.update(b'aaaaaaaaaaaaaaa')
+# print(a.hexdigest())
+#
+# # ######## sha1 ########
+#
+# hash = hashlib.sha1()
+# hash.update(b'admin')
+# print(hash.hexdigest())
+#
+# # ######## sha256 ########
+#
+# hash = hashlib.sha256()
+# hash.update(b'admin')
+# print(hash.hexdigest())
+#
+#
+# # ######## sha384 ########
+#
+# hash = hashlib.sha384()
+# hash.update(b'admin')
+# print(hash.hexdigest())
+#
+# # ######## sha512 ########
+#
+# hash = hashlib.sha512()
+# hash.update(b'admin')
+# print(hash.hexdigest())
+
+
+# import hmac
+
+# #一般更多用于消息加密，
+# import hmac
+# h = hmac.new('wueiqi')
+# h.update('hellowo')
+# print (h.hexdigest())
+
+
+import subprocess
+subprocess.call('
