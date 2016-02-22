@@ -185,4 +185,77 @@ import os
 
 
 import subprocess
-subprocess.call('
+# a=subprocess.run('ipconfig');print(a) # 调用系统命令.返回显示值 3.5以前不支持
+# subprocess.call('ipconfig')## 在3.5以前的版本中 该写法会报错。多一个参数,只能如下格式
+# subprocess.call(['df','-h'])
+#或者
+# subprocess.call('df -h',shell=True)
+
+# a=subprocess.call('ipconfig');print(a) #3.5以前调用系统命令这样写,但是返回的是返回值，而不是命令执行结果（显示值），若想打印显示值则：
+# a=subprocess.Popen('ipconfig',stdout=subprocess.PIPE) #3.5以前的版本
+# print(a.stdout.read())   # 打印ipconfig的显示结果而不是打印返回值
+
+
+
+# a=subprocess.Popen('df -h',shell=True,stdout=subprocess.PIPE);print(a.stdout.read())
+'''
+打印执行命令的显示，而不是返回结果（stdout=subprocess.PIPE）表示管道符，意将显示通过管道符传入，
+然后通过a.stdout.read()打印出来显示
+'''
+'''
+>>>subprocess.call('sdf',shell=True)# 报错
+/bin/sh: sdf: command not found
+127
+subprocess.check_call('sdf',shell=True)  抛出异常
+/bin/sh: sdf: command not found
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib64/python2.6/subprocess.py", line 505, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'sdf' returned non-zero exit status 127
+'''
+# import subprocess
+#
+# obj = subprocess.Popen(["python"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+# obj.stdin.write("print ('hello')")
+# obj.stdin.write("print ('hello1')")
+# obj.stdin.write("print ('hello2')")
+# obj.stdin.write("print ('hello3')")
+#
+# out_error_list = obj.communicate(timeout=10)
+# print (out_error_list)
+
+
+import logging
+
+#create logger
+logger = logging.getLogger('TEST-LOG') #公开接口
+logger.setLevel(logging.DEBUG) # 默认级别
+
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()  #输出到屏幕
+ch.setLevel(logging.DEBUG)
+
+# create file handler and set level to warning  # 输出到文件
+fh = logging.FileHandler("access.log")
+fh.setLevel(logging.WARNING)
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') # 规定输出格式
+
+# add formatter to ch and fh
+ch.setFormatter(formatter) #哪个对象应用上述格式
+fh.setFormatter(formatter)#哪个对象应用上述格式
+
+# add ch and fh to logger
+logger.addHandler(ch) #应用到接口
+logger.addHandler(fh)#应用到接口
+
+# 'application' code # 输出日志信息
+logger.debug('debug message')
+logger.info('info message')
+logger.warn('warn message')
+logger.error('error message')
+logger.critical('critical message')
+
+
