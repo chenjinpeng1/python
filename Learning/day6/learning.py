@@ -226,36 +226,83 @@ subprocess.CalledProcessError: Command 'sdf' returned non-zero exit status 127
 # print (out_error_list)
 
 
-import logging
-
-#create logger
-logger = logging.getLogger('TEST-LOG') #公开接口
-logger.setLevel(logging.DEBUG) # 默认级别
-
-
-# create console handler and set level to debug
-ch = logging.StreamHandler()  #输出到屏幕
-ch.setLevel(logging.DEBUG)
-
-# create file handler and set level to warning  # 输出到文件
-fh = logging.FileHandler("access.log")
-fh.setLevel(logging.WARNING)
-# create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') # 规定输出格式
-
-# add formatter to ch and fh
-ch.setFormatter(formatter) #哪个对象应用上述格式
-fh.setFormatter(formatter)#哪个对象应用上述格式
-
-# add ch and fh to logger
-logger.addHandler(ch) #应用到接口
-logger.addHandler(fh)#应用到接口
-
-# 'application' code # 输出日志信息
-logger.debug('debug message')
-logger.info('info message')
-logger.warn('warn message')
-logger.error('error message')
-logger.critical('critical message')
-
+# import logging
+# #create logger
+# logger = logging.getLogger('TEST-LOG') #公开接口
+# logger.setLevel(logging.DEBUG) # 默认级别
+# # create console handler and set level to debug
+# ch = logging.StreamHandler()  #输出到屏幕
+# ch.setLevel(logging.DEBUG)
+# # create file handler and set level to warning  # 输出到文件
+# fh = logging.FileHandler("access.log")
+# fh.setLevel(logging.WARNING)
+# # create formatter
+# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') # 规定输出格式
+# # add formatter to ch and fh
+# ch.setFormatter(formatter) #哪个对象应用上述格式
+# fh.setFormatter(formatter)#哪个对象应用上述格式
+# # add ch and fh to logger
+# logger.addHandler(ch) #应用到接口
+# logger.addHandler(fh)#应用到接口
+# # 'application' code # 输出日志信息
+# logger.debug('debug message')
+# logger.info('info message')
+# logger.warn('warn message')
+# logger.error('error message')
+# logger.critical('critical message')
+# import struct
+# b='wupeiqi'
+# a=struct.pack('%ds'%b)
+# print(a)
+# wupeiqi=['0b1110111', '0b1110101', '0b1110000', '0b1100101', '0b1101001', '0b1110001', '0b1101001']
+# 武沛齐=['0b110101101100110', '0b110110010011011', '0b1001111101010000']
+# a=[]
+# for i in '武沛齐':
+#     a.append(bin(int(ord(i))))
+# print(a)
+#
+# a = ''
+# for i in '武沛齐':
+#     a+=bin(ord(i))
+#     a=a.replace('0b','')
+# print(a)
+# source = '武'
+# a=''
+# for i in source:
+#     num = ord(i)
+#     b=bin(num).replace('0b','')
+#     # a+=b
+#     print(b)
+# # print(a)
+# # c=011100110010101101010100110
+# print(int(str(0b011100110)))
+# a=int('1101011011001101101100100110111001111101010000')
+# print(chr(a))
+# int
+# a='武沛齐'
+# b=a.encode()
+# print(b)
+# print(b.decode())
+# import logging
+# A=logging.getLogger('chen')
+# A.setLevel(logging.DEBUG)
+# #print console
+# B=logging.StreamHandler()
+# B.setLevel(logging.DEBUG)
+# #write file
+# C=logging.FileHandler('access.log')
+# C.setLevel(logging.INFO)
+# #创建格式模板
+# D=logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# #对象应用模板
+# B.setFormatter(D)
+# C.setFormatter(D)
+# A.addHandler(B)
+# A.addHandler(C)
+# #输出日志信息
+# A.debug('DEBUG_LOG')
+# A.info('INFO_LOG')
+# A.warning('WARNING_LOG')
+# A.error('ERROR_LOG')
+# A.critical('CRITICAL_LOG')
 
