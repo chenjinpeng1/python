@@ -2,7 +2,6 @@
 #阅读手册查询readme文件
 #作者：S12-陈金彭
 import pickle,collections,random,game_function
-# from game_function import Attack
 print(('=*'*20).rjust(80))
 print('|'.rjust(41),'LOL Game Start'.rjust(25),'|'.rjust(12))
 print(('=*'*20).rjust(80))
@@ -15,6 +14,7 @@ print(('=*'*20).rjust(80))
 # Hero_attribute['剑圣'] = ['剑圣',2300,90,[['阿尔法突袭','100'],['冥想',85],['无极剑道',20],['高原血统',400]]]
 # Hero_attribute['寒冰射手'] = ['寒冰射手',1500,150,[['冰霜射击','99'],['万箭齐发',100],['鹰击长空',30],['魔法之箭',250]]]
 # Hero_attribute['伊泽瑞尔'] = ['伊泽瑞尔',2000,120,[['秘术射击','100'],['精华跃动',90],['奥术跃迁',90],['精准弹幕',300]]]
+# 获取字典信息
 f=open('info.txt','rb')
 # f.write(pickle.dumps(Hero_attribute))
 Hero_attribute=pickle.loads(f.read())
@@ -22,39 +22,31 @@ Menu=['选择英雄','退出']
 for index,i in enumerate(Menu,1):print('[%s]     %s'.rjust(61)%(index,i))
 Option = input('请输入操作')
 if Option == '1':
+    # 将英雄添加到列表
     A=[]
     for index,i in enumerate(Hero_attribute,1):
         print(index,i)
         A.append(i)
     # print('%s'.rjust(28) %(''.join(A)))
     Hero_1 = input('选择参战的第一个英雄：')
+    # 获取技能信息
     JiNeng=[]
     for i in Hero_attribute[A[int(Hero_1)-1]][3]:
         JiNeng.append(i[0])
     print('[%s] 的技能为%s'%(A[int(Hero_1)-1],JiNeng))
     Hero_2 = input('选择参战的第二个英雄：')
-    JiNeng=[]
+    JiNeng2=[]
     for i in Hero_attribute[A[int(Hero_2)-1]][3]:
         JiNeng.append(i[0])
     print('[%s] 的技能为%s'%(A[int(Hero_2)-1],JiNeng))
     print('战斗开始')
-    res = True
-    # X1=game_function.Attack('AnNi','盖伦','500','1000',80,90,'碎裂之火','审判之剑')
-    # game_function.X1.acctack()
-
-    while res:
-        S_name = A[int(Hero_1)-1]
-        D_name = A[int(Hero_2)-1]
-        S_Life_Val = Hero_attribute[S_name][1]
-        D_Life_Val = Hero_attribute[D_name][1]
-        S_damage = Hero_attribute[S_name][2]
-        D_damage = Hero_attribute[D_name][2]
-        A=random.randrange(1,6)
-
-    #     X1=Attack('AnNi','盖伦','500','1000',80,90,'碎裂之火','审判之剑')
-        X1=('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'%(A[int(Hero_1)-1],A[int(Hero_2)-1],Hero_attribute[]))
-    #     X1.attack()
-    #     res = False
-
-
-
+    S_name = A[int(Hero_1)-1]  #原英雄名
+    D_name = A[int(Hero_2)-1] # 目标英雄名
+    S_Life_Val = Hero_attribute[S_name][1] #原英雄生命值
+    D_Life_Val = Hero_attribute[D_name][1] #目标英雄生命值
+    S_damage = Hero_attribute[S_name][2] #原初始攻击力
+    D_damage = Hero_attribute[D_name][2] #目标初始攻击力
+    X1=game_function.Attack(S_name,S_Life_Val,S_damage,Hero_attribute[S_name][3],D_name,D_Life_Val,Hero_attribute[D_name][3],D_damage)
+    X1.attack()
+if Option == '2':
+    print('ByeBye!')
