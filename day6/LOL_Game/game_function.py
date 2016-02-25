@@ -4,9 +4,8 @@
 import os,sys,time,random
 BASE=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE)
-from LOL_Game import Game_life
+from LOL_Game import Game_Life
 Res = True
-
 class LOL(object):
     def __init__(self,user,age,sex):
         self.user = user
@@ -25,6 +24,7 @@ class Hero_Pool(object):
 攻击类
 '''
 class Attack(Hero_Pool):
+    Count = 0
     def __init__(self,name,Life_Val,damage,skills,D_name,D_Life_Val,D_skills,D_damage):
         super(Attack,self).__init__(name,Life_Val,damage,skills)
         self.D_name = D_name
@@ -68,10 +68,11 @@ class Attack(Hero_Pool):
                 ShangHai = self.D_skills[A][1]
                 GongJi = self.D_skills[A][0]
             self.Life_Val-=int(ShangHai)
+            Attack.Count+=1
             print('[%s] 向 [%s] 释放技能 [%s] , 扣除[%s]生命,[%s] 剩余生命 [%s]\n' %(self.D_name,self.name,GongJi,ShangHai,self.name,self.Life_Val))
- #            print('''
- # -------------------- 第一回合结束 --------------------
- #            ''')
+            print('''
+ -------------------- 第%s回合结束 --------------------
+            '''%Attack.Count)
             if self.Life_Val <= 0:
                 print('[%s] game over！！'%self.D_name)
                 Res = False
@@ -86,7 +87,7 @@ class Attack(Hero_Pool):
             time.sleep(0.01)
 
     def HoneWork(self):
-        f = open('Game_Life.py','r',encoding='utf-8')
+        f = open('LOL_Game/Game_Life.py','r',encoding='utf-8')
         for i in f.readlines():
             self.Print_xiaoguo(i)
         p=('写完啦~~~~~继续玩游戏吧 哈哈哈哈哈哈哈！\n')
