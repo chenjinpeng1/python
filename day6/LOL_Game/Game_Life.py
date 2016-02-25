@@ -22,6 +22,10 @@ def Judge_Options(str,des):
         return False
 # if __name__ == '__main__':
 def Game_index():
+    '''
+    游戏开始调用页面
+    '''
+
     RES = True
     while RES:
         print(('=*'*20).rjust(80))
@@ -52,6 +56,7 @@ def Game_index():
                         A.append(i)
                     Hero_1 = input('选择参战的第一个英雄(q退出)：')
                     if Hero_1 != 'q':
+                        # 进行判断输入是否有误
                         Judge_res2=Judge_Options(Hero_1,A)
                         if Judge_res2:
                             # 获取技能信息
@@ -88,6 +93,7 @@ def Game_index():
                                         if Next_option == '1':
                                             X1.HoneWork()
                                             Judge_res=False
+                                            RES = False
                                             break
                                         if Next_option == '2':
                                             Judge_res=False

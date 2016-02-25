@@ -5,12 +5,8 @@ import os,sys,time,random
 BASE=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE)
 from LOL_Game import Game_Life
+from PAONIU import paoniu
 Res = True
-class LOL(object):
-    def __init__(self,user,age,sex):
-        self.user = user
-        self.age = age
-        self.sex = sex
 '''
 定义英雄的默认属性
 '''
@@ -31,7 +27,12 @@ class Attack(Hero_Pool):
         self.D_Life_Val = D_Life_Val
         self.D_skills = D_skills
         self.D_damage = D_damage
+
+
     def attack(self):
+        """
+        选择性攻击
+        """
         global Res
         Res = True
         A=[]
@@ -57,7 +58,12 @@ class Attack(Hero_Pool):
                     # break
                 else:self.Auto()
             else:continue
+
+
     def Auto(self):
+        '''
+        自动攻击函数
+        '''
         global Res
         while Res:
             A=random.randrange(0,5)
@@ -81,15 +87,45 @@ class Attack(Hero_Pool):
                 self.attack()
 
     def Print_xiaoguo(self,p):
+        '''
+        打印延迟函数
+        '''
         for i in p:
             sys.stdout.write(i)
             sys.stdout.flush()
-            time.sleep(0.01)
+            time.sleep(0.05)
 
     def HoneWork(self):
-        f = open('LOL_Game/Game_Life.py','r',encoding='utf-8')
+        """
+        写作业函数
+        """
+        f = open('index.py','r',encoding='utf-8')#LOL_Game/Game_Life.py
         for i in f.readlines():
             self.Print_xiaoguo(i)
-        p=('写完啦~~~~~继续玩游戏吧 哈哈哈哈哈哈哈！\n')
+        p=('写完啦~~~~~泡妞去咯 哈哈哈哈哈哈哈！\n')
         self.Print_xiaoguo(p)
+        self.paoniu()
+    def paoniu(self):
+        '''
+        泡妞函数
+        '''
+        name = input('请输入你的名字：')
+        info = paoniu.MAN(name)
+        info[name] = info['alex']
+        info2 = paoniu.Girl()
+        Options = list(info2.keys())
+        for index,i in enumerate(Options):
+            print(index,i)
+        Option = input('请输入你想泡的妞：')
+        aa=paoniu.TanLa(info,info2,Options[int(Option)],name)
+        while True:
+            try:
+                a,b=aa.__next__()
+                print1=('[%s]:%s\n'%(name,a))
+                print2=('[%s]:%s\n'%(Options[int(Option)],b))
+                self.Print_xiaoguo(print1)
+                self.Print_xiaoguo(print2)
+            except StopIteration:
+                break
+
 # --------------------------------------------------------------------------------- #
