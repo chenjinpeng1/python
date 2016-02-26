@@ -301,8 +301,15 @@ subprocess.CalledProcessError: Command 'sdf' returned non-zero exit status 127
 # A.addHandler(C)
 # #输出日志信息
 # A.debug('DEBUG_LOG')
-# A.info('INFO_LOG')
+# A.info('INFO_LOG')print(hash.hexdigest())
 # A.warning('WARNING_LOG')
 # A.error('ERROR_LOG')
 # A.critical('CRITICAL_LOG')
+class Stack(list):
+    def push(self,object):
+        self.append(object)
+
+a = Stack(11111)
+# a.push('abc')
+print (a)
 
