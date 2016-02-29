@@ -43,18 +43,28 @@ class C(object):
         self.__foo = "私有字段"
 
     def func(self):
-        print(self.foo)#　类内部访问
+        print(self.__foo)#　类内部访问
 
 class D(C):
 
     def show(self):
         print (self.foo) #派生类中访问
-
+#
 obj = C()
-# obj.__foo     # 通过对象访问    ==> 错误
+# # obj.__foo     # 通过对象访问    ==> 错误
 obj.func()  # 类内部访问        ==> 正确
-# obj_son = D();
-# obj_son.show()  # 派生类中访问  ==> 错误
+obj_son = D();
+obj_son.func()  # 派生类中访问  ==> 错误
+#
+# print(obj_son._C__foo)
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+class C:
+
+    def __init__(self):
+        self.name = 'wupeiqi'
+
 
 
 
