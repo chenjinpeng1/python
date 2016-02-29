@@ -1,0 +1,8 @@
+[Log]
+compression = yes
+compressionlevel = 9
+serveraliveinterval = 45
+
+[esuizhen]
+user = 1
+
