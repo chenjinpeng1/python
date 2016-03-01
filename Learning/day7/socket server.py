@@ -15,7 +15,6 @@ sk.listen(5)
 while True:
     print ('server waiting...')
     conn,addr = sk.accept()
-
     client_data = conn.recv(1024)
     print (str(client_data,'utf8'))
     conn.sendall(bytes('不要回答,不要回答,不要回答','utf8'))
