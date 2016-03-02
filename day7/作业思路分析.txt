@@ -1,0 +1,19 @@
+client
+1、账号密码判断
+账号密码通过ConfigParser写入与判断
+2、登录
+linx 服务端
+    ls 查看主目录下的内容
+     cd 进入到目录 通过命令输出的结果判断是否超出自己的主目录
+     rm 删除目录 -r 文件 -f
+     mv 移动目录
+     rename 改名
+linux客户端：
+     ls 查看主目录下的内容
+     cd 进入到目录
+     rm 删除目录 -r 文件 -f
+     mv 移动目录
+     rename 改名
+     put 上传
+     get 下载
+3、退出

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3.5
+#!/usr/bin/env python3.5
 # Auth -chenjinpeng-
 import socket,subprocess,time
 
@@ -16,6 +16,14 @@ while True:
                 #try:
                 client_data = conn.recv(1024) # 收客户端的消息 阻塞
                 if not client_data:break # 如果接受不到消息 则退出循环
+                if str(client_data.decode()) == "put":
+                    conn.sendall(bytes("ack",'utf8'))
+                    while True:
+                        ack_res=conn.recv(1024)
+                        if len(ack_res.decode()) == 0:break
+                        f_w = open(ack_res,'a')
+                        f_w.write(ack_res.decode())
+
                 cmd = client_data.decode().strip() # 将获取到的消息进行转码,将bytes转换为str用decode
                 cmd_call = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE) # 将读取到的命令通过管道符进行输出到变量
                 #Server_input = input("S >>>:").strip()
@@ -27,6 +35,7 @@ while True:
                 ack=conn.recv(50) # 确认用户收到后回复。进行下一步操作
                 if ack:
                         if ack.decode() == "ack":
+                                print(cmd_result.decode())
                                 conn.sendall(cmd_result) # 因为为bytes类型 直接发送
                 else:break
         conn.close()
