@@ -40,3 +40,6 @@ aaaaaaaaaaaa
 #     b+=1
 # print(b)
 # if os.path.isfile("作业思路分析.txt") is True:print("aaaaaaaa")
+# CUR_PATH=os.path.dirname(os.path.abspath(__file__)).replace("\\","/")
+# print(CUR_PATH)
+print(os.stat("./"))

@@ -5,10 +5,16 @@ import  configparser
 config = configparser.ConfigParser()
 config.read("ftp.config")
 
+
 class S_FUNC(object):
     def __init__(self,func,name): # 服务端将socket连接传入
         self.func = func
         self.name = name
+
+    def md5_auth(self,passwd):
+        A=hashlib.md5()
+        A.update(bytes(passwd,"utf8"))
+        return A.hexdigest()
 
     def MD5(self,Str):
         MD5_mes=hashlib.md5()
@@ -127,8 +133,6 @@ class S_FUNC(object):
                     baifenbi = (int(CUR_SIZE) / int(F_size)) * 100
                     baifenbi_1 = float("%.2f"%baifenbi)
                     self.func.sendall(bytes("%s %s "%(baifenbi_1,"%"),"utf8")) # 发送百分比
-                    print("发送百分比完成")
-
     def get(self,cmd):
         F_name = self.func.recv(50)
         F_E=os.path.isfile(F_name.decode())
@@ -151,57 +155,60 @@ class S_FUNC(object):
                 one_res3=self.func.recv(50)
 
 
+if __name__ == "__main__":
+    Ip_port = ('127.0.0.1',9999)
 
-Ip_port = ('127.0.0.1',9999)
-
-Ftp = socket.socket()
-Ftp.bind(Ip_port)
-Ftp.listen(5) # 最大允许连5个？
+    Ftp = socket.socket()
+    Ftp.bind(Ip_port)
+    Ftp.listen(5) # 最大允许连5个？
 
 
-while True:
-    print("server waiting...")
-    conn,addr = Ftp.accept()
-    AUTH=True
-    while AUTH:
-        # try:
-            U_P_recv = conn.recv(1024) # 接收用户输入的账号密码
-            if len(U_P_recv) == 0:break
-            U_P_SPLIT=U_P_recv.decode().split("|") # 转换为列表
-            PASSWD=config["USER_PASS"][U_P_SPLIT[0]]
-            MD5=hashlib.md5()
-            MD5.update(bytes(PASSWD,"utf8"))
-            PASSWD=MD5.hexdigest()
-            print(PASSWD)
-            if U_P_SPLIT[0] in config["USER_PASS"] and U_P_SPLIT[1] == PASSWD: # 判断用户密码
-                NAME=U_P_SPLIT[0]
-                U_P_AUTH = conn.sendall(bytes("ACK_OK",'utf8'))
-                LOGIN_AUTH = True # 设置成功标志位
-                USER_HOME=config["HOME"][NAME]
-                os.chdir(USER_HOME)
+    while True:
+        print("server waiting...")
+        conn,addr = Ftp.accept()
+        AUTH=True
+        while AUTH:
+            try:
+                U_P_recv = conn.recv(1024) # 接收用户输入的账号密码
+                if len(U_P_recv) == 0:break
+                U_P_SPLIT=U_P_recv.decode().split("|") # 转换为列表
+                S_USER=U_P_SPLIT[0]
+                S_PASSWD=U_P_SPLIT[1]
+                if S_USER in config["USER_PASS"]: # 判断用户是否存在
+                    PASSWD=config["USER_PASS"][S_USER]
+                    MD5_FUNC=S_FUNC("pass_md5",S_USER)
+                    PASSWD_MD5=MD5_FUNC.md5_auth(PASSWD) # 将用户密码取出md5值
+                    if S_PASSWD == PASSWD_MD5:
+                        U_P_AUTH = conn.sendall(bytes("ACK_OK",'utf8'))
+                        LOGIN_AUTH = True # 设置成功标志位
+                        CUR_PATH=os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\","/")
+                        config["HOME"][S_USER]=''.join("%s/%s"%(CUR_PATH,S_USER))
+                        config.write(open("ftp.config","w"))
+                        os.chdir(config["HOME"][S_USER])
+                        break
+                    else:U_P_AUTH2 = conn.sendall(bytes("ACK_ERROR",'utf8'))
+                else:
+                    U_P_AUTH2 = conn.sendall(bytes("ACK_ERROR",'utf8'))
+                    # LOGIN_AUTH=None
+                    # break
+            except Exception:
+                print("异常报错")
                 break
-            else:
-                U_P_AUTH2 = conn.sendall(bytes("ACK_ERROR",'utf8'))
-                # LOGIN_AUTH=None
-                # break
-        # except Exception:
-        #     print("异常报错")
-        #     break
-# ------------------login success------------------------------
-    while LOGIN_AUTH:
-        try:
-            MES_INFO = conn.recv(1024) # 第一步收取用户传来的命令
-            if len(MES_INFO) == 0:
+    # ------------------login success------------------------------
+        while LOGIN_AUTH:
+            try:
+                MES_INFO = conn.recv(1024) # 第一步收取用户传来的命令
+                if len(MES_INFO) == 0:
+                    AUTH=False
+                    break
+                MES_ACK = conn.send(bytes("ack","utf8")) # 发送ack回执
+                MES_INFO_SPLIT=MES_INFO.decode().split(" ")
+                FUNC=S_FUNC(conn,U_P_SPLIT[0]) # 实例化Server的类，反射调用方法
+                if hasattr(FUNC,MES_INFO_SPLIT[0]):
+                    func = getattr(FUNC,MES_INFO_SPLIT[0])
+                    func(MES_INFO.decode())
+                else:print('error......!')
+            except Exception:
                 AUTH=False
                 break
-            MES_ACK = conn.send(bytes("ack","utf8")) # 发送ack回执
-            MES_INFO_SPLIT=MES_INFO.decode().split(" ")
-            FUNC=S_FUNC(conn,U_P_SPLIT[0]) # 实例化Server的类，反射调用方法
-            if hasattr(FUNC,MES_INFO_SPLIT[0]):
-                func = getattr(FUNC,MES_INFO_SPLIT[0])
-                func(MES_INFO.decode())
-            else:print('error......!')
-        except Exception:
-            AUTH=False
-            break
 

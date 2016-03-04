@@ -1,7 +1,7 @@
 #python 3.5环境,解释器在linux需要改变
 # -*- encoding:utf-8 -*-
 #Auth  ChenJinPeng
-import sys,os,hashlib
+import sys,os,hashlib,time
 DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(DIR)
 class FtpClient(object):
@@ -11,8 +11,10 @@ class FtpClient(object):
         MD5=hashlib.md5()
         MD5.update(Str)
         return MD5.hexdigest()
+
     def help(self,cmd):
-        print("dir-----查看家目录文件")
+        print("程序只在windows下测试过")
+        print("dir-----查看当前目录文件(暂只试用windows)")
         print("pwd-----查看当前目录")
         print("cd-----切换到目录")
         print("rm-----删除操作")
@@ -20,6 +22,10 @@ class FtpClient(object):
         print("get-----下载文件")
         print("put-----上传文件")
         print("q-----退出")
+        print("----进度条未完成")
+        print("----多用户登陆为完成")
+        print("----断点续传未完成")
+
     def dir(self,func):
         # SYSTEM=sys.platform # 判断系统为 什么系统
         try:
@@ -43,8 +49,6 @@ class FtpClient(object):
         except Exception:
             print("ERROR COMMAND...")
 
-
-
     def pwd(self,func):
         print("pwd")
         try:
@@ -67,6 +71,7 @@ class FtpClient(object):
                 print("-----last time-----")
         except Exception:
             print("ERROR COMMAND...")
+
     def cd(self,func):
         self.connection.sendall(bytes(func,"utf8"))
         ack_res=self.connection.recv(1024)
@@ -77,16 +82,19 @@ class FtpClient(object):
         else:
             # cd_res=self.connection.recv(1024)
             print(cd_error.decode())
+
     def rm(self,func):
         print("rm")
         self.connection.sendall(bytes(func,'utf8'))
         self.connection.recv(1024)
+
     def rename(self,func):
         print("rename")
         self.connection.sendall(bytes(func,"utf8"))
         rename_recv=self.connection.recv(1024)
         rename_res=self.connection.recv(1024)
         print(rename_res.decode())
+
     def get(self,func):
         self.connection.sendall(bytes(func,"utf8"))
         S_MES=self.connection.recv(50)
@@ -119,6 +127,7 @@ class FtpClient(object):
                 c_file.write(res)
                 c_file.flush()
                 self.connection.sendall(bytes("下载完成","utf8"))
+
     def put(self,func):
         self.connection.sendall(bytes(func,"utf8"))
         self.connection.recv(50)
@@ -142,7 +151,6 @@ class FtpClient(object):
                     self.connection.sendall(bytes("ok","utf8"))
                 else:
                     self.connection.sendall(bytes("no","utf8"))
-                print("aaaaaa")
             fr = open(P_file,"rb")
             for i in fr.readlines():
                 a=bytes(str(len(i)),"utf8")
@@ -154,9 +162,15 @@ class FtpClient(object):
                     self.connection.sendall(bytes("ok","utf8")) # OK 你发给我百分比吧
                     baifenbi=self.connection.recv(50) # 接收百分比
                     print(baifenbi.decode())
+                    # self.jindutiao(baifenbi.decode(),a)
             break
 
-
-
-    def q(self):
+    # def jindutiao(self,num,num2):
+    #     a="#"
+    #     # for i in range(10):
+    #     b=a*num2
+    #     sys.stdout.write("%s | %s"%(b,num))
+    #     sys.stdout.flush()
+    #     time.sleep(0.3)
+    def q(self,func):
         pass
