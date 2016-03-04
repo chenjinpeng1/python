@@ -12,7 +12,7 @@ class S_FUNC(object):
 
     def MD5(self,Str):
         MD5_mes=hashlib.md5()
-        MD5_mes.update(bytes(Str,"utf8"))
+        MD5_mes.update(Str)
         return MD5_mes.hexdigest()
     def dir(self,cmd):
         try:
@@ -59,6 +59,7 @@ class S_FUNC(object):
             # res = self.func.sendall(bytes)
         except Exception:
             print("error")
+            self.func.sendall(bytes("error","utf8"))
             pass
     def rm(self,cmd):
         try:
@@ -85,30 +86,69 @@ class S_FUNC(object):
         F_info_b=self.func.recv(50)
         F_info=F_info_b.decode().split(",")
         F_name=F_info[0]
-        F_size=F_info[1]
-        print(F_name,F_size)
-        with open(F_name,"a") as f:f.close()
-        F_name_recv=self.func.sendall(bytes("创建文件完毕","utf8"))
-        with open(F_name,"a") as wf:
+        F_size=int(F_info[1])
+        HOME=config["HOME"][self.name]
+        print(os.getcwd())
+        if os.path.isfile(F_name) is True:
+            self.func.sendall(bytes("file exit","utf8"))
+            F_E_R=self.func.recv(50)
+            if F_E_R.decode() == "ok":
+                os.remove(F_name)
+                NEXT_RES=True
+            else:
+                self.func.sendall(bytes("no","utf8"))
+                NEXT_RES=False
+        else:
+            self.func.sendall(bytes("ok","utf8"))
+            NEXT_RES =True
+        while NEXT_RES:
+            wf = open(F_name,"wb")
             while True:
-                print("cccccd")
-                W_file_b = self.func.recv(1024)
-                W_file_split=W_file_b.decode().split(",")
-                print(W_file_split)
-                W_file=W_file_split[0]
-                F_MD5=self.MD5(W_file)
-                print(F_MD5)
-                print(W_file_split[1])
-                if F_MD5==W_file_split[1]:
-                    print("aaaaaa")
-                    self.func.sendall(bytes("MD5校验成功","utf8"))
-                    wf.write(W_file)
-                    print("bbbbb")
+                File_info = os.stat(F_name)
+                S_FILE_SIZE=File_info.st_size
+                if S_FILE_SIZE == F_size:
+                    NEXT_RES=False
+                    break
+                C_len=self.func.recv(50)
+                self.func.sendall(bytes("ok","utf8"))
+                res = b""
+                res_len=0
+                #-------------接受文件---------------
+                while res_len < int(C_len.decode()):
+                    W_file_b = self.func.recv(1024) # 接收数据
+                    res+=W_file_b
+                    res_len+=len(W_file_b)
+                else:
+                    wf.write(res)
+                    wf.flush()
+                    self.func.sendall(bytes("ok","utf8")) # OK 接收完了
+                    zb_bfb=self.func.recv(50) # 好的
+                    CUR_SIZE=os.path.getsize(F_name)
+                    baifenbi = (int(CUR_SIZE) / int(F_size)) * 100
+                    baifenbi_1 = float("%.2f"%baifenbi)
+                    self.func.sendall(bytes("%s %s "%(baifenbi_1,"%"),"utf8")) # 发送百分比
+                    print("发送百分比完成")
 
-
-
-
-
+    def get(self,cmd):
+        F_name = self.func.recv(50)
+        F_E=os.path.isfile(F_name.decode())
+        if F_E:
+            self.func.sendall(bytes("exit","utf8"))
+            one_res1=self.func.recv(50)
+            if one_res1.decode() == "touch_file_ok":
+                file_size=os.path.getsize(F_name.decode())
+                self.func.sendall(bytes("%s"%file_size,"utf8"))# 发送文件总大小
+                Auth = True
+        else:
+            self.func.sendall(bytes("no_exit","utf8"))
+        if Auth:
+            r_file = open(F_name,"rb")
+            for i in r_file.readlines():
+                a=bytes(str(len(i)),"utf8")
+                self.func.sendall(a) # 发送长度
+                one_res2 = self.func.recv(50) # 收取客户端返回收到长度的状态
+                self.func.sendall(i)
+                one_res3=self.func.recv(50)
 
 
 
@@ -124,7 +164,7 @@ while True:
     conn,addr = Ftp.accept()
     AUTH=True
     while AUTH:
-        try:
+        # try:
             U_P_recv = conn.recv(1024) # 接收用户输入的账号密码
             if len(U_P_recv) == 0:break
             U_P_SPLIT=U_P_recv.decode().split("|") # 转换为列表
@@ -132,32 +172,36 @@ while True:
             MD5=hashlib.md5()
             MD5.update(bytes(PASSWD,"utf8"))
             PASSWD=MD5.hexdigest()
+            print(PASSWD)
             if U_P_SPLIT[0] in config["USER_PASS"] and U_P_SPLIT[1] == PASSWD: # 判断用户密码
-                U_P_AUTH = conn.send(bytes("ACK_OK",'utf8'))
+                NAME=U_P_SPLIT[0]
+                U_P_AUTH = conn.sendall(bytes("ACK_OK",'utf8'))
                 LOGIN_AUTH = True # 设置成功标志位
-                os.chdir('C:/Users/chen/PycharmProjects/python/day7/chen')
-                print(os.getcwd())
+                USER_HOME=config["HOME"][NAME]
+                os.chdir(USER_HOME)
                 break
             else:
-                U_P_AUTH = conn.send(bytes("ACK_ERROR",'utf8'))
-                break
-        except Exception:
-            break
+                U_P_AUTH2 = conn.sendall(bytes("ACK_ERROR",'utf8'))
+                # LOGIN_AUTH=None
+                # break
+        # except Exception:
+        #     print("异常报错")
+        #     break
 # ------------------login success------------------------------
     while LOGIN_AUTH:
-        # try:
-        MES_INFO = conn.recv(1024) # 第一步收取用户传来的命令
-        if len(MES_INFO) == 0:
+        try:
+            MES_INFO = conn.recv(1024) # 第一步收取用户传来的命令
+            if len(MES_INFO) == 0:
+                AUTH=False
+                break
+            MES_ACK = conn.send(bytes("ack","utf8")) # 发送ack回执
+            MES_INFO_SPLIT=MES_INFO.decode().split(" ")
+            FUNC=S_FUNC(conn,U_P_SPLIT[0]) # 实例化Server的类，反射调用方法
+            if hasattr(FUNC,MES_INFO_SPLIT[0]):
+                func = getattr(FUNC,MES_INFO_SPLIT[0])
+                func(MES_INFO.decode())
+            else:print('error......!')
+        except Exception:
             AUTH=False
             break
-        MES_ACK = conn.send(bytes("ack","utf8")) # 发送ack回执
-        MES_INFO_SPLIT=MES_INFO.decode().split(" ")
-        FUNC=S_FUNC(conn,U_P_SPLIT[0]) # 实例化Server的类，反射调用方法
-        if hasattr(FUNC,MES_INFO_SPLIT[0]):
-            func = getattr(FUNC,MES_INFO_SPLIT[0])
-            func(MES_INFO.decode())
-        else:print('error......')
-        # except Exception:
-        #     AUTH=False
-        #     break
 

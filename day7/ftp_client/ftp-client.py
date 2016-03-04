@@ -16,9 +16,11 @@ while True:
     Passwd = input("Password:")
     MD5=hashlib.md5()
     MD5.update(bytes(Passwd,"utf8"))
-    Passwd=MD5.hexdigest()
-    client.send(bytes("%s|%s"%(User,Passwd),"utf8"))
+    Passwd1=MD5.hexdigest()
+    print(Passwd1)
+    client.sendall(bytes("%s|%s"%(User,Passwd1),"utf8"))
     UP_RES = client.recv(1024)
+    print(UP_RES.decode())
     if UP_RES.decode() == "ACK_OK":
         print("login success")
         while True:

@@ -21,12 +21,22 @@ aaaaaaaaaaaa
 '''
 # file = input(">>>:")
 # AA=os.path.isfile(file)
-# print(AA)
-# if AA is not True:
-#     print("wocao")
-# if A is not True:
-#     print(A)
-# else:
-#     print("exit")
-A=os.stat("作业思路分析.txt")
-print(A.st_size)
+# # print(AA)
+# # if AA is not True:
+# #     print("wocao")
+# # if A is not True:
+# #     print(A)
+# # else:
+# #     print("exit")
+# a=open("bb.pdf","rb")
+# # # aa=open("cc.pdf","wb")
+# # b=0
+# for i in a.readlines():
+#     aa=hashlib.md5()
+#     aa.update(i)
+#     print(i)
+#     print(aa.hexdigest())
+#     aa.write(i)
+#     b+=1
+# print(b)
+# if os.path.isfile("作业思路分析.txt") is True:print("aaaaaaaa")

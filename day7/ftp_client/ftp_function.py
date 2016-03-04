@@ -9,7 +9,7 @@ class FtpClient(object):
         self.connection = conection
     def Md5(self,Str):
         MD5=hashlib.md5()
-        MD5.update(bytes(Str,"utf8"))
+        MD5.update(Str)
         return MD5.hexdigest()
     def help(self,cmd):
         print("dir-----查看家目录文件")
@@ -70,8 +70,13 @@ class FtpClient(object):
     def cd(self,func):
         self.connection.sendall(bytes(func,"utf8"))
         ack_res=self.connection.recv(1024)
-        cd_res=self.connection.recv(1024)
-        print(cd_res.decode())
+        cd_error=self.connection.recv(50)
+        print(cd_error.decode())
+        if cd_error.decode() == "error":
+            pass
+        else:
+            # cd_res=self.connection.recv(1024)
+            print(cd_error.decode())
     def rm(self,func):
         print("rm")
         self.connection.sendall(bytes(func,'utf8'))
@@ -82,8 +87,38 @@ class FtpClient(object):
         rename_recv=self.connection.recv(1024)
         rename_res=self.connection.recv(1024)
         print(rename_res.decode())
-    def get(self):
-        pass
+    def get(self,func):
+        self.connection.sendall(bytes(func,"utf8"))
+        S_MES=self.connection.recv(50)
+        GET_FILE_NAME=input("请输入下载的文件名称：")
+        self.connection.sendall(bytes(GET_FILE_NAME,"utf8"))
+        one_res=self.connection.recv(50)
+        if one_res.decode() == "exit":
+            c_file=open(GET_FILE_NAME,"wb")
+            self.connection.sendall(bytes("touch_file_ok","utf8"))
+            one_res2 = self.connection.recv(50).decode() # 获取下载文件总大小
+            AUTH=True
+        else:
+            one_res1=self.connection.recv(50)
+            print("服务器文件不存在")
+            AUTH=False
+        while AUTH:
+            S_SIZE=os.path.getsize(GET_FILE_NAME)
+            if int(S_SIZE) == int(one_res2):
+                AUTH=False
+                break
+            one_res3=self.connection.recv(50).decode() # 获取文件第一行的长度
+            self.connection.sendall(bytes("总长度收到","utf8"))
+            res = b""
+            default_len=0
+            while default_len < int(one_res3):
+                one_res4=self.connection.recv(1024)
+                res+=one_res4
+                default_len+=len(one_res4)
+            else:
+                c_file.write(res)
+                c_file.flush()
+                self.connection.sendall(bytes("下载完成","utf8"))
     def put(self,func):
         self.connection.sendall(bytes(func,"utf8"))
         self.connection.recv(50)
@@ -99,18 +134,28 @@ class FtpClient(object):
             print(File_size)
             print("文件大小为：%s"%File_size)
             self.connection.sendall(bytes("%s,%s"%(P_file,File_size),'utf8'))
-            ack_mes=self.connection.recv(1024)
-            print("%s - 确认消息"%ack_mes.decode())
-            fr = open(P_file,"r")
+            NEXT_RES=self.connection.recv(50)
+            if NEXT_RES.decode() == "file exit":
+                print("发现文件存在")
+                NEXT=input("文件存在，是否覆盖，yes覆盖,任意键退出")
+                if NEXT == "yes":
+                    self.connection.sendall(bytes("ok","utf8"))
+                else:
+                    self.connection.sendall(bytes("no","utf8"))
+                print("aaaaaa")
+            fr = open(P_file,"rb")
             for i in fr.readlines():
-                MD5=self.Md5(i)
-                print(MD5)
-                print(i)
-                self.connection.sendall(bytes("%s,%s"%(i,MD5),"utf8"))
-                MD5_RES=self.connection.recv(50)
-                if MD5_RES.decode() != "MD5校验成功":
-                    print(MD5_RES.decode())
-                    break
+                a=bytes(str(len(i)),"utf8")
+                self.connection.sendall(a)   # 发送长度
+                len_recv=self.connection.recv(50) # 接收长度回复信息
+                if len_recv.decode() == "ok":
+                    self.connection.sendall(i) # 发送数据
+                    client_res=self.connection.recv(50) # 我知道你接收完了
+                    self.connection.sendall(bytes("ok","utf8")) # OK 你发给我百分比吧
+                    baifenbi=self.connection.recv(50) # 接收百分比
+                    print(baifenbi.decode())
+            break
+
 
 
     def q(self):
