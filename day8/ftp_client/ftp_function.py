@@ -5,8 +5,9 @@ import sys,os,hashlib,time
 DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(DIR)
 class FtpClient(object):
-    def __init__(self,conection):
+    def __init__(self,conection,User):
         self.connection = conection
+        self.User=User
     def Md5(self,Str):
         MD5=hashlib.md5()
         MD5.update(Str)
@@ -95,7 +96,7 @@ class FtpClient(object):
         rename_res=self.connection.recv(1024)
         print(rename_res.decode())
 
-    def get(self,func):
+    def get1(self,func):
         self.connection.sendall(bytes(func,"utf8"))
         S_MES=self.connection.recv(50)
         GET_FILE_NAME=input("请输入下载的文件名称：")
@@ -173,5 +174,34 @@ class FtpClient(object):
         sys.stdout.write("\r%s | %s"%(a,num))
         sys.stdout.flush()
         time.sleep(0.01)
+
+    def get(self,func):
+        info = {}
+        self.connection.sendall(bytes(func,"utf8")) # 发送服务器做的操作
+        FUNC_ACK=self.connection.recv(1024) # 接受Server调用方法的回复消息
+        FileName = input("输入文件名：")
+        self.connection.sendall(bytes(FileName,"utf8")) #传入Server文件名
+        FileSize=self.connection.recv(1024) #接受文件大小,顺便判断文件是否存在
+        if FileSize.decode() == "No File Exit": # 接受Server的判断文件是否存在
+            print(FileSize.decode())
+        else:
+            self.connection.sendall(bytes("file size ok")) #告知客户端收到文件大小
+            f = open(FileName,"wb")
+            tmp_log = open("tmp.log","a")
+            res=b''
+            default_size = os.path.getsize(FileSize)
+            while default_size < FileSize: #接受文件大小小于文件总大小则循环
+                A=self.connection.recv(1024).decode().split("|") # 第一次接收到的数据为发送的字节+指针位置
+                Data=A[0]
+                zhizhen=A[1]
+                f.write(bytes(Data,"utf8"))
+                f.flush()
+                default_size = os.path.getsize(FileSize)
+                info[self.User] = [FileName,FileSize,zhizhen]
+                tmp_log.write(info)
+                self.connection.sendall("RECV_OK")
+
+
+
     def q(self,func):
         pass

@@ -4,6 +4,7 @@
 import os,sys,time,random
 BASE=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE)
+print(BASE)
 from LOL_Game import Game_Life
 from PAONIU import paoniu
 Res = True
