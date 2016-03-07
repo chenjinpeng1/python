@@ -163,7 +163,7 @@ class S_FUNC(object):
         if R_tmplog[self.name][-1]!=0: # 判断文件成功失败，0代表成功
             print("hahaha")
             self.func.sendall(bytes("before_trs_faild","utf8")) # 向client发送失败的消息
-            AFTER_RECV=self.func.recv(1024) # 接受client的选择二
+            AFTER_RECV=self.func.recv(1024) # 接受client的选择
             print(AFTER_RECV.decode()) # 打印客户端的选择
             if AFTER_RECV.decode()=="y": # 选择继续下载
                 print(R_tmplog)
@@ -314,7 +314,7 @@ if __name__ == "__main__":
                 if len(MES_INFO) == 0:
                     AUTH=False
                     break
-                MES_ACK = conn.send(bytes("ack","utf8")) # 发送ack回执
+                MES_ACK = conn.sendall(bytes("ack","utf8")) # 发送ack回执
                 MES_INFO_SPLIT=MES_INFO.decode().split(" ")
                 FUNC=S_FUNC(conn,U_P_SPLIT[0]) # 实例化Server的类，反射调用方法
                 if hasattr(FUNC,MES_INFO_SPLIT[0]):

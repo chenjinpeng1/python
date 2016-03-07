@@ -180,9 +180,12 @@ class FtpClient(object):
         info = {}
         self.connection.sendall(bytes(func,"utf8")) # 发送服务器做的操作
         FUNC_ACK=self.connection.recv(1024) # 接受Server调用方法的回复消息
+        # self.connection.sendall(bytes(""))
         BEFORE_TRS=self.connection.recv(1024)
+        print(BEFORE_TRS.decode())
         if BEFORE_TRS.decode()=="before_trs_faild":
             print(BEFORE_TRS.decode())
+            print("aaaaaaaaaa")
             AFTER_INPUT=input("是否继续上次的传输 y/n :")
             self.connection.sendall(bytes(AFTER_INPUT,"utf8"))
             if AFTER_INPUT == "y":
@@ -232,8 +235,8 @@ class FtpClient(object):
                     print(a)
 
         else:
-            BEFORE_TRS_success_ack=self.connection.sendall("")
-            print(BEFORE_TRS_success.decode())
+            # BEFORE_TRS_success=self.connection.recv(1024)
+            # print(BEFORE_TRS_success.decode())
             FileName = input("输入文件名：")
             self.connection.sendall(bytes(FileName,"utf8")) #传入Server文件名
             FileSize=self.connection.recv(1024) #接受文件大小,顺便判断文件是否存在
