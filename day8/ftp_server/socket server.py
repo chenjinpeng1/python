@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.5
 # Auth -chenjinpeng-
 import socket,subprocess,time,hashlib,sys,os
-import  configparser
+import  configparser,pickle
 config = configparser.ConfigParser()
 config.read("ftp.config")
 
@@ -157,24 +157,111 @@ class S_FUNC(object):
                 one_res3=self.func.recv(50)
 
     def get(self,cmd):
-        Recv_Filename=self.func.recv(1024)   # 接受用户的下载的文件名
-        print(Recv_Filename.decode())
-        if os.path.isfile(Recv_Filename.decode()): # 判断服务器上文件名是否存在
-            print("yes! file exit")
-            FiteSize=os.path.getsize(Recv_Filename.decode()) # 判断文件大小
-            self.func.sendall(bytes(str(FiteSize),"utf8"))# 发送文件大小
-            ClientRecvSize=self.func.recv(1024) # Client存在时答复filesize
-            with open(Recv_Filename,"rb")as R_file:
-                while True:
-                    R_file_msg=R_file.read(1024)
-                    if len(R_file_msg) == 0:break
-                    R_tell = R_file.tell()
-                    Send_tell = "%s|%s"%(R_file_msg,R_tell)
-                    self.func.sendall(bytes(Send_tell,"utf8")) # 发送数据+指针
-                    Client_ack=self.func.recv()
+        tmplog=open("tmp.log","rb") # 用户下载前先读取记录下载成功失败的记录文件
+        R_tmplog=pickle.loads(tmplog.read()) # 读取服务端的记录文件
+        tmplog.close()
+        if R_tmplog[self.name][-1]!=0: # 判断文件成功失败，0代表成功
+            print("hahaha")
+            self.func.sendall(bytes("before_trs_faild","utf8")) # 向client发送失败的消息
+            AFTER_RECV=self.func.recv(1024) # 接受client的选择二
+            print(AFTER_RECV.decode()) # 打印客户端的选择
+            if AFTER_RECV.decode()=="y": # 选择继续下载
+                print(R_tmplog)
+                TRS_DICT=pickle.dumps(R_tmplog)
+                self.func.sendall(TRS_DICT) # 向client发送字典信息
+                print("发送字典成功")
+                DICT_STATUS=self.func.recv(1024) #接收client的字典信息回复
+                print(DICT_STATUS.decode())
+                with open(R_tmplog[self.name][0],"rb") as R_Enter:
+                    R_Enter.seek(R_tmplog[self.name][-2])   # -2 表示上次读取的指针位置
+                    while True:
+                        R_file_msg=R_Enter.read(1024)
+                        print("读取数据中")
+                        print(R_file_msg)
+                        if len(R_file_msg) == 0:break
+                        R_tell = R_Enter.tell()
+                        print(R_tell)
+                        print("发送数据",R_file_msg)
+                        self.func.sendall(R_file_msg) # 发送数据
+                        MSGRETURN=self.func.recv(1024)
+                        print("client 接受数据的返回")
+                        self.func.sendall(bytes(str(R_tell),"utf8"))
+                        print("发送指针",R_tell)
+                        Client_ack=self.func.recv(1024)
+                        print("client接受指针的回复")
+                        WRITE_TMP=open("tmp.log","wb")
+                        R_tmplog[self.name] = [R_tmplog[self.name][0],R_tmplog[self.name][1],R_tell,1]
+                        WRITE_TMP.write(pickle.dumps(R_tmplog))
+                        WRITE_TMP.flush()
+                        print("写入记录指针的文件")
+                        WRITE_TMP.close()
+                        print(R_tmplog)
+                    if R_tmplog[self.name][1]==R_tmplog[self.name][1]:
+                        R_tmplog[self.name][-1]=0
+                        WRITE_TMP=open("tmp.log","wb")
+                        WRITE_TMP.write(pickle.dumps(R_tmplog))
+                        WRITE_TMP.flush()
+                        print("文件大小相等，写入完成")
+                        WRITE_TMP.close()
+                        f = open("tmp.log","rb")
+                        a=pickle.loads(f.read())
+                        print(a)
+                    else:
+                        pass
+
+            else:
+                pass
         else:
-            print("no file exit!!!")
-            self.func.sendall(bytes("No File Exit","utf8"))
+            print("oooooo")
+            self.func.sendall(bytes("before_trs_success","utf8"))
+            print("发送成功")
+            Recv_Filename=self.func.recv(1024)   # 接受用户的下载的文件名
+            print(Recv_Filename.decode())
+            if os.path.isfile(Recv_Filename.decode()): # 判断服务器上文件名是否存在
+                print("yes! file exit")
+                FiteSize=os.path.getsize(Recv_Filename.decode()) # 判断文件大小
+                self.func.sendall(bytes(str(FiteSize),"utf8"))# 发送文件大小
+                ClientRecvSize=self.func.recv(1024) # Client存在时答复filesize
+                print("Client Recv Size:",ClientRecvSize.decode())
+                info = {}
+                with open(Recv_Filename.decode(),"rb")as R_file:
+                    while True:
+                        R_file_msg=R_file.read(1024)
+                        print("读取数据中")
+                        print(R_file_msg)
+                        if len(R_file_msg) == 0:break
+                        R_tell = R_file.tell()
+                        print(R_tell)
+                        print("发送数据",R_file_msg)
+                        self.func.sendall(R_file_msg) # 发送数据
+                        MSGRETURN=self.func.recv(1024)
+                        print("client 接受数据的返回")
+                        self.func.sendall(bytes(str(R_tell),"utf8"))
+                        print("发送指针",R_tell)
+                        Client_ack=self.func.recv(1024)
+                        print("client接受指针的回复")
+                        WRITE_TMP=open("tmp.log","wb")
+                        info[self.name] = [Recv_Filename.decode(),FiteSize,R_tell,1]
+                        WRITE_TMP.write(pickle.dumps(info))
+                        WRITE_TMP.flush()
+                        print("写入记录指针的文件")
+                        WRITE_TMP.close()
+                        print(info)
+                    if info[self.name][1]==FiteSize:
+                        info[self.name][-1]=0
+                        WRITE_TMP=open("tmp.log","wb")
+                        WRITE_TMP.write(pickle.dumps(info))
+                        WRITE_TMP.flush()
+                        print("文件大小相等，写入完成")
+                        WRITE_TMP.close()
+                        f = open("tmp.log","rb")
+                        a=pickle.loads(f.read())
+                        print(a)
+                    else:
+                        pass
+            else:
+                print("no file exit!!!")
+                self.func.sendall(bytes("No File Exit","utf8"))
 
 
 
@@ -232,6 +319,7 @@ if __name__ == "__main__":
                 FUNC=S_FUNC(conn,U_P_SPLIT[0]) # 实例化Server的类，反射调用方法
                 if hasattr(FUNC,MES_INFO_SPLIT[0]):
                     func = getattr(FUNC,MES_INFO_SPLIT[0])
+                    print("diaoyong func")
                     func(MES_INFO.decode())
                 else:print('error......!')
             except Exception:

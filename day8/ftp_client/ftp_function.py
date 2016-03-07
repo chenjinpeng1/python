@@ -1,7 +1,8 @@
 #python 3.5环境,解释器在linux需要改变
 # -*- encoding:utf-8 -*-
 #Auth  ChenJinPeng
-import sys,os,hashlib,time
+import sys,os,hashlib,time,pickle
+import time
 DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(DIR)
 class FtpClient(object):
@@ -179,28 +180,105 @@ class FtpClient(object):
         info = {}
         self.connection.sendall(bytes(func,"utf8")) # 发送服务器做的操作
         FUNC_ACK=self.connection.recv(1024) # 接受Server调用方法的回复消息
-        FileName = input("输入文件名：")
-        self.connection.sendall(bytes(FileName,"utf8")) #传入Server文件名
-        FileSize=self.connection.recv(1024) #接受文件大小,顺便判断文件是否存在
-        if FileSize.decode() == "No File Exit": # 接受Server的判断文件是否存在
-            print(FileSize.decode())
-        else:
-            self.connection.sendall(bytes("file size ok")) #告知客户端收到文件大小
-            f = open(FileName,"wb")
-            tmp_log = open("tmp.log","a")
-            res=b''
-            default_size = os.path.getsize(FileSize)
-            while default_size < FileSize: #接受文件大小小于文件总大小则循环
-                A=self.connection.recv(1024).decode().split("|") # 第一次接收到的数据为发送的字节+指针位置
-                Data=A[0]
-                zhizhen=A[1]
-                f.write(bytes(Data,"utf8"))
-                f.flush()
-                default_size = os.path.getsize(FileSize)
-                info[self.User] = [FileName,FileSize,zhizhen]
-                tmp_log.write(info)
-                self.connection.sendall("RECV_OK")
+        BEFORE_TRS=self.connection.recv(1024)
+        if BEFORE_TRS.decode()=="before_trs_faild":
+            print(BEFORE_TRS.decode())
+            AFTER_INPUT=input("是否继续上次的传输 y/n :")
+            self.connection.sendall(bytes(AFTER_INPUT,"utf8"))
+            if AFTER_INPUT == "y":
+                DICT_RECV=self.connection.recv(1024) # 接收字典信息
+                info=pickle.loads(DICT_RECV)
+                print(info)
+                self.connection.sendall(bytes("DICT IS OK","utf8")) # 回复server
+                FileName=info[self.User][0] # 文件名
+                FileSize=info[self.User][1] # 总文件大小
+                FileTELL=info[self.User][2] #文件指针
+                FileStatus=info[self.User][3]#  文件状态
+                CUR_FILE_SIZE=os.path.getsize(FileName) # 获取当前文件大小
+                f=open(FileName,"ab")
+                while int(CUR_FILE_SIZE)< int(FileSize):
+                    #-----------------------
+                    tmp_log = open("tmp.log","wb")
+                    print("接受文件大小",CUR_FILE_SIZE)
+                    print("总文件大小:",FileSize)
+                    A=self.connection.recv(1024) # 第一次接收到的数据为发送的字节
+                    self.connection.sendall(bytes("数据已接受","utf8"))
+                    print("接收到数据",A)
+                    TELL=self.connection.recv(1024) # 接受指针
+                    print("接受到指针",TELL.decode())
+                    f.write(A)
+                    f.flush()
+                    default_size = os.path.getsize(FileName)
+                    print("文件大小",default_size)
+                    info[self.User] = [FileName,FileSize,TELL.decode(),1] # [文件名，文件大小，指针]
+                    print(info)
+                    tmp_log.write(pickle.dumps(info))
+                    print("写入指针")
+                    tmp_log.flush()
+                    tmp_log.close()
+                    print("文件关闭")
+                    self.connection.sendall(bytes("TELL_OK","utf8"))
+                    CUR_FILE_SIZE=os.path.getsize(FileName) # 获取当前文件大小
+                else:
+                    print(info[self.User][-1])
+                    info[self.User][-1]=0
+                    print(info)
+                    tmp_log=open("tmp.log","wb")
+                    tmp_log.write(pickle.dumps(info))
+                    print("chongxie~~~~~~~~~~~~~~~~~~~~~~")
+                    tmp_log.close()
+                    f = open("tmp.log","rb")
+                    a=pickle.loads(f.read())
+                    print(a)
 
+        else:
+            BEFORE_TRS_success_ack=self.connection.sendall("")
+            print(BEFORE_TRS_success.decode())
+            FileName = input("输入文件名：")
+            self.connection.sendall(bytes(FileName,"utf8")) #传入Server文件名
+            FileSize=self.connection.recv(1024) #接受文件大小,顺便判断文件是否存在
+            print(FileSize.decode())
+            if FileSize.decode() == "No File Exit": # 接受Server的判断文件是否存在
+                print(FileSize.decode())
+            else:
+                f = open(FileName,"wb")
+                self.connection.sendall(bytes("file size ok","utf8")) #告知服务端已收到文件大小
+                print("进行查看现在文件大小")
+                default_size = 0
+                print(default_size)
+                while default_size < int(FileSize.decode()): #接受文件大小小于文件总大小则循环
+                    tmp_log = open("tmp.log","wb")
+                    print("接受文件大小",default_size)
+                    print("总文件大小:",int(FileSize.decode()))
+                    A=self.connection.recv(1024) # 第一次接收到的数据为发送的字节
+                    self.connection.sendall(bytes("数据已接受","utf8"))
+                    print("接收到数据",A)
+                    TELL=self.connection.recv(1024) # 接受指针
+                    print("接受到指针",TELL.decode())
+                    f.write(A)
+                    f.flush()
+                    print(os.getcwd())
+                    default_size = os.path.getsize(FileName)
+                    print("文件大小",default_size)
+                    info[self.User] = [FileName,FileSize.decode(),TELL.decode(),1] # [文件名，文件大小，指针]
+                    print(info)
+                    tmp_log.write(pickle.dumps(info))
+                    print("写入指针")
+                    tmp_log.flush()
+                    tmp_log.close()
+                    print("文件关闭")
+                    self.connection.sendall(bytes("TELL_OK","utf8"))
+                else:
+                    print(info[self.User][-1])
+                    info[self.User][-1]=0
+                    print(info)
+                    tmp_log=open("tmp.log","wb")
+                    tmp_log.write(pickle.dumps(info))
+                    print("chongxie~~~~~~~~~~~~~~~~~~~~~~")
+                    tmp_log.close()
+                    f = open("tmp.log","rb")
+                    a=pickle.loads(f.read())
+                    print(a)
 
 
     def q(self,func):

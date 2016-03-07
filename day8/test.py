@@ -61,11 +61,57 @@ import time
 #     print("aaa",end="\r")
 
 import os,sys
-import codecs
-f = open("aa.txt", "wb")
-with codecs.open("作业思路分析.txt","r","utf8") as fread:
-    while True:
-        A=fread.read(100)
-        print(A)
-        if len(A) == 0:break
-        print(fread.tell())
+# import codecs
+# f = open("aa.txt", "wb")
+# with codecs.open("作业思路分析.txt","rb","utf8") as fread:
+#     while True:
+#         A=fread.read(100)
+#         print(A)
+#         if len(A) == 0:break
+#         print(fread.tell())
+info={}
+# b["1"]=[1,2,3]
+import pickle,codecs
+# f = open("chen/tmp.log","wb")
+# info["chen"]=["aa","0","0",0]
+# f.write(pickle.dumps(info))
+# f.close()
+
+f = open("chen/tmp.log","rb")
+a=pickle.loads(f.read())
+print(a)
+
+
+
+# a = {"chen":"taishuai"}
+# B=pickle.dumps(a)
+# print(type(B))
+# C=pickle.loads(B)
+# print(C)
+
+
+#--------------------
+# f = open("作业思路分析.txt","ab")
+# f.write(pickle.dumps("wowowowowowowo"))
+# f.close()
+
+
+
+
+
+
+
+
+
+# print('-------------------------')
+# d = open("chen/tmp.log","rb")
+# a=pickle.loads(d.read())
+# duandian=a["chen"][2]
+# read = codecs.open("作业思路分析.txt","rb")
+# read.seek(10)
+# print(read.read(10))
+#b'\x80\x81\xe8\xb4\xa6\xe5\x8f\xb7\xe5\xaf'
+#b'client\r\n1\xe3\x80\x81\xe8\xb4\xa6\xe5\x8f\xb7\xe5\xaf'
+
+
+
