@@ -52,6 +52,9 @@ aaaaaaaaaaaa
 Usage:
 Just A Template
 """
+a=os.path.abspath("./")
+print(a)
+print(os.getcwd())
 
 import time
 # for i in range(100000):
@@ -71,23 +74,25 @@ import os,sys
 #         print(fread.tell())
 info={}
 # b["1"]=[1,2,3]
-import pickle,codecs
-f = open("chen/tmp.log","wb")
-info["chen"]=["aa","0","0",0]
-f.write(pickle.dumps(info))
-f.close()
+# import pickle,codecs
+# f = open("chen/tmp.log","wb")
+# info["chen"]=["aa","0","0",0]
+# f.write(pickle.dumps(info))
+# f.close()
 
 # f = open("chen/movie/tmp.log","rb")
 # a=pickle.loads(f.read())
 # print(a)
-a=os.path.abspath(__file__)
-print(a)
-b=a.replace("\\","/").replace("C:/Users/chen/PycharmProjects","")[1:]
-print(b)
-print(os.getcwd())
-a="a|b"
-print(a.split("|")[0],a.split("|")[1])
-
+# a=os.path.abspath(__file__)
+# print(a)
+# b=a.replace("\\","/").replace("C:/Users/chen/PycharmProjects","")[1:]
+# print(b)
+# print(os.getcwd())
+# a="a|b"
+# print(a.split("|")[0],a.split("|")[1])
+# /aa/bb/cc/chen/movie
+#movie
+#/aa/bb/chen
 
 # a = {"chen":"taishuai"}
 # B=pickle.dumps(a)
@@ -105,7 +110,14 @@ print(a.split("|")[0],a.split("|")[1])
 # f.write(pickle.dumps("wowowowowowowo"))
 # f.close()
 
-
+# a="/aa/bb/aa.txt"
+# b=a.split("/")
+# print(b)
+# if len(b) == 1:
+#     print(b[0])
+# else:
+#     print(b[-1])
+#     print("eeeee")
 
 
 
@@ -123,5 +135,30 @@ print(a.split("|")[0],a.split("|")[1])
 #b'\x80\x81\xe8\xb4\xa6\xe5\x8f\xb7\xe5\xaf'
 #b'client\r\n1\xe3\x80\x81\xe8\xb4\xa6\xe5\x8f\xb7\xe5\xaf'
 
+#!/usr/bin/env python
+import sys,os;
+def DIR_SIZE(name,num):
+    B=os.listdir(name)
+    print(name,B)
+    for i in B:
+        C="%s/%s"%(name,i)
+        num+=os.path.getsize(C)
+    print(name,num)
+    return num
+def ALL_SIZE(name):
+    num = 0
+    a=0
+    LIST=os.listdir(name)
+    print(LIST)
+    for i in LIST:
+        aaa="%s/%s"%(name,i)
+        d=os.path.isdir(aaa)
+        if d:
+            a+=1
+            num=DIR_SIZE(aaa,num)
+        else:
+            num+=os.path.getsize(aaa)
+    print(num)
 
+ALL_SIZE("./")
 

@@ -195,7 +195,11 @@ class FtpClient(object):
                 info=pickle.loads(DICT_RECV)
                 print(info)
                 self.connection.sendall(bytes("DICT IS OK","utf8")) # 回复server
-                FileName=info[self.User][0] # 文件名
+                FileName1=info[self.User][0].split("/") # 文件名
+                if len(FileName1) == 1:
+                    FileName=FileName1[0]
+                else:
+                    FileName=FileName1[-1]
                 FileSize=info[self.User][1] # 总文件大小
                 FileTELL=info[self.User][2] #文件指针
                 FileStatus=info[self.User][3]#  文件状态
@@ -209,7 +213,6 @@ class FtpClient(object):
                     print("总文件大小:",FileSize)
                     A=self.connection.recv(1024) # 第一次接收到的数据为发送的字节
                     self.connection.sendall(bytes("数据已接受","utf8"))
-                    print("接收到数据",A)
                     TELL=self.connection.recv(1024) # 接受指针
                     print("接受到指针",TELL.decode())
                     f.write(A)
@@ -258,12 +261,10 @@ class FtpClient(object):
                     print("总文件大小:",int(FileSize.decode()))
                     A=self.connection.recv(1024) # 第一次接收到的数据为发送的字节
                     self.connection.sendall(bytes("数据已接受","utf8"))
-                    print("接收到数据",A)
                     TELL=self.connection.recv(1024) # 接受指针
                     print("接受到指针",TELL.decode())
                     f.write(A)
                     f.flush()
-                    print(os.getcwd())
                     default_size = os.path.getsize(FileName)
                     print("文件大小",default_size)
                     info[self.User] = [FileName,FileSize.decode(),TELL.decode(),1] # [文件名，文件大小，指针]

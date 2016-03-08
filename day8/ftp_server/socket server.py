@@ -157,40 +157,40 @@ class S_FUNC(object):
                 one_res3=self.func.recv(50)
 
     def get(self,cmd):
-        # print("打开日志临时文件")
-        TMP_LOG_tmp=config["HOME"][self.name]
-        TMP_LOG=('%s/%s'%(TMP_LOG_tmp,'tmp.log'))
-        print(TMP_LOG)
+        '''
+        TMP_LOG_tmp 取出用户主目录
+        TMP_LOG 取出主目录下的记录断电续传的文件
+        R_tmplog pickle 读取出字典
+        :param cmd:
+        :return:
+        '''
+        TMP_LOG_tmp=config["HOME"][self.name]  # 取出用户的主目录
+        TMP_LOG=('%s/%s'%(TMP_LOG_tmp,'tmp.log')) # 定义用户的临时文件位置，避免用户任意切换目录后打不开文件
+        print("用户的断点传输配置文件为：",TMP_LOG)
         tmplog=open(TMP_LOG,"rb") # 用户下载前先读取记录下载成功失败的记录文件
-        print("读取到了")
-        R_tmplog=pickle.loads(tmplog.read()) # 读取服务端的记录文件
+        R_tmplog=pickle.loads(tmplog.read()) # pickle读取服务端的记录文件
         tmplog.close()
-        print(R_tmplog)
+        print("记录断点续传的字典信息，格式为 文件名,文件大小,传输的大小,断点记录值0表示成功",R_tmplog)
         if R_tmplog[self.name][-1]!=0: # 判断文件成功失败，0代表成功
-            print("hahaha")
             self.func.sendall(bytes("before_trs_faild","utf8")) # 向client发送失败的消息
             AFTER_RECV=self.func.recv(1024) # 接受client的选择
-            print(AFTER_RECV.decode()) # 打印客户端的选择
+            print("客户端选择继续下载或者重新下载",AFTER_RECV.decode()) # 打印客户端的选择
             if AFTER_RECV.decode()=="y": # 选择继续下载
                 print(R_tmplog)
                 TRS_DICT=pickle.dumps(R_tmplog)
                 self.func.sendall(TRS_DICT) # 向client发送字典信息
-                print("发送字典成功")
                 DICT_STATUS=self.func.recv(1024) #接收client的字典信息回复
-                print(DICT_STATUS.decode())
-                print(os.getcwd())
-                ENTER_TRS_FILE="%s"%(R_tmplog[self.name][0])
-                print(ENTER_TRS_FILE)
+                AFTER_TRS_PATH=os.getcwd()
+                ENTER_TRS_FILE="%s"%(R_tmplog[self.name][0]) # 客户端上次断点文件的文件位置（次于主目录后开始记录）
+                os.chdir(TMP_LOG_tmp) # 先切到根目录在进行传输数据
                 with open(ENTER_TRS_FILE,"rb") as R_Enter:
                     R_Enter.seek(R_tmplog[self.name][-2])   # -2 表示上次读取的指针位置
                     while True:
                         R_file_msg=R_Enter.read(1024)
                         print("读取数据中")
-                        print(R_file_msg)
                         if len(R_file_msg) == 0:break
                         R_tell = R_Enter.tell()
-                        print(R_tell)
-                        print("发送数据",R_file_msg)
+                        # print("发送数据",R_file_msg)
                         self.func.sendall(R_file_msg) # 发送数据
                         MSGRETURN=self.func.recv(1024)
                         print("client 接受数据的返回")
@@ -205,7 +205,7 @@ class S_FUNC(object):
                         print("写入记录指针的文件")
                         WRITE_TMP.close()
                         print(R_tmplog)
-                    if R_tmplog[self.name][1]==R_tmplog[self.name][1]:
+                    if R_tmplog[self.name][1]==R_tmplog[self.name][2]:
                         R_tmplog[self.name][-1]=0
                         WRITE_TMP=open(TMP_LOG,"wb")
                         WRITE_TMP.write(pickle.dumps(R_tmplog))
@@ -215,10 +215,16 @@ class S_FUNC(object):
                         f = open(TMP_LOG,"rb")
                         a=pickle.loads(f.read())
                         print(a)
+                        os.chdir(AFTER_TRS_PATH)
                     else:
                         pass
-            # else:
-            #     pass
+            else:
+                R_tmplog[self.name] = ["None","0","0",0]
+                WRITE_TMP=open(TMP_LOG,"wb")
+                WRITE_TMP.write(pickle.dumps(R_tmplog))
+                WRITE_TMP.flush()
+                print("重新写入")
+                WRITE_TMP.close()
         else:
             print("oooooo")
             self.func.sendall(bytes("before_trs_success","utf8"))
@@ -227,9 +233,9 @@ class S_FUNC(object):
             print(Recv_Filename.decode())
             print(os.getcwd())
             CUR_File_PATH1=os.getcwd()
-            CUR_File_PATH="%s/%s"%(CUR_File_PATH1,Recv_Filename)
+            CUR_File_PATH="%s/%s"%(CUR_File_PATH1,Recv_Filename.decode())
             print(config["HOME"][self.name])
-            RE_FILE_PATH=CUR_File_PATH.replace("\\","/").replace(config["HOME"][self.name],".")[2:]
+            RE_FILE_PATH=CUR_File_PATH.replace("\\","/").replace(config["HOME"][self.name],"")[1:]
             print(RE_FILE_PATH)
             if os.path.isfile(Recv_Filename.decode()): # 判断服务器上文件名是否存在
                 print("yes! file exit")
@@ -242,11 +248,10 @@ class S_FUNC(object):
                     while True:
                         R_file_msg=R_file.read(1024)
                         print("读取数据中")
-                        print(R_file_msg)
                         if len(R_file_msg) == 0:break
                         R_tell = R_file.tell()
                         print(R_tell)
-                        print("发送数据",R_file_msg)
+                        print("发送数据")
                         self.func.sendall(R_file_msg) # 发送数据
                         MSGRETURN=self.func.recv(1024)
                         print("client 接受数据的返回")
@@ -254,9 +259,9 @@ class S_FUNC(object):
                         print("发送指针",R_tell)
                         Client_ack=self.func.recv(1024)
                         print("client接受指针的回复")
-                        File_PATH="%s%s"%(RE_FILE_PATH,Recv_Filename.decode())
+                        # File_PATH="%s%s"%(RE_FILE_PATH,Recv_Filename.decode())
                         WRITE_TMP=open(TMP_LOG,"wb")
-                        info[self.name] = [File_PATH,FiteSize,R_tell,1]
+                        info[self.name] = [RE_FILE_PATH,FiteSize,R_tell,1]
                         WRITE_TMP.write(pickle.dumps(info))
                         WRITE_TMP.flush()
                         print("写入记录指针的文件")
