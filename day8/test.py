@@ -72,15 +72,21 @@ import os,sys
 info={}
 # b["1"]=[1,2,3]
 import pickle,codecs
-# f = open("chen/tmp.log","wb")
-# info["chen"]=["aa","0","0",0]
-# f.write(pickle.dumps(info))
-# f.close()
+f = open("chen/tmp.log","wb")
+info["chen"]=["aa","0","0",0]
+f.write(pickle.dumps(info))
+f.close()
 
-f = open("chen/tmp.log","rb")
-a=pickle.loads(f.read())
+# f = open("chen/movie/tmp.log","rb")
+# a=pickle.loads(f.read())
+# print(a)
+a=os.path.abspath(__file__)
 print(a)
-
+b=a.replace("\\","/").replace("C:/Users/chen/PycharmProjects","")[1:]
+print(b)
+print(os.getcwd())
+a="a|b"
+print(a.split("|")[0],a.split("|")[1])
 
 
 # a = {"chen":"taishuai"}
@@ -88,7 +94,11 @@ print(a)
 # print(type(B))
 # C=pickle.loads(B)
 # print(C)
-
+# a=os.getcwd()
+# print(a)
+# b={"chen":['|aa.txt',0,0,0]}
+# a=b["chen"][0].split("|")
+# print(a)
 
 #--------------------
 # f = open("作业思路分析.txt","ab")
@@ -106,7 +116,7 @@ print(a)
 # print('-------------------------')
 # d = open("chen/tmp.log","rb")
 # a=pickle.loads(d.read())
-# duandian=a["chen"][2]
+# print(a)
 # read = codecs.open("作业思路分析.txt","rb")
 # read.seek(10)
 # print(read.read(10))

@@ -157,9 +157,15 @@ class S_FUNC(object):
                 one_res3=self.func.recv(50)
 
     def get(self,cmd):
-        tmplog=open("tmp.log","rb") # 用户下载前先读取记录下载成功失败的记录文件
+        # print("打开日志临时文件")
+        TMP_LOG_tmp=config["HOME"][self.name]
+        TMP_LOG=('%s/%s'%(TMP_LOG_tmp,'tmp.log'))
+        print(TMP_LOG)
+        tmplog=open(TMP_LOG,"rb") # 用户下载前先读取记录下载成功失败的记录文件
+        print("读取到了")
         R_tmplog=pickle.loads(tmplog.read()) # 读取服务端的记录文件
         tmplog.close()
+        print(R_tmplog)
         if R_tmplog[self.name][-1]!=0: # 判断文件成功失败，0代表成功
             print("hahaha")
             self.func.sendall(bytes("before_trs_faild","utf8")) # 向client发送失败的消息
@@ -172,7 +178,10 @@ class S_FUNC(object):
                 print("发送字典成功")
                 DICT_STATUS=self.func.recv(1024) #接收client的字典信息回复
                 print(DICT_STATUS.decode())
-                with open(R_tmplog[self.name][0],"rb") as R_Enter:
+                print(os.getcwd())
+                ENTER_TRS_FILE="%s"%(R_tmplog[self.name][0])
+                print(ENTER_TRS_FILE)
+                with open(ENTER_TRS_FILE,"rb") as R_Enter:
                     R_Enter.seek(R_tmplog[self.name][-2])   # -2 表示上次读取的指针位置
                     while True:
                         R_file_msg=R_Enter.read(1024)
@@ -189,7 +198,7 @@ class S_FUNC(object):
                         print("发送指针",R_tell)
                         Client_ack=self.func.recv(1024)
                         print("client接受指针的回复")
-                        WRITE_TMP=open("tmp.log","wb")
+                        WRITE_TMP=open(TMP_LOG,"wb")
                         R_tmplog[self.name] = [R_tmplog[self.name][0],R_tmplog[self.name][1],R_tell,1]
                         WRITE_TMP.write(pickle.dumps(R_tmplog))
                         WRITE_TMP.flush()
@@ -198,25 +207,30 @@ class S_FUNC(object):
                         print(R_tmplog)
                     if R_tmplog[self.name][1]==R_tmplog[self.name][1]:
                         R_tmplog[self.name][-1]=0
-                        WRITE_TMP=open("tmp.log","wb")
+                        WRITE_TMP=open(TMP_LOG,"wb")
                         WRITE_TMP.write(pickle.dumps(R_tmplog))
                         WRITE_TMP.flush()
                         print("文件大小相等，写入完成")
                         WRITE_TMP.close()
-                        f = open("tmp.log","rb")
+                        f = open(TMP_LOG,"rb")
                         a=pickle.loads(f.read())
                         print(a)
                     else:
                         pass
-
-            else:
-                pass
+            # else:
+            #     pass
         else:
             print("oooooo")
             self.func.sendall(bytes("before_trs_success","utf8"))
             print("发送成功")
             Recv_Filename=self.func.recv(1024)   # 接受用户的下载的文件名
             print(Recv_Filename.decode())
+            print(os.getcwd())
+            CUR_File_PATH1=os.getcwd()
+            CUR_File_PATH="%s/%s"%(CUR_File_PATH1,Recv_Filename)
+            print(config["HOME"][self.name])
+            RE_FILE_PATH=CUR_File_PATH.replace("\\","/").replace(config["HOME"][self.name],".")[2:]
+            print(RE_FILE_PATH)
             if os.path.isfile(Recv_Filename.decode()): # 判断服务器上文件名是否存在
                 print("yes! file exit")
                 FiteSize=os.path.getsize(Recv_Filename.decode()) # 判断文件大小
@@ -240,8 +254,9 @@ class S_FUNC(object):
                         print("发送指针",R_tell)
                         Client_ack=self.func.recv(1024)
                         print("client接受指针的回复")
-                        WRITE_TMP=open("tmp.log","wb")
-                        info[self.name] = [Recv_Filename.decode(),FiteSize,R_tell,1]
+                        File_PATH="%s%s"%(RE_FILE_PATH,Recv_Filename.decode())
+                        WRITE_TMP=open(TMP_LOG,"wb")
+                        info[self.name] = [File_PATH,FiteSize,R_tell,1]
                         WRITE_TMP.write(pickle.dumps(info))
                         WRITE_TMP.flush()
                         print("写入记录指针的文件")
@@ -249,12 +264,12 @@ class S_FUNC(object):
                         print(info)
                     if info[self.name][1]==FiteSize:
                         info[self.name][-1]=0
-                        WRITE_TMP=open("tmp.log","wb")
+                        WRITE_TMP=open(TMP_LOG,"wb")
                         WRITE_TMP.write(pickle.dumps(info))
                         WRITE_TMP.flush()
                         print("文件大小相等，写入完成")
                         WRITE_TMP.close()
-                        f = open("tmp.log","rb")
+                        f = open(TMP_LOG,"rb")
                         a=pickle.loads(f.read())
                         print(a)
                     else:
@@ -294,15 +309,16 @@ if __name__ == "__main__":
                         U_P_AUTH = conn.sendall(bytes("ACK_OK",'utf8'))
                         LOGIN_AUTH = True # 设置成功标志位
                         CUR_PATH=os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\","/")
+                        # print(CUR_PATH)
                         config["HOME"][S_USER]=''.join("%s/%s"%(CUR_PATH,S_USER))
                         config.write(open("ftp.config","w"))
                         os.chdir(config["HOME"][S_USER])
-                        print("diaoyong hanshu")
+                        # print("diaoyong hanshu")
                         break
                     else:U_P_AUTH2 = conn.sendall(bytes("ACK_ERROR",'utf8'))
                 else:
                     U_P_AUTH2 = conn.sendall(bytes("ACK_ERROR",'utf8'))
-                    # LOGIN_AUTH=None
+                    LOGIN_AUTH=False
                     # break
             except Exception:
                 print("异常报错")
@@ -319,7 +335,7 @@ if __name__ == "__main__":
                 FUNC=S_FUNC(conn,U_P_SPLIT[0]) # 实例化Server的类，反射调用方法
                 if hasattr(FUNC,MES_INFO_SPLIT[0]):
                     func = getattr(FUNC,MES_INFO_SPLIT[0])
-                    print("diaoyong func")
+                    # print("diaoyong func")
                     func(MES_INFO.decode())
                 else:print('error......!')
             except Exception:

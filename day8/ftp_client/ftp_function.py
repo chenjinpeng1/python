@@ -180,9 +180,11 @@ class FtpClient(object):
         info = {}
         self.connection.sendall(bytes(func,"utf8")) # 发送服务器做的操作
         FUNC_ACK=self.connection.recv(1024) # 接受Server调用方法的回复消息
+        print("接受到服务端接受命令的回执",FUNC_ACK.decode())
         # self.connection.sendall(bytes(""))
         BEFORE_TRS=self.connection.recv(1024)
-        print(BEFORE_TRS.decode())
+        # print("这是什么?",BEFORE_TRS.decode())
+        # print(BEFORE_TRS.decode())
         if BEFORE_TRS.decode()=="before_trs_faild":
             print(BEFORE_TRS.decode())
             print("aaaaaaaaaa")
@@ -198,6 +200,7 @@ class FtpClient(object):
                 FileTELL=info[self.User][2] #文件指针
                 FileStatus=info[self.User][3]#  文件状态
                 CUR_FILE_SIZE=os.path.getsize(FileName) # 获取当前文件大小
+                print(CUR_FILE_SIZE)
                 f=open(FileName,"ab")
                 while int(CUR_FILE_SIZE)< int(FileSize):
                     #-----------------------
