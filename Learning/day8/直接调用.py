@@ -2,7 +2,7 @@
 # -*- encoding:utf-8 -*-
 #Auth  ChenJinPeng
 
-import threading
+import threading # threading 线程模块
 import time
 
 def sayhi(num): #定义每个线程要运行的函数
