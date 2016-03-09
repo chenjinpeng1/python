@@ -18,6 +18,5 @@ while True:
     client_data = conn.recv(1024)
     print (str(client_data,'utf8'))
     conn.sendall(bytes('不要回答,不要回答,不要回答','utf8'))
-
     conn.close()
 

@@ -52,9 +52,9 @@ aaaaaaaaaaaa
 Usage:
 Just A Template
 """
-a=os.path.abspath("./")
-print(a)
-print(os.getcwd())
+# a=os.path.abspath("./")
+# print(a)
+# print(os.getcwd())
 
 import time
 # for i in range(100000):
@@ -136,29 +136,65 @@ info={}
 #b'client\r\n1\xe3\x80\x81\xe8\xb4\xa6\xe5\x8f\xb7\xe5\xaf'
 
 #!/usr/bin/env python
-import sys,os;
-def DIR_SIZE(name,num):
-    B=os.listdir(name)
-    print(name,B)
-    for i in B:
-        C="%s/%s"%(name,i)
-        num+=os.path.getsize(C)
-    print(name,num)
-    return num
-def ALL_SIZE(name):
-    num = 0
-    a=0
-    LIST=os.listdir(name)
-    print(LIST)
-    for i in LIST:
-        aaa="%s/%s"%(name,i)
-        d=os.path.isdir(aaa)
-        if d:
-            a+=1
-            num=DIR_SIZE(aaa,num)
-        else:
-            num+=os.path.getsize(aaa)
-    print(num)
+# import sys,os;
+# def DIR_SIZE(name,num):
+#     B=os.listdir(name)
+#     print(name,B)
+#     for i in B:
+#         C="%s/%s"%(name,i)
+#         num+=os.path.getsize(C)
+#     print(name,num)
+#     return num
+# def ALL_SIZE(name):
+#     num = 0
+#     a=0
+#     LIST=os.listdir(name)
+#     print(LIST)
+#     for i in LIST:
+#         aaa="%s/%s"%(name,i)
+#         d=os.path.isdir(aaa)
+#         if d:
+#             a+=1
+#             num=DIR_SIZE(aaa,num)
+#         else:
+#             num+=os.path.getsize(aaa)
+#     print(num)
+#
+# ALL_SIZE("./")
+class Foo():
 
-ALL_SIZE("./")
+    def __init__(self, name):
+        self.name = name
+
+    def ord_func(self):
+        """ 定义普通方法，至少有一个self参数 """
+
+        # print self.name
+        print ('普通方法')
+
+    @classmethod
+    def class_func(cls):
+        """ 定义类方法，至少有一个cls参数 """
+
+        print ('类方法')
+
+    @staticmethod
+    def static_func():
+        """ 定义静态方法 ，无默认参数"""
+
+        print ('静态方法')
+
+
+# 调用普通方法
+f = Foo("chen")
+f.ord_func()
+
+# 调用类方法
+Foo.class_func()
+
+# 调用静态方法
+Foo.static_func()
+
+
+
 

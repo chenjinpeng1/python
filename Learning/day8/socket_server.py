@@ -10,7 +10,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         print("NEW:",self.client_address)
         while True:
             data = self.request.recv(1024)
-            if not data:break
+            if len(data) ==0:break
             print("client says:",data.decode())
             self.request.send(data)
 
