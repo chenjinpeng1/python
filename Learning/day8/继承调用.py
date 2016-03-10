@@ -3,6 +3,7 @@
 #Auth  ChenJinPeng
 import threading
 import time
+import sys
 class MyThread(threading.Thread):
     def __init__(self,num):
         # threading.Thread.__init__(self)
@@ -19,3 +20,16 @@ if __name__ == "__main__":
     t2 = MyThread(2)
     t1.start()
     t2.start()
+
+import configparser
+# info = configparser.ConfigParser()
+# info["auth"]={}
+# info["auth"]["chen"]="123"
+# with open("user.log","a") as f:
+#     info.write(f)
+
+A=configparser.ConfigParser()
+A.read("user.log")
+print(list(A))
+import os
+print(os.getpid())

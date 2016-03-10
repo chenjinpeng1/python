@@ -40,3 +40,6 @@ if __name__ == '__main__':
 #     # for i in t_list:
 #     t.join()
 #     print("last start")
+from multiprocessing import Process
+import os,sys
+sys.argv
