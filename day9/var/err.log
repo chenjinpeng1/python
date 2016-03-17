@@ -1,0 +1,9 @@
+2016-03-18 02:35:05,886 - sys-log - INFO - [60.195.252.60] - {run}: [df -h] {状态 'dict_keys' object is not subscriptable} 
+2016-03-18 02:36:40,513 - sys-log - INFO - [127.0.0.1] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: LOG() missing 1 required positional argument: 'log_file'} 
+2016-03-18 02:36:40,545 - sys-log - INFO - [localhost] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: LOG() missing 1 required positional argument: 'log_file'} 
+2016-03-18 02:36:41,285 - sys-log - INFO - [60.195.252.60] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: Unable to connect to 60.195.252.60: [Errno 111] Connection refused} 
+2016-03-18 02:38:39,737 - sys-log - INFO - [localhost] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: LOG() missing 1 required positional argument: 'log_file'} 
+2016-03-18 02:38:39,754 - sys-log - INFO - [127.0.0.1] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: LOG() missing 1 required positional argument: 'log_file'} 
+2016-03-18 02:38:40,445 - sys-log - INFO - [60.195.252.60] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: Unable to connect to 60.195.252.60: [Errno 111] Connection refused} 
+2016-03-18 02:39:42,799 - sys-log - INFO - [60.195.252.60] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: Unable to connect to 60.195.252.60: [Errno 111] Connection refused} 
+2016-03-18 02:41:01,346 - sys-log - INFO - [60.195.252.60] - {run}: [/home/chen/aa.txt,/tmp/bb.txt] {error info: Unable to connect to 60.195.252.60: [Errno 111] Connection refused} 

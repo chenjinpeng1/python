@@ -1,0 +1,40 @@
+2016-03-18 02:03:31,401 - sys-log - INFO - 60.195.252.60 - command: df 
+2016-03-18 02:03:31,435 - sys-log - INFO - localhost - command: df 
+2016-03-18 02:07:06,963 - sys-log - INFO - localhost - put- remote_path /home/chen/aa.txt local_path:/tmp/bb.txt 
+2016-03-18 02:07:07,015 - sys-log - INFO - 60.195.252.60 - put- remote_path /home/chen/aa.txt local_path:/tmp/bb.txt 
+2016-03-18 02:08:53,277 - sys-log - INFO - localhost - put- local_path /home/chen/aa.txt remote_path:/tmp/bb.txt 
+2016-03-18 02:08:53,348 - sys-log - INFO - 60.195.252.60 - put- local_path /home/chen/aa.txt remote_path:/tmp/bb.txt 
+2016-03-18 02:10:04,403 - sys-log - INFO - [localhost] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:10:04,482 - sys-log - INFO - [60.195.252.60] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:10:15,529 - sys-log - INFO - [localhost] - command: [df] 
+2016-03-18 02:10:15,539 - sys-log - INFO - [60.195.252.60] - command: [df] 
+2016-03-18 02:11:00,445 - sys-log - INFO - [localhost] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:11:00,477 - sys-log - INFO - [60.195.252.60] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:11:08,449 - sys-log - INFO - [localhost] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:11:08,492 - sys-log - INFO - [60.195.252.60] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:11:30,264 - sys-log - INFO - [60.195.252.60] - command: [df -h] 
+2016-03-18 02:11:30,266 - sys-log - INFO - [localhost] - command: [df -h] 
+2016-03-18 02:11:40,270 - sys-log - INFO - [60.195.252.60] - command: [df -h] 
+2016-03-18 02:11:40,292 - sys-log - INFO - [localhost] - command: [df -h] 
+2016-03-18 02:12:05,010 - sys-log - INFO - [60.195.252.60] - command: [df -h] 
+2016-03-18 02:12:05,014 - sys-log - INFO - [localhost] - command: [df -h] 
+2016-03-18 02:12:10,726 - sys-log - INFO - [localhost] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:12:11,487 - sys-log - INFO - [60.195.252.60] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:12:15,463 - sys-log - INFO - [localhost] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:12:16,945 - sys-log - INFO - [60.195.252.60] - put - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:12:43,808 - sys-log - INFO - [60.195.252.60] - command: [df -h] 
+2016-03-18 02:12:43,867 - sys-log - INFO - [localhost] - command: [df -h] 
+2016-03-18 02:18:52,396 - sys-log - INFO - [60.195.252.60] - command: [df -h] 
+2016-03-18 02:18:52,432 - sys-log - INFO - [localhost] - command: [df -h] 
+2016-03-18 02:21:48,363 - sys-log - INFO - [localhost] - {put} - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:21:48,405 - sys-log - INFO - [60.195.252.60] - {put} - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] 
+2016-03-18 02:21:59,567 - sys-log - INFO - [60.195.252.60] - {run}: [df -h] 
+2016-03-18 02:21:59,590 - sys-log - INFO - [localhost] - {run}: [df -h] 
+2016-03-18 02:28:37,940 - sys-log - INFO - [localhost] - {run}: [df -h] 
+2016-03-18 02:28:37,942 - sys-log - INFO - [127.0.0.1] - {run}: [df -h] 
+2016-03-18 02:35:05,091 - sys-log - INFO - [127.0.0.1] - {run}: [df -h] {状态 True} 
+2016-03-18 02:35:05,111 - sys-log - INFO - [localhost] - {run}: [df -h] {状态 True} 
+2016-03-18 02:39:42,014 - sys-log - INFO - [127.0.0.1] - {put} - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] {状态 True}
+2016-03-18 02:39:42,039 - sys-log - INFO - [localhost] - {put} - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] {状态 True}
+2016-03-18 02:41:00,603 - sys-log - INFO - [127.0.0.1] - {put} - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] {状态 True}
+2016-03-18 02:41:00,625 - sys-log - INFO - [localhost] - {put} - local_path [/home/chen/aa.txt] remote_path:[/tmp/bb.txt] {状态 True}
