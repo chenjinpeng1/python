@@ -1,0 +1,15 @@
+from twisted.internet import protocol
+from twisted.internet import reactor #reactor是twisted事件循环的核心，它提供了一些服务的基本接口，像网络通信、线程和事件的分发
+class Echo(protocol.Protocol):
+   #必须自己定义一个类,继承protocol，成为protocol的子类
+   def dataReceived(self, data):
+       self.transport.write(data) #写入数据到物理链接     类似send发送数据
+
+def main():
+   factory = protocol.ServerFactory() #protocol.ServerFactor只是一个空类（工厂），你必须继承这个类并重写
+   factory.protocol = Echo # 重新定义类
+   reactor.listenTCP(1234,factory) #绑定端口和重新定义的类
+   reactor.run() #  启动分发器 | 类似于select的监听，有连接就触发重新定义类里的操作 （因为在上面已经绑定了类）
+
+if __name__ == '__main__':
+   main()
