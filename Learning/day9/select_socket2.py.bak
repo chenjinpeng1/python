@@ -36,7 +36,7 @@ while inputs:
         else:
             data = s.recv(1024)
             if data:
-                print(sys.stderr, 'received "%s" from %s' % (data, s.getpeername()) ) #getpeername获取当前连接的客户端的IP地址和端口号
+                print(sys.stderr, 'received "%s" from %s' % (data, s.getpeername()) )
                 message_queues[s].put(data)
                 if s not in outputs:
                     outputs.append(s)
