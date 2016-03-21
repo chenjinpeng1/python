@@ -31,13 +31,13 @@ while True:
             try:
                 client_data=i.recv(1024)
                 if len(client_data) != 0:
+                    message[i] = Queue() # 将message字典的值设置为队列。
+                    message[i].put(client_data) # 将接收的数据上传到队列中
                     OUTPUT.append(i) # 接收到客户端的数据了
-                    message[conn] = Queue() # 将message字典的值设置为队列。
-                    message[conn].put(client_data) # 将接收的数据上传到队列中
             except Exception:
                 INPUT.remove(i)
 
     for wi in w:
-        wi.send(message[conn].get())
+        wi.send(message[wi].get())
         OUTPUT.remove(wi) # 发送过去数据后移除OUTPUT里client的socket句柄，因为每次接收时候也会创建，如果不删除客户端断开后句柄也会存在，这样就慢慢就增大了内存
         message.pop(wi) # 移除message里的client的socket句柄
