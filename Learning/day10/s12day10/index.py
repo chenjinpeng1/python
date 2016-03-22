@@ -11,5 +11,5 @@ class MyHandler(fram.BaseHandler):
         print ('event-drive execute MyHandler')
 
 
-fram.event_list.append(MyHandler)
+fram.event_list.append(MyHandler) # 注册事件
 fram.run()
