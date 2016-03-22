@@ -15,17 +15,17 @@ def parse_args():
 This is the Get Poetry Now! client, Twisted version 3.0
 Run it like this:
 
-  python get-poetry-1.py port1 port2 port3 ...
+  python get-poetry-1.py port1 port2 port3 ... 指定服务器端的端口，可以同时接受多个文件
 """
 
     parser = optparse.OptionParser(usage)
-    _, addresses = parser.parse_args()
-    print('==addr:',_,addresses)
-    if not addresses:
-        print parser.format_help()
+    _, addresses = parser.parse_args() # _表示过滤掉第一个值
+    print('==addr:',_,addresses) #==addr: {} ['111', '222', '333']
+    if not addresses:# 如果没输入地址，打印help
+        print (parser.format_help())
         parser.exit()
 
-    def parse_address(addr):
+    def parse_address(addr):# 区分用户指定的主机和端口，默认为127.0.0.1
         if ':' not in addr:
             host = '127.0.0.1'
             port = addr
@@ -33,11 +33,11 @@ Run it like this:
             host, port = addr.split(':', 1)
         if not port.isdigit():
             parser.error('Ports must be integers.')
-        return host, int(port)
+        return host, int(port) # 返回主机地址，端口
     #return  parse_address(addresses)
     return map(parse_address, addresses)
 
-class PoetryProtocol(Protocol):
+class PoetryProtocol(Protocol): # handle
 
     poem = ''
     def dataReceived(self, data):
@@ -51,7 +51,7 @@ class PoetryProtocol(Protocol):
         self.factory.poem_finished(poem)
 
 
-class PoetryClientFactory(ClientFactory):
+class PoetryClientFactory(ClientFactory):#定义基类继承指定的类
     protocol = PoetryProtocol #handle method
     def __init__(self, callback):
         self.callback = callback
