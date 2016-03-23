@@ -3,7 +3,7 @@
 #Auth  ChenJinPeng
 import socket
 cl=socket.socket()
-cl.connect(("127.0.0.1",10000))
+cl.connect(("127.0.0.1",1234))
 while True:
     data=input("==>>>:")
     cl.sendall(bytes(data,"utf8"))
