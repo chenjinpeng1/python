@@ -62,7 +62,7 @@ def get_poetry(host, port, callback):
     """
     from twisted.internet import reactor
     factory = PoetryClientFactory(callback) # 实例化ProtryClientFactory 将传入的回调函数传入
-    reactor.connectTCP(host, port, factory)
+    reactor.connectTCP(host, port, factory) # 链接
 def poetry_main():
     addresses = parse_args() #((172.0.0.1,9000),(...))
     from twisted.internet import reactor
@@ -74,7 +74,7 @@ def poetry_main():
 
     for address in addresses:#循环列表 获取地址和端口
         host, port = address
-        get_poetry(host, port, got_poem) # 将got_poem函数传入类
+        get_poetry(host, port, got_poem) # 将got_poem函数链接函数
     reactor.run()
 
     print("main loop done...")
