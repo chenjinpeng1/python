@@ -44,8 +44,8 @@ to serve up John Donne's Ecstasy, which I know you want to do.
 
 class PoetryProtocol(Protocol): #handle
     def connectionMade(self):
-        self.transport.write(self.factory.poem)
-        self.transport.loseConnection()
+        self.transport.write(self.factory.poem)#发送数据
+        self.transport.loseConnection()#关闭链接
 
 
 class PoetryFactory(ServerFactory): #基础类
@@ -56,7 +56,7 @@ class PoetryFactory(ServerFactory): #基础类
 def main():
     options, poetry_file = parse_args()#options 用户传入的参数,poetry_file 文件名
     poem = open(poetry_file).read() # 打开文件
-    factory = PoetryFactory(bytes(poem,"utf8")) # 初始化基类，传入读取的数据
+    factory = PoetryFactory(poem) # 初始化基类，传入读取的数据
     from twisted.internet import reactor # 导入事件分发器
     port = reactor.listenTCP(options.port or 9000, factory,
                              interface=options.iface) # 绑定端口，默认9000，interface 指定主机地址

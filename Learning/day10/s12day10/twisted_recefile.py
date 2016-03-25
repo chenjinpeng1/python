@@ -39,12 +39,11 @@ class PoetryProtocol(Protocol): # handle
     poem = ''
     def dataReceived(self, data): # 接受数据
         self.poem += data
-        #self.factory = PoetryClientFactory
-        print('[%s] recv:[%s]' %(self.transport.getPeer(),len(self.poem)))
+        # self.factory = PoetryClientFactory
+        print('[%s] -----recv-----:[%s]' %(self.transport.getPeer(),len(self.poem)))
 
     def connectionLost(self, reason): # 连接关闭后执行此函数
         self.poemReceived(self.poem)
-
     def poemReceived(self, poem): #
         self.factory.poem_finished(poem)
 class PoetryClientFactory(ClientFactory):#定义基类继承指定的类

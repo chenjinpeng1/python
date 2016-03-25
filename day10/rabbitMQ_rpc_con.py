@@ -5,8 +5,8 @@ import time
 connection = pika.BlockingConnection(pika.ConnectionParameters(
         host='localhost')) # 链接主机
 channel = connection.channel() # 创建隧道
-channel.exchange_declare(exchange="cmd",type="fanout")
-result = channel.queue_declare(exclusive=True)
+channel.exchange_declare(exchange="cmd",type="fanout") # 创建交换器
+result = channel.queue_declare(exclusive=True)#生产随机Q ，exclusive=True链接断开后自动删除这个Q
 queue_name = result.method.queue
 channel.queue_bind(exchange="cmd",queue=queue_name)
 # channel.queue_declare(queue='rpc_queue') #创建q名称

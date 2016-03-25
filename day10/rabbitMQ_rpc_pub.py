@@ -30,7 +30,7 @@ class FibonacciRpcClient(object):
                                    body=str(n))
         while self.response is None:
             self.connection.process_data_events() # 如果response的结果为NONE，就一直等待接收
-
+            # bug 到这后就一直在循环
 fibonacci_rpc = FibonacciRpcClient()
 if len(sys.argv) != 2:
     print('''
