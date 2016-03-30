@@ -15,7 +15,7 @@ class Hosts(Base):
     ip_addr = Column(String(128),unique=True,nullable=False)
     port = Column(Integer,default=22)
     group_id = Column(Integer,ForeignKey('groups.id')) # 外键关联groups下的id
-    group = relationship("Groups",backref='hosts_list') # backref表示反向关联hosts_list可以指定任意字符串，但是你调用的时候必须一致
+    group = relationship("Groups",backref="hosts_list") # backref表示反向关联hosts_list可以指定任意字符串，但是你调用的时候必须一致
 class Groups(Base):
     __tablename__='groups'
     id = Column(Integer,primary_key=True)
@@ -43,7 +43,5 @@ if __name__ == "__main__":
     # print(g1.hosts_list)
     #[<__main__.Hosts object at 0x7ffb945af5f8>, <__main__.Hosts object at 0x7ffb945af668>]
     #inner join
-    # ret = session.query(Hosts).join(Hosts.group).filter(Hosts.group_id=="1").group_by(Groups.groupname=="g1").all()
-    ret = session.query(Hosts).join(Hosts.group).filter(Groups.groupname=="g1").all()
-    print(ret)
-    print(len(ret))
+    # ret = session.query(Hosts).join(Hosts.group).filter(Groups.groupname=="g1").all()
+    # for i in ret:print(i.hostname)
