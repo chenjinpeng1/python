@@ -1,0 +1,6 @@
+  hostuser:
+    chen:
+      - webserver
+      - test
+    alex:
+      - test

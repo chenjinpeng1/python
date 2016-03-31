@@ -1,0 +1,6 @@
+  h1:
+    ipaddress: 127.0.0.1
+    port: 22
+  h2:
+    ipaddress: 127.0.0.1
+    port: 22

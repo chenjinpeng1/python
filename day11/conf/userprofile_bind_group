@@ -1,0 +1,6 @@
+  userprofile_group:
+    chen:
+      - webserver
+      - test
+    alex:
+      - test

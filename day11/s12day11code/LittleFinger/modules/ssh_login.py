@@ -8,7 +8,7 @@ import socket
 import sys
 import traceback
 from paramiko.py3compat import input
-import models
+from modules import models
 import datetime
 
 import paramiko

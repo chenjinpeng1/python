@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 
-DB_CONN ="mysql+mysqldb://root:123@localhost:3306/little_finger"
+DB_CONN ="mysql+pymysql://root:chen27@localhost:3306/chen"
 
 '''
 # Database

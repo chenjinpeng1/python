@@ -17,6 +17,7 @@ def help_msg():
         print(key)
 
 def excute_from_command_line(argvs):
+    print(argvs[1:])
     if len(argvs) < 2:
         help_msg()
         exit()

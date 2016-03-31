@@ -1,11 +1,14 @@
 #_*_coding:utf-8_*_
 __author__ = 'Alex Li'
-
+import sys,os
+Base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(Base)
+print(Base)
 from modules import models
-from db_conn import engine,session
-from utils import print_err,yaml_parser
-import common_filters
-import ssh_login
+from modules.db_conn import engine,session
+from modules.utils import print_err,yaml_parser
+from modules import common_filters
+from modules import ssh_login
 def auth():
     '''
     do the user login authentication
