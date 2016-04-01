@@ -25,7 +25,7 @@ Hostuser_group = Table("Hostuser_group",Base.metadata,
     Column("group_id",ForeignKey("groups.id"),primary_key=True))
 class Hosts(Base):
     __tablename__='hosts'
-    id = Column(Integer,primary_key=True)
+    id = Column(Integer,primary_key=True,autoincrement=True)
     hostname = Column(String(64),unique=True,nullable=False)
     address = Column(String(128),unique=True,nullable=False)
     port = Column(Integer,default=22)
@@ -63,7 +63,7 @@ class Hostusers(Base):
     group = relationship("Groups",backref="hostusers",secondary=Hostuser_group)
     def __repr__(self):
         return "id=%s,user=%s"%(self.id,self.user)
-    __table_args__ = (UniqueConstraint( 'hostid','user', name='_host_username_uc'),)
+    __table_args__ = (UniqueConstraint( 'hostid','user', name='_host_username_uc'),)#联合唯一
 
 # sess = sessionmaker(bind=engine)
 # session = sess()

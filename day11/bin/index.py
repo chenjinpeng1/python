@@ -7,9 +7,10 @@ actions = {
     "initdb":initdata.initdb,
     "create_userprofile":initdata.createuser,
     "create_group":initdata.creategroup,
+    "create_host":initdata.createhost,
     "create_hostuser":initdata.createhostuser,
     "userprofile_bind_group":initdata.userprofile_bind_group,
-    "userprofile_bind_user":initdata.userprofile_bind_user
+    "userprofile_bind_user":initdata.userprofile_bind_user,
     "hostuser_bind_group":initdata.Hostusers_bind_group
 }
 def help():
@@ -18,6 +19,7 @@ def help():
     initdb              - init mysql data
     create_userprofile         - create remote user
     create_group        - create group and bind userprofile,
+    create_host         - create hosts
     create_hostuser      - create server user
     bind_userprofile    -initdata.userprofile_bind_group
     userprofile_bind_user   - userprofile bind user
