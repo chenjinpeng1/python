@@ -1,4 +1,6 @@
   chen:
     password: chen27
+    hostname: h1
   test:
     password: 123
+    hostname: h2
