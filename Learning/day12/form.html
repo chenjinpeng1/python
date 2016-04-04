@@ -1,0 +1,52 @@
+<html>
+<head>
+    <style>
+        .bb{
+            color: #0095bb;
+        }
+        a{
+            color: #e7e7e7;
+        }
+        #uu{
+            color: rebeccapurple;
+        }
+    </style>
+
+    <link rel="stylesheet"href="color.css"/>
+    <title>form</title>
+</head>
+<body>
+<div style="background-image : url(meinv.jpg);height: 100%;background-repeat: no-repeat">
+    <form action="http://10.0.4.42:8000/django_form/" enctype="multipart/form-data" method="post">
+        <p>
+            主机：<input  type="text" name="host"/>
+            密码:<input type="password" name="pwd"/>
+        </p>
+        <div class="bb">
+            <h6>爱好</h6>
+            篮球：<input name="favor" type="checkbox" value="1"/>
+            足球：<input name="favor" type="checkbox" value="2"/>
+            乒乓球：<input name="favor" type="checkbox" value="3"/>
+        </div>
+        <div class="bb">
+            <h6>性别</h6>
+            男：<input name="gender" type="radio" value="1"/>
+            女：<input name="gender" type="radio" value="2"/>
+        </div>
+        <div class="bb">
+            <a id="uu">hhhhhhhhhhhhhhhhhhhhh</a>
+            <h6>城市</h6>
+            <select name="city">
+                <option value="aa">上海</option>
+                <option value="bb">北京</option>
+            </select>
+        </div>
+        <div class="bb">
+            <textarea name="mono"></textarea>
+        </div>
+        <input type="submit" value="commit">
+    </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+1、块级标签，内联标签
+	div、p，h
+	span,a,label,input,form,img
+	
+2、各种符号
+	&nbsp;
+3、标签
+	input系列
+	select
+	textarea
+	form
+	
+	div
+	span
+	
+	a
+	img
+	table
+	
+	H,ul,li,ol,dl,p,br,hr
+4、属性
+	公共属性：id,name(一般只提交数据),style,class
+	input:text,password
+		<input type='text' value="123" />
+	input:button,submit
+		<input type='submit' value='BTN' />
+		
+	input:checkbox
+		<input type='checkbox' />
+		
+		* checked="checked"
+		
+	input:radio
+		<input name='gender' type='radio' />
+		<input name='gender' type='radio' />
+		* checked="checked" 
+		* name='gender'
+	input:file
+		如果想要提交文件，需要在其所在form标签中添加特殊的一个属性：
+		<form action='...' enctype='multipart/form-data' method='POST'>
+			<input type='text' />
+			<input type='file' />
+		</form>
+		* 对form标签要求
+	form
+		<form action='' enctype='multipart/form-data' method='POST'>
+			要提交的所有标签
+		</form>
+		
+		* action,提交到某一个地址
+		
+	textarea
+		<taxtarea name='xxx'></taxtarea>
+		
+	=======
+	select
+		<select>
+			<option value='9' selected='selected'>ff</option>
+		</select>
+		* option,value,提交数据时，value
+		* selected='selected'
+		
+	table：
+		table,
+			thead,tbody
+			tr:行
+				td：列
+					合并单元格，colspan,rowspan
+	

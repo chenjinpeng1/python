@@ -1,0 +1,66 @@
+寻找标签
+class选择器
+	.c1{}
+	<div class='c1'> 123</div>
+	<div class='c1'> 123</div>
+标签选择器
+	a{
+		color:red;
+	}
+	div
+	span
+	select
+	input，type=text
+	
+	*****
+	input[type='text']{
+	
+	}
+	
+	html中所有的a标签，全部红色字体
+	
+ID选择器
+	#uu{
+		
+	}
+	<div></div>
+	<div id='uu'>123</div>
+	
+层级选择器
+	 
+	.c3 #i8 div .c4{
+	
+	}
+
+	<div class='c3'>
+		<a id='i8'>
+			<div>
+				<span class='c4'></span>
+			</div>
+			<span class='c4'></span>
+		</a>
+	</div>
+	<span class='c4'></span>
+	
+组合选择器
+	,
+	a{
+		
+	}
+	p{
+		
+	}
+	
+	.c3 #i8 div .c4,.c3 #i8 div .c9{
+		xxxx
+	}
+
+
+
+
+	
+	
+	
+	
+	
+应用样
