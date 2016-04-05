@@ -1,0 +1,69 @@
+.Bodytop1 {
+    height: 125px;
+    width: 100%;
+    border:1px solid red;
+}
+.Bodytop2{
+    height: 25px;
+    width: 100%;
+    background-color: #9a9a9a;
+    opacity: 0.5;
+}
+.Bodytop3{
+    height: 60px;
+    width: 200px;
+    background: url(jdicon.png) no-repeat 0px 10px ;
+    float: left;
+    margin-left: 360px;
+}
+.Bodytop4{
+    height: 60px;
+    width: 450px;
+    float: left;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+.Bodytop6{
+    height: 35px;
+    width: 100%;
+    background-color: red;
+    opacity: 0.5;
+    margin-top: 65px;
+}
+.Bodytop_goods_all{
+    width: 200px;
+    height: 35px;
+    background-color: #B61D1D;
+    color: white;
+    margin-left: 100px;
+    text-align: center;
+    line-height: 35px;
+    float: left;
+    margin-top: -15px;
+}
+.Bodyleft1{
+    width: 200px;
+    height: 500px;
+    border: 1px solid red;
+    float: left;
+    margin-left: 100px;
+}
+.Bodyright1{
+    width: 60%;
+    height: 500px;
+    border: 1px solid red;
+    margin-left: 400px;
+}
+a{
+    text-decoration: none;
+    color:black;
+    /*margin: 0px;*/
+    margin-top: 3px;
+    float: left;
+    margin-left: 10px;
+}
+/*a{*/
+    /*float: left;*/
+    /*margin-left: 10px;*/
+    /*list-style: none;*/
+/*}*/
