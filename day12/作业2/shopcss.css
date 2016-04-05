@@ -14,11 +14,11 @@
     width: 200px;
     background: url(jdicon.png) no-repeat 0px 10px ;
     float: left;
-    margin-left: 360px;
+    margin-left: 10%;
 }
 .Bodytop4{
     height: 60px;
-    width: 450px;
+    /*width: 450px;*/
     float: left;
     margin-left: 100px;
     margin-top: 20px;
@@ -26,35 +26,54 @@
 .Bodytop6{
     height: 35px;
     width: 100%;
-    background-color: red;
-    opacity: 0.5;
+    background-color: #B61D1D;
+    /*opacity: 0.5;*/
     margin-top: 65px;
 }
 .Bodytop_goods_all{
-    width: 200px;
+    width: 20%;
     height: 35px;
     background-color: #B61D1D;
     color: white;
-    margin-left: 100px;
+    margin-left: 7%;
+    text-align: center;
+    line-height: 35px;
+    float: left;
+    margin-top: -15px;
+}.Bodytop_goods_all2{
+    width: 30%;
+    height: 35px;
+    background-color: #B61D1D;
+    color: white;
+    margin-left: 3%;
     text-align: center;
     line-height: 35px;
     float: left;
     margin-top: -15px;
 }
 .Bodyleft1{
-    width: 200px;
-    height: 500px;
+    width: 20%;
+    height: 349px;
     border: 1px solid red;
     float: left;
     margin-left: 100px;
+    background-color:#B61D1D ;
+    color: white;
 }
 .Bodyright1{
     width: 60%;
     height: 500px;
     border: 1px solid red;
-    margin-left: 400px;
+    margin-left: 40px;
+    /*margin-top: 10px;*/
+    float: left;
 }
-a{
+.Bodyright1-2{
+    width: 100%;
+    height: 5%;
+    border-bottom: 2px solid  red;
+}
+.Bodytop1 a{
     text-decoration: none;
     color:black;
     /*margin: 0px;*/
@@ -62,8 +81,18 @@ a{
     float: left;
     margin-left: 10px;
 }
-/*a{*/
-    /*float: left;*/
-    /*margin-left: 10px;*/
-    /*list-style: none;*/
-/*}*/
+.Bodytop_goods_all2 a{
+    color: white;
+    text-decoration: none;
+}
+.Bodyleft1 a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 3px solid white;
+    margin-top: 2px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
