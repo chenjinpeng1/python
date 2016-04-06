@@ -76,7 +76,7 @@
     color: white;
 }
 .Bodyright1{
-    width: 1025px;
+    width: 70%;
     height: 500px;
     border: 1px solid red;
     margin-left: 40px;
@@ -120,13 +120,13 @@
 }
 .Body_div_border{
     border: 1px solid #676767;
-    width: 1025px;
+    /*width: 70%;*/
     height: 7%;
 }
 .Bodyright1 .Body_div_border2{
     background-color: #676767;
     opacity: 0.5;
-    width: 102px;
+    width: 15%;
     height: 100%;
     font-weight: bold;
     text-align: center;
@@ -135,7 +135,7 @@
 }.Bodyright1 .Body_div_border3{
     /*background-color: #676767;*/
     /*opacity: 0.5;*/
-    width: 90%;
+    width: 85%;
     height: 100%;
     font-weight: bold;
     text-align: center;
@@ -143,14 +143,15 @@
     float: left;
 }
 .Bodyright1 .Body_div_border .Body_div_border3 ul{
-    width: 96%;
+    width: 100%;
     height: 100%;
     /*float: left;*/
     list-style-type: none;
-    margin-top: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 .Bodyright1 .Body_div_border .Body_div_border3 ul li{
-    width: 15.5%;
+    width: 16.5%;
     height: 100%;
     float: left;
     /*margin-top: 0px;*/
