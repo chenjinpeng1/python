@@ -1,67 +1,82 @@
 .Bodytop1 {
-    height: 125px;
+    height: 15%;
     width: 100%;
     border:1px solid red;
 }
 .Bodytop2{
-    height: 25px;
+    height: 25%;
     width: 100%;
     background-color: #9a9a9a;
-    opacity: 0.5;
+    /*opacity: 0.5;*/
+    /*float: left;*/
+}
+.Bodytop2-2{
+    height: 100%;
+    width: 20%;
+    background-color: #9a9a9a;
+    /*opacity: 0.5;*/
+    float: left;
+}
+.Bodytop2-3{
+    height: 100%;
+    width: 50%;
+    background-color: #9a9a9a;
+    margin-left: 25%;
+    float: left;
 }
 .Bodytop3{
-    height: 60px;
+    height: 40%;
     width: 200px;
     background: url(jdicon.png) no-repeat 0px 10px ;
     float: left;
     margin-left: 10%;
 }
 .Bodytop4{
-    height: 60px;
+    height: 43%;
     /*width: 450px;*/
     float: left;
-    margin-left: 100px;
-    margin-top: 20px;
+    margin-left: 200px;
+    /*margin-top: 20px;*/
 }
 .Bodytop6{
-    height: 35px;
+    height: 30%;
     width: 100%;
     background-color: #B61D1D;
     /*opacity: 0.5;*/
     margin-top: 65px;
 }
 .Bodytop_goods_all{
-    width: 20%;
-    height: 35px;
-    background-color: #B61D1D;
+    width: 10%;
+    height: 100%;
+    /*background-color: #B61D1D;*/
     color: white;
-    margin-left: 7%;
+    margin-left: 12%;
     text-align: center;
-    line-height: 35px;
+    line-height: 45px;
     float: left;
-    margin-top: -15px;
+    /*margin-top: -15px;*/
 }.Bodytop_goods_all2{
-    width: 30%;
+    /*width: 30%;*/
     height: 35px;
     background-color: #B61D1D;
     color: white;
-    margin-left: 3%;
+    margin-left: -35%;
     text-align: center;
     line-height: 35px;
     float: left;
-    margin-top: -15px;
+    margin-left: -955px;
 }
 .Bodyleft1{
-    width: 20%;
-    height: 349px;
-    border: 1px solid red;
+    width: 15%;
+    height: 47%;
+    /*border: 1px solid red;*/
     float: left;
-    margin-left: 100px;
+    margin-left: 10%;
     background-color:#B61D1D ;
     color: white;
 }
 .Bodyright1{
-    width: 60%;
+    width: 1025px;
     height: 500px;
     border: 1px solid red;
     margin-left: 40px;
@@ -71,7 +86,13 @@
 .Bodyright1-2{
     width: 100%;
     height: 5%;
-    border-bottom: 2px solid  red;
+    /*border-bottom: 0px solid  red;*/
+}
+.Body_div_border .px{
+    width: 50px;
+    height: 20px;
+    margin-top: 15px;
+    float: left;
 }
 .Bodytop1 a{
     text-decoration: none;
@@ -81,9 +102,10 @@
     float: left;
     margin-left: 10px;
 }
-.Bodytop_goods_all2 a{
+.Bodytop_goods_all2 a b{
     color: white;
     text-decoration: none;
+    margin-left: 10px;
 }
 .Bodyleft1 a{
     display: block;
@@ -95,4 +117,66 @@
     text-align: center;
     height: 30px;
     line-height: 30px;
+}
+.Body_div_border{
+    border: 1px solid #676767;
+    width: 1025px;
+    height: 7%;
+}
+.Bodyright1 .Body_div_border2{
+    background-color: #676767;
+    opacity: 0.5;
+    width: 102px;
+    height: 100%;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    float: left;
+}.Bodyright1 .Body_div_border3{
+    /*background-color: #676767;*/
+    /*opacity: 0.5;*/
+    width: 90%;
+    height: 100%;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    float: left;
+}
+.Bodyright1 .Body_div_border .Body_div_border3 ul{
+    width: 96%;
+    height: 100%;
+    /*float: left;*/
+    list-style-type: none;
+    margin-top: 0px;
+}
+.Bodyright1 .Body_div_border .Body_div_border3 ul li{
+    width: 15.5%;
+    height: 100%;
+    float: left;
+    /*margin-top: 0px;*/
+    /*margin-left: -40px;*/
+    list-style-type: none;
+
+}
+.Bodyright1 .Body_div_border .Body_div_border3 ul li img{
+    height: 100%;
+    width: 136px;
+    float: left;
+    border: 1px solid #676767;
+}
+.Body_div_border4{
+    border: 2px solid black;
+    height: 50%;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+}
+#aa{
+    height: 100%;
+    width: 80px;
+    /*float: left;*/
+    /*border: 1px solid #676767;*/
+    display: block;
+    text-align: center;
 }
