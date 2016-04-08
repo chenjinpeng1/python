@@ -37,7 +37,7 @@ class Hosts(Base):
                                                   self.port)
 class Groups(Base):
     __tablename__='groups'
-    id = Column(Integer,primary_key=True)
+    id = Column(Integer,primary_key=True,autoincrement=True)
     groupname = Column(String(64),unique=True,nullable=False)
     # hosts = relationship("Hosts")
     def __repr__(self):

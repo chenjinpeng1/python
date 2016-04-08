@@ -61,6 +61,7 @@ def creategroup(argv):
             for i in val:
                 from modules.data_init import Groups
                 # for i in key:
+                print(i)
                 g1 = Groups(groupname=i)
                 session.add(g1)
                 session.commit()
@@ -81,12 +82,11 @@ def userprofile_bind_group(argv):
             from modules.data_init import Userprofiles,Groups
             userprofile_2_group = session.query(Userprofiles).filter(Userprofiles.user==key).first()
             print(userprofile_2_group)
-            # for i in val:
-            #     group = session.query(Groups).filter(Groups.groupname==i).first()
-            #     print(group)
-            #     userprofile_2_group.group = [group]
-            #     # # session.add(g1)
-            #     session.commit()
+            for i in val:
+                group = session.query(Groups).filter(Groups.groupname==i).first()
+                print(group)
+                userprofile_2_group.group.append(group)
+                session.commit()
     else:
         print('''
         -f 指定配置文件
