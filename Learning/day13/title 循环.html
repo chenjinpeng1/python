@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎光临My home</title>
+</head>
+<body>
+<input type="button" onclick="stop()" value="停下来">
+<script>
+    obj = setInterval("Func()",1000);
+//    超时时间 1秒后自动停止
+//    obj = setTimeout("Func()",1000);
+    function Func(){
+        var text = document.title;
+        var firstchar = text.charAt(0);
+        var subtext = text.substring(1,text.length);
+        var newtitle = subtext + firstchar;
+        document.title=newtitle
+    }
+//    怎么让他停下来？创建触发事件
+    function stop(){
+//        清除定时器
+        clearInterval(obj)
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="aa" action="https://www.sogou.com/web" method="get">
+    <input name="query" type="text"/>
+    <input type="submit"  value="提交">
+    <!--另一种方式-->
+    <div onclick="mysubmit()">提交</div>
+
+</form>
+<script>
+    function mysubmit(){
+        document.getElementById("aa").submit();
+    }
+</script>
+</body>
+</html>

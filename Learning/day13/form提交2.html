@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="aa" action="https://www.sogou.com/web" method="get">
+    <input name="query" type="text"/>
+    <input type="submit" onclick="return Mysubmit();" value="提交">
+    <!--另一种方式-->
+    <!--<div onclick=" return Mysubmit()">提交</div>-->
+
+</form>
+<script>
+    function Mysubmit(){
+        var q = document.getElementsByName('query')[0];
+        if(q.value.trim()){
+            return true;
+        }else{
+            alert("请输入内容")
+            return false
+        }
+//        document.getElementById("aa").submit();
+    }
+</script>
+</body>
+</html>

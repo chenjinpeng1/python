@@ -1,0 +1,171 @@
+day13
+JavaScript
+    1  文件 块
+    2 body 底部（js1.html）
+    3 声明变量
+        name="chen" # 全局变量
+        var name = "chen" #局部变量 尽量使用局部变量 避免出错
+        var a1='chen',a2='zhhang',a3=1 多行声明变量
+    4 注释
+        单行注释 //
+        多行注释 /*   */
+    5 基本数据类型
+        数字
+            两种方式
+                var age = 18
+                var age = Number(18)；
+            将一个字符串转换为数字类型
+                Number('123')
+                parseInt（'123'）
+                n2='123'
+                a=parseInt(n2) # 必须赋值给变量才会生效，不会直接将原变量的类型进行改变
+                转换为float类型
+                parsefloat('18.9')
+            调试js
+                console.log(age)
+                age 类型 console.log(age,typeof age)
+                或者在html F12中的Console里也可以直接进行测试和调试
+        字符串
+            var age = '18';
+
+        数组
+            num = [11,22,33]
+            num.unshift("aa") 前插入
+            num.push（'bb''） 后插入 追加
+            num.splice(1,0,'bbb')指定插入(中间的0必须要加，只有为0的时候才会帮你去插入)
+            li.splice(1,3) 删除索引位置后的三个元素 （obj.splice(index,count)         数组指定位置后count个字符）
+            li.slice(0,2) 切片
+            num.pop() 删除最后一个值，并获取
+            num.shift() 删除第一个值
+            num.concat(n) 数组合并
+                n=['a','b']
+            num.rerverse（）  翻转
+            num.join('-') 字符串格式化
+
+        字典（js中的字典是数组伪造出来的“数组(字典)）
+            dic = {'k1':'v1'}
+
+        序列化
+             s=JSON.stringify(dic)
+             JSON.parse(s)
+        6 字符串的高级用法
+            过滤
+            name = "chen    "
+            name.trim()
+            索引取值
+            name.charAt(0)
+            name.charAt(1)
+            子序列
+            name.substring(1,2) 大于等于1 小于2
+            获取字符串的下标
+            name.indexOf('c')
+            获取长度
+            name.length
+        7 布尔
+            Boolean(1) true
+            Boolean(0) false
+        8 for 循环
+            数组
+                var li = [11,22,33,44];
+                for(var index in li){
+                    console.log(index,li[index]);
+                    }
+                for (var i=0;i<li.length;i++){
+                    console.log(i,li[i])；
+                }
+            字典
+                var dic = {"k1":11,"k2":22}
+                for (var key in dic){
+                    console.log(key)；
+                }
+
+            while 循环
+                while (li.length<10){
+                    console.log("小于10")
+                    li.push("aa")
+                    console.log(li)
+                    continue
+
+                }
+            switch 循环
+                switch (li){
+                    case li.length <5:
+                        console.log("小于5");
+                        break;
+                    case li.length < 8:
+                        console.log("小于8");
+                        break;
+                    default:
+                        console.log("大于8")
+                }
+            try 异常检错
+                try{
+                    li.sasasasasas(2)
+                }
+                    catch (e){
+                        console.log("异常")
+                    }
+                    finally {
+                        console.log("完成")
+                    }
+
+        9 函数
+            function func1(arg){
+                console.log(arg);
+                return "aaa";
+            };
+            var ret = fun1("123");
+            console.log(ret)
+
+            匿名函数
+            var f = function(arg){
+                console.log(arg);
+            }
+            f(1234)
+
+            自执行函数
+                ()();
+                (function(arg){
+                    console.log("111",arg)
+                    })("chen");
+
+        10 类（函数模拟类）
+            function fun1(name,age){
+                this.Name = name;
+                this.Age = age;
+                this.fun2 = function(arg){
+                    return this.Name + arg;
+                }
+            }
+            var obj = new fun1("chen","18");
+            console.log(obj.Name);
+            console.log(obj.Age);
+            var ret = obj.fun2("66666")
+            console.log(ret);
+
+    DOM
+        1 查找元素
+        2 操作内容
+            var nid = document.getElementById("n11")
+            n11.innerText="n1122222221111222224442222"
+            console.log(n11)
+
+            var lis = document.getElementsByTagName("li")
+            for(var i in lis){
+                var item = lis[i];
+                item.innerText=i;
+            }
+            var list2 = document.getElementsByClassName("c1");
+            for(var i in list2){
+                console.log(i)
+                var item = list2[i];
+                item.innerText = i;
+            }
+
+            var name1 = document.getElementsByName("username")[0]
+        //    console.log("aaaaa",name1.valueOf("asasas"))
+            var pwd1 = document.getElementsByName("pwd")
+            for(var i in name1){
+                var name = name1[i];
+                name1.value = "sasasasa";
+            }

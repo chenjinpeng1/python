@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1 >Hi,hello
+
+</h1>
+
+<script>
+    function js1(){
+        alert("Hi hello");
+    }
+    js1();
+//    ;分号必须加上，js子啊上线的时候 代码都会进行压缩 合并成一行，到时 会用分号区分
+//    压缩格式
+//        aa.js
+//        ss.min.js 压缩过的
+//    声明变量
+    var name='chen',name1='qiu',n1= 1,n2='2';
+    console.log(name,name1,n1,n2);
+    console.log(typeof name,typeof n1,typeof n2);
+    a=parseInt(n2)
+    console.log(typeof name,typeof n1,typeof a);
+    a=[1,2,3,4,"5"]
+//    a="aaaaa"
+//    b=a.join('-')
+    console.log(a[4],typeof a[4]);
+//    循环
+//    数组
+    var li = [11,22,33,44]
+    for(var i in li){
+        console.log(li[i]);
+    };
+    for(var i=0;i<li.length;i++){
+        console.log(li[i]);
+    };
+//    字典
+    dic={"k1":111,"k2":222}
+    for(var key in dic){
+        console.log(key);
+    };
+//    if
+    li = [11,22,33,44]
+    if(li.length <3){
+        console("长度小于5")
+    }else if(li.length>3){
+        console.log("长度大于3")
+    }
+//    while
+    while (li.length<10){
+        console.log("小于10")
+        li.push("aa")
+        console.log(li)
+        continue
+
+    }
+//    switch
+    switch (li){
+        case li.length <5:
+            console.log("小于5");
+            break;
+        case li.length < 8:
+            console.log("小于8");
+            break;
+        default:
+            console.log("大于8")
+    }
+    try{
+        li.sasasasasas(2)
+    }
+        catch (e){
+            console.log("异常")
+        }
+        finally {
+            console.log("完成")
+        }
+</script>
+
+</body>
+</html>

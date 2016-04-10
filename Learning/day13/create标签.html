@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div  id="container">
+
+</div>
+<a href="http://www.baidu.com" onclick="return AddElement()">添加</a>
+
+
+<div id="aa" class="a1" style="font-size: 120px;color: red">aaa</div>
+<input type="button" value="换样式" onclick="bb()">
+<script>
+//    方式1
+function AddElement(){
+//    创建标签，添加至container
+    var nid = document.getElementById("container");
+    var tag = "<input type='text'/>";
+    nid.innerHTML = tag;
+    return false
+//    以上注释的  是只能添加一次input标签
+//    var createObj = document.createElement("a")
+//    createObj.href = "http://www.baidu.com";
+//    createObj.innerText = "百度"
+//    var nid = document.getElementById("container");
+//    nid.appendChild(createObj);
+//    return false
+}
+
+function bb(){
+    nid = document.getElementById("aa")
+    nid.style.color = "blue"
+    nid.style.fontSize = "160px"
+//    nid.innerHTML = nid
+}
+</script>
+</body>
+</html>

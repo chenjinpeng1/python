@@ -1,0 +1,21 @@
+<html>
+<head>
+</head>
+<body>
+
+<div>
+    <div id="aaa">1</div>
+    <input  type="button" value="+1" onclick="Add();"/>
+
+</div>
+<script>
+    function Add() {
+        var add = document.getElementById("aaa")
+//        console.log(add)
+        var test = parseInt(add.innerText)
+        test += 1
+        add.innerText = test
+    }
+</script>
+</body>
+</html>

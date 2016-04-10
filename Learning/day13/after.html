@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<div>
+    <div id ="n11">n1</div>
+    <a>aaaaaaaa</a>
+</div>
+<ul>
+    <li>123</li>
+    <li>123</li>
+</ul>
+<div class="c1">c1</div>
+<div class="c1">c2</div>
+<div class="c1">c3</div>
+
+<form>
+    <p>用户名<input name="username" value="aaaa"/></p>
+    <p>密码<input name="pwd" value="bbbb"/></p>
+
+<script>
+    var nid = document.getElementById("n11")
+    n11.innerText="n1122222221111222224442222"
+    console.log(n11)
+
+    var lis = document.getElementsByTagName("li")
+    for(var i in lis){
+        var item = lis[i];
+        item.innerText=i;
+    }
+    var list2 = document.getElementsByClassName("c1");
+    for(var i in list2){
+        console.log(i)
+        var item = list2[i];
+        item.innerText = i;
+    }
+
+    var name1 = document.getElementsByName("username")[0]
+//    console.log("aaaaa",name1.valueOf("asasas"))
+    var pwd1 = document.getElementsByName("pwd")
+    for(var i in name1){
+        var name = name1[i];
+        name1.value = "sasasasa";
+    }
+
+</script>
+</form>
+<div style="background-image: url('http://quc.qhimg.com/dm/110_110_100/t018840558d80b38089.jpg');background-repeat: no-repeat; height: 110px">sss
+</div>
+<div style="background-image:url('http://misc.360buyimg.com/jdf/1.0.0/unit/globalImages/1.0.0/jd2015img.png');background-repeat:no-repeat;height:49px;background-position: 28px 24px;"></div>
+</div>
+<div style="border:1px solid red;height:10px;width:20px">sss</div>
+<!--<div style="background-image:url('http://misc.360buyimg.com/jdf/1.0.0/unit/globalImages/1.0.0/jd2015img.png'); height: 80px;background-repeat:no-repeat;background-position:-105px  -112px;"></div>-->
+</body>
+</html>
