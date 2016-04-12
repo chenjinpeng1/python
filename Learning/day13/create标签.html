@@ -5,10 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<div  id="container">
-
+<div  id="container" onclick="">
+ssss
 </div>
-<a href="http://www.baidu.com" onclick="return AddElement()">添加</a>
+<a  onclick="return aa()">添加</a >
 
 
 <div id="aa" class="a1" style="font-size: 120px;color: red">aaa</div>
@@ -29,13 +29,17 @@ function AddElement(){
 //    nid.appendChild(createObj);
 //    return false
 }
-
-function bb(){
-    nid = document.getElementById("aa")
-    nid.style.color = "blue"
-    nid.style.fontSize = "160px"
-//    nid.innerHTML = nid
+function aa(){
+    var nid = document.getElementById('container')
+    console.log(nid.id)
+    console.log(nid.className)
+    console.log(nid.style.fontSize='88px')
 }
+//function bb(){
+//    nid = document.getElementById("aa")
+//    nid.style.color = "blue"
+//    nid.style.fontSize = "160px"
+//}
 </script>
 </body>
 </html>

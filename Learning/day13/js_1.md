@@ -224,13 +224,28 @@ Dom
 		<div  id="container">		
 		</div>
 		<a href="http://www.baidu.com" onclick="return AddElement()">添加</a>
-
+		function AddElement(){
 	    var createObj = document.createElement("a")
 	    createObj.href = "http://www.baidu.com";
 	    createObj.innerText = "百度"
 	    var nid = document.getElementById("container");
-	    nid.appendChild(createObj);
+	    nid.appendChild(createObj);}
 	    return false
+	实例二：（替换样式）
+		function bb(){
+		    nid = document.getElementById("aa")
+		    nid.style.color = "blue"
+		    nid.style.fontSize = "160px"}
+
+4、标签属性
+
+	function aa(){
+    var nid = document.getElementById('container')
+    console.log(nid.id)
+    console.log(nid.className)
+    console.log(nid.style.fontSize='88px')
+}
+	
 	
 
 
