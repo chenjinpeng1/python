@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .back{
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div style="height: 2000px;"></div>
+
+<div onclick="GoTop()" class="back hide">返回顶部</div>
+
+<script src="../jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+
+    function GoTop(){
+        //返回顶部
+        $(window).scrollTop(0);
+    }
+
+    $(function(){
+
+        $(window).scroll(function(){
+            //当滚动滑轮时，执行函数体
+
+            //获取当前滑轮滚动的高度
+            var top = $(window).scrollTop();
+
+            if(top>100){
+                //展示“返回顶部”
+                $('.back').removeClass('hide');
+            }else{
+                //隐藏“返回顶部”
+                $('.back').addClass('hide');
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
+
+实例：返回顶部

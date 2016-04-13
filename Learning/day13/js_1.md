@@ -245,9 +245,211 @@ Dom
     console.log(nid.className)
     console.log(nid.style.fontSize='88px')
 }
+
+5、提交表单
+		
+	document.geElementById('form').submit()
+	---------
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+		    <meta charset="UTF-8">
+		    <title>Title</title>
+		</head>
+		<body>
+		<form id="aa" action="https://www.sogou.com/web" method="get">
+		    <input name="query" type="text"/>
+		    <input type="submit"  value="提交">
+		    <!--另一种方式-->
+		    <div onclick="mysubmit()">提交</div>
+		
+		</form>
+		<script>
+		    function mysubmit(){
+		        document.getElementById("aa").submit();
+		    }
+		</script>
+		</body>
+		</html>
+6、事件
+<div>
+<table>
+<tr>
+	<td style=background-color:#676767>属性</td>
+	<td style=background-color:#676767>此事件发生在何时...</td>
+</tr>
+<tr>
+	<td>onabort</td>
+	<td>图像的加载被中断。</td>
+</tr>
+<tr>
+	<td>onblur</td>
+	<td>元素失去焦点。</td>
+</tr>
+<tr>
+	<td>onchange</td>
+	<td>域的内容被改变。</td>
+</tr>
+<tr>
+	<td>onclick</td>
+	<td>当用户点击某个对象调用的事件句柄。</td>
+</tr>
+<tr>
+	<td>ondblclick</td>
+	<td>当用户双击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+	<td>onerror</td>
+	<td>在加载文档或图像时发生错误。</td>
+</tr>
+<tr>
+	<td>onfocus</td>
+	<td>元素获得焦点。</td>
+</tr>
+<tr>
+	<td>onkeydown</td>
+	<td>某个键盘按键被按下。</td>
+</tr>
+<tr>
+	<td>onkeypress</td>
+	<td>某个键盘按键被按下并松开。</td>
+</tr>
+<tr>
+	<td>onkeyup</td>
+	<td>某个键盘按键被松开。</td>
+</tr>
+<tr>
+	<td>onload</td>
+	<td>一张页面或者一副图像加载完成。</td>
+</tr>
+<tr>
+	<td>onmousedown</td>
+	<td>鼠标按钮被按下。</td>
+</tr>
+<tr>
+	<td>onmousemove</td>
+	<td>鼠标被移动。</td>
+</tr>
+<tr>
+	<td>onmouseout</td>
+	<td>鼠标从某元素已开。</td>
+</tr>
+<tr>
+	<td>onmouseover</td>
+	<td>鼠标移动到某元素之上。</td>
+</tr>
+<tr>
+	<td>onmouseup</td>
+	<td>鼠标按键被松开。</td>
+</tr>
+<tr>
+	<td>onreset</td>
+	<td>重置按钮被点击。</td>
+</tr>
+<tr>
+	<td>onresize</td>
+	<td>窗口或框架被重新调整大小。</td>
+</tr>
+<tr>
+	<td>onselect</td>
+	<td>文本被选中。</td>
+</tr>
+<tr>
+	<td>onsubmit</td>
+	<td>确认按钮被点击。</td>
+</tr>
+<tr>
+	<td>onunload</td>
+	<td>用户退出页面。</td>
+</tr>
+</table>
+</div>
+特殊的：
+		
+	window.onload = function(){}
+	    //jQuery：$(document).ready(function(){})
+	    //onload是所有DOM元素创建、图片加载完毕后才触发的。而ready则是DOM元素创建完毕后触发的，不等图片加载完毕。图片还没有渲染，就可以进行事件的执行。
+特殊参数：this,event
+7、其他功能
+
+	console.log()
+	//用于显示一个带有指定消息和 OK 及取消按钮的警告框
+	alert() 
+	//用于显示一个带有指定消息和 OK 及取消按钮的对话框
+	confirm()
+	 
+	// URL和刷新
+	location.href
+	location.href = "url"  window.location.reload()
+	 
+	// 定时器
+	/*setInterval() 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。由 setInterval() 返回的 ID 值可用作 clearInterval() 方法的参数。*/
+	setInterval("alert()",2000);   
+	//clearInterval() 方法可取消由 setInterval() 设置的 timeout。clearInterval() 方法的参数必须是由 setInterval() 返回的 ID 值。
+	clearInterval(obj)
+	//超时时间
+	setTimeout();   
+	clearTimeout(obj)
+
+  实例
+
+	<!DOCTYPE html>
+	<html>
+    <head>
+        <meta charset='utf-8' >
+        <title>欢迎blue shit莅临指导&nbsp;&nbsp;</title>
+        <script type='text/javascript'>
+            function Go(){
+                var content = document.title;
+                var firstChar = content.charAt(0)
+                var sub = content.substring(1,content.length)
+                document.title = sub + firstChar;
+            }
+            setInterval('Go()',1000);
+        </script>
+    </head>
+    <body>    
+    </body>
+	</html>
+&nbsp;
+
+	<!DOCTYPE html>
+	<html>
+    <head>
+        <meta charset='utf-8' />
+        <title></title>
+        
+        <style>
+            .gray{
+                color:gray;
+            }
+            .black{
+                color:black;
+            }
+        </style>
+        <script type="text/javascript">
+            function Enter(){
+               var id= document.getElementById("tip")
+               id.className = 'black';
+               if(id.value=='请输入关键字'||id.value.trim()==''){
+                    id.value = ''
+               }
+            }
+            function Leave(){
+                var id= document.getElementById("tip")
+                var val = id.value;
+                if(val.length==0||id.value.trim()==''){
+                    id.value = '请输入关键字'
+                    id.className = 'gray';
+                }else{
+                    id.className = 'black';
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input type='text' class='gray' id='tip' value='请输入关键字' onfocus='Enter();'  onblur='Leave();'/>
+    </body>
+	</html>
 	
-	
-
-
-
-
+	搜索框
