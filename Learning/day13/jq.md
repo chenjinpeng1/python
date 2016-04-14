@@ -4,6 +4,56 @@ jQuery是一个兼容多浏览器的javascript库，核心理念是write less,do
 http://www.php100.com/manual/jquery/
 
 测试下面的页面要去jquery官网下载好jq的js文件，具体参数属性去上面的网站查询
+
+jquery基础用法
+	
+	$("#n1").text("123"); 找到所有id=n1的id更改内容内容为123
+	$("div").text("321");找到所有的div更改内容为321
+	$(".c1").text("456") 找到所有的class=c1的类更改内容 为456
+	$(".c1,a,#n2").text("ok") 多个匹配修改
+	层级
+	$("c1 div .c1 span a").text("aaaaaa")层级匹配
+	$("form > input") 寻找form表达的子级元素的input标签 子级下（孙子，外孙等等）的不寻找
+	$("form + input")匹配所有紧接在form元素后的下一个input元素
+	$("form ~ input")匹配form元素之后的所有 siblings(兄弟) 元素input
+	--基本筛选器
+	$(li:first) li标签下的第一个元素
+	$("input:not(:checked)") input标签没有被选中的标签
+	$("tr:even")匹配所有索引值为偶数的元素，从 0 开始计数(：odd偶数)
+	$("tr:eq(1)")匹配索引值等于1的元素
+	--内容匹配
+	$("div:contains('John')") 匹配DIV下的内容为John的元素 contains匹配内容 
+	$("div:empty")匹配div下内容为空的
+	$("div:has(p)") 匹配div下的p标签
+	$("div:parent")匹配含有子元素或者文本的元素
+	--属性选择器
+	$("div[id]")匹配div下的id属性
+	$("div[id=“test”]")匹配div下的id=test的属性【扩展：!=不等于，^=已某些值开始,$已什么结尾,*=包含某些值的】
+	$("input[id][name$='man']")复合属性选择器，需要同时满足多个条件时使用。
+	--子元素
+	$("ul li:first-child")匹配ul下的第一个子元素li
+	--表单
+	$(":input")匹配表单下所有input元素
+	$(":password")匹配所有type为password的元素
+	--表单对象属性
+	1、匹配所有选中的option元素
+		<select>
+		  <option value="1">Flowers</option>
+		  <option value="2" selected="selected">Gardens</option>
+		  <option value="3">Trees</option>
+		</select>
+	$("select option:selected")
+	2、匹配所有选中的被选中元素(复选框、单选框等，select中的option)，对于select元素来说，获取选中推荐使用 :selected
+		<form>
+		  <input type="checkbox" name="newsletter" checked="checked" value="Daily" />
+		  <input type="checkbox" name="newsletter" value="Weekly" />
+		  <input type="checkbox" name="newsletter" checked="checked" value="Monthly" />
+		</form>
+	$("input:checked")
+
+
+	
+实例
 加载
 
 	<!DOCTYPE html>
@@ -92,6 +142,7 @@ http://www.php100.com/manual/jquery/
 	<div>
         <div class="menu">
             <div class="item">
+				// this是js里特殊的参数，把它自己的名字（菜单一）传入函数
                 <div class="title" onclick="Func(this);">菜单一</div>
                 <div class="body">
                     <div>1.1</div>
