@@ -11,29 +11,27 @@
             <input type='checkbox' value='2'/>足球
             <input type='checkbox' value='3'/>羽毛球
         </div>
-        <div onclick="options()">
-        <input type='button' value='全选' id='selectAll'  />
-        </div>
+        <input type='button' value='全选' id='selectAll' />
         <input type='button' value='不选' id='unselectAll' />
         <input type='button' value='反选' id='reverseAll' />
-    <script type="text/javascript" src=../jquery-2.2.3.min.js'></script>
-    <script type="text/javascript">
-        function options(){
-            $('#selectAll').click(function(){
-                $('#checklist :checkbox').prop('checked',true);
-            })
-//            $('#unselectAll').click(function(){
-//                $('#checklist :checkbox').prop('checked',false);
-//            })
-//            $('#reverseAll').click(function(){
-//                $('#checklist :checkbox').each(function(){
-//                    $(this).prop('checked',!$(this).prop('checked'))
-//                })
-//            })
-        }
+        <script type="text/javascript" src='../jquery-2.2.3.min.js'></script>
+        <script type="text/javascript">
+            $(function(){
+                $('#selectAll').click(function(){
+                    $('#checklist :checkbox').prop('checked',true);
+                })
+                $('#unselectAll').click(function(){
+                    $('#checklist :checkbox').prop('checked',false);
+                })
+                $('#reverseAll').click(function(){
+                    $('#checklist :checkbox').each(function(){
+                        $(this).prop('checked',!$(this).prop('checked'))
+                    })
+                })
 
-    </script>
-</body>
+            })
+        </script>
+    </body>
 </html>
 
 实例：多选、反选和取消

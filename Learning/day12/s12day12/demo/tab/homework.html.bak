@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html en='utf8'>
+<html xmlns:alex>
 <head></head>
 <link href="common.css" rel="stylesheet" />
 <body>
@@ -7,9 +7,9 @@
 		<div class='tab-menu-box1'>
 			<div class='menu'>
 				<ul id='tab-menu-title'>
-					<li class='current' content-to='1'>jiage</li>
-					<li content-to='2'>shichang</li>
-					<li content-to='3'>qita</li>
+					<li class='current' content-to='1'>价格趋势</li>
+					<li content-to='2'>市场分布</li>
+					<li content-to='3'>其他</li>
 				</ul>
 			</div>
 
