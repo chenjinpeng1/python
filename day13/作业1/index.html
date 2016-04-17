@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .style1{
+    width: 40px;
+    text-align: center;
+    line-height: 100%;
+    }
+    .style2{
+    width: 200px;
+    text-align: center;
+    line-height: 100%;
+    }
+    .style3{
+    width: 80px;
+    text-align: center;
+    line-height: 100%;
+    }
+    </style>
+</head>
+<body>
+<div style="width: 1300px">
+    <div style="height: 50px;background-color: #666666">
+        <div style="text-align: center;line-height: 50px">
+        <h2 >My CMDB后台管理系统</h2>
+        </div>
+    </div>
+    <div style="position: fixed ;top: 70px; left:350px">
+        <div>
+        <input type="submit" value="全选">
+        <input type="submit" value="反选">
+        <input type="submit" value="取消">
+        <input type="submit" value="编辑" onclick="bianji(this)">
+        </div>
+    <form>
+
+        <table border="1" style="border: solid black">
+            <tr bgcolor="#5f9ea0">
+                <td  class="style1">选择</td>
+                <td class="style2">主机名</td>
+                <td class="style2">主机地址</td>
+                <td class="style3">主机端口</td>
+                <!--<td class="style3">编辑</td>-->
+            </tr>
+            <tr style="text-align: center">
+                <td>
+                    <input type="checkbox" />
+                </td>
+                <td>
+                    <input value="nginx"  disabled style="width: 100%">
+                </td>
+                <td>
+                    <input value="192.168.1.1" disabled style="width: 100%">
+                </td>
+                <td>
+                    <input value="22" disabled="disabled" style="width: 100%">
+                    <!--<input type="text" name="input1" value="中国" />-->
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+<script type="text/javascript" src="../jq/jquery-2.2.3.min.js"></script>
+<script>
+    function bianji(ths){
+        edit=$("input:checkbox:checked")
+        aa=$(edit).parent().siblings().
+//        aa=$('input:disabled').removeAttr('disabled')
+        console.log(aa)
+
+
+    }
+</script>
+</body>
+</html>
