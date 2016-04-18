@@ -31,8 +31,8 @@
     <div style="position: fixed ;top: 70px; left:350px">
         <div>
         <input type="submit" value="全选" onclick="quanxuan()">
-        <input type="submit" value="反选" onclick="fanxuan()">
-        <input type="submit" value="取消">
+        <input type="submit" value="反选" onclick="fanxuan()" >
+        <input type="submit" value="取消" onclick="quxiao()">
         <input type="submit" value="编辑" onclick="bianji()">
         <input type="submit" value="保存">
         </div>
@@ -100,8 +100,13 @@
     function quanxuan() {
         $("input[type='checkbox']").prop("checked", true)
     }
-    function fanxuan() {
-         $("input[type='checkbox']").prop("checked", false)
+    function  fanxuan(){
+        a1=$("input[type='checkbox']").prop("checked", true)
+        $("input:not(:checked)").prop("checked",!a1.prop("checked",true))
+
+    }
+    function quxiao() {
+        $("input[type='checkbox']").prop("checked", false)
     }
     function bianji() {
         $("input:checked").parent().parent().find('input').removeAttr('disabled')
