@@ -19,81 +19,153 @@
     text-align: center;
     line-height: 100%;
     }
+        a{
+            display: block;
+            background-color: #555555;
+            text-align: center;
+            line-height: 50px;
+            height: 50px;
+        }
+        .menu{
+            float: left;width: 200px;height: 400px;background-color: white;
+        }
+        /*.content{*/
+            /*float: left;width: 70%;height: 500px;background-color: blue;*/
+        /*}*/
+        .title{
+            background-color: #555555;
+            color: white;
+            height: 50px;
+            line-height: 50px;
+        }
+        .hide{
+            display: none;
+        }
+        .zcgl{
+            float: left;
+            /*text-align: center;*/
+            margin-left: 100px;
+            /*top: 70px;*/
+            /*margin-top: 10px;*/
+        }
+        .body{
+            width: 100%;
+            height: 80px;
+            opacity: 0.9;
+        }
+
     </style>
 </head>
 <body>
-<div style="width: 1300px">
-    <div style="height: 50px;background-color: #666666">
+<div style="width:100%;height: 100%">
+    <div style="height: 50px;background-color: #0095bb">
         <div style="text-align: center;line-height: 50px">
-        <h2 >My CMDB后台管理系统</h2>
+        <h2 >易随诊CMDB后台管理系统</h2>
         </div>
     </div>
-    <div style="position: fixed ;top: 70px; left:350px">
-        <div>
-        <input type="submit" value="全选" onclick="quanxuan()">
-        <input type="submit" value="反选" onclick="fanxuan()" >
-        <input type="submit" value="取消" onclick="quxiao()">
-        <input type="submit" value="编辑" onclick="bianji()">
-        <input type="submit" value="保存">
-        </div>
-    <form>
+    <div class="body">
+        <div class="menu">
+            <div>
+                <div class="title" onclick="Func(this)">资产系统</div>
+                <div class="body hide">
+                    <div onclick="dis_zcgl()">资产管理</div>
+                    <div>1.2</div>
+                    <div>1.3</div>
+                </div>
+            </div>
+            <div class="item">
+                 <div class="title" onclick="Func(this);">监控系统</div>
+                <div class="body hide">
+                    <div>2.1</div>
+                    <div>2.2</div>
+                    <div>2.3</div>
+                </div>
+            </div>
 
-        <table border="1" style="border: solid black">
-            <tr bgcolor="#5f9ea0">
-                <td  class="style1">选择</td>
-                <td class="style2">主机名</td>
-                <td class="style2">主机地址</td>
-                <td class="style3">主机端口</td>
-                <!--<td class="style3">编辑</td>-->
-            </tr>
-            <tr style="text-align: center">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td>
-                    <input value="nginx"  disabled style="width: 100%">
-                </td>
-                <td>
-                    <input value="192.168.1.1" disabled style="width: 100%">
-                </td>
-                <td>
-                    <input value="22" disabled="disabled" style="width: 100%">
-                    <!--<input type="text" name="input1" value="中国" />-->
-                </td>
-            </tr>
-            <tr style="text-align: center" id="ab">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td>
-                    <input value="zabbix"  disabled style="width: 100%">
-                </td>
-                <td>
-                    <input value="192.168.1.2" disabled style="width: 100%">
-                </td>
-                <td>
-                    <input value="8080" disabled="disabled" style="width: 100%">
-                    <!--<input type="text" name="input1" value="中国" />-->
-                </td>
-            </tr>
-            <tr style="text-align: center" id="ac">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td>
-                    <input value="mysql"  disabled style="width: 100%">
-                </td>
-                <td>
-                    <input value="192.168.1.3" disabled style="width: 100%">
-                </td>
-                <td>
-                    <input value="3306" disabled="disabled" style="width: 100%">
-                    <!--<input type="text" name="input1" value="中国" />-->
-                </td>
-            </tr>
-        </table>
-    </form>
+            <div class="item">
+                 <div class="title" onclick="Func(this);">日志系统</div>
+                <div class="body hide">
+                    <div>3.1</div>
+                    <div>3.2</div>
+                    <div>3.3</div>
+                </div>
+            </div>
+
+        </div>
+    <div class="zcgl hide">
+        <div style="background-color: #555555;height: 30px;line-height: 30px">
+            <input type="submit" value="全选" onclick="quanxuan()">
+            <input type="submit" value="反选" onclick="fanxuan(this)" >
+            <input type="submit" value="取消" onclick="quxiao()">
+            <input type="submit" value="多编辑" onclick="bianji()">
+            <input type="submit" value="保存">
+        </div>
+        <div>
+            <table border="1" style="border: solid black">
+                <tr bgcolor="#5f9ea0">
+                    <td  class="style1">选择</td>
+                    <td class="style2">主机名</td>
+                    <td class="style2">主机地址</td>
+                    <td class="style3">主机端口</td>
+                    <td class="style3">编辑</td>
+                </tr>
+                <tr style="text-align: center" id="aa">
+                    <td>
+                        <input type="checkbox" id="ba" />
+                    </td>
+                    <td>
+                        <input type="text" value="nginx"  disabled style="width: 100%">
+                    </td>
+                    <td>
+                        <input type="text" value="192.168.1.1" disabled style="width: 100%">
+                    </td>
+                    <td>
+                        <input type="text" value="22" disabled="disabled" style="width: 100%">
+                    </td>
+                    <td>
+                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit()">
+                    </td>
+                </tr>
+                <tr style="text-align: center" id="ab">
+                    <td>
+                        <input type="checkbox" id="bb" />
+                    </td>
+                    <td>
+                        <input type="text" value="zabbix"  disabled style="width: 100%">
+                    </td>
+                    <td>
+                        <input  type="text" value="192.168.1.2" disabled style="width: 100%">
+                    </td>
+                    <td>
+                        <input type="text" value="8080" disabled="disabled" style="width: 100%">
+                    </td>
+                    <td>
+                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit()">
+                    </td>
+
+                </tr>
+                <tr style="text-align: center" id="ac">
+                    <td>
+                        <input type="checkbox" id="bc" />
+                    </td>
+                    <td>
+                        <input type="text" value="mysql"  disabled style="width: 100%">
+                    </td>
+                    <td>
+                        <input type="text" value="192.168.1.3" disabled style="width: 100%">
+                    </td>
+                    <td>
+                        <input  type="text" value="3306" disabled="disabled" style="width: 100%">
+                    </td>
+                    <td>
+                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit()">
+                    </td>
+                </tr>
+                </table>
+        </div>
     </div>
+    <div style="background-color: #00a2ca;position: fixed;top: 80px;left: 450px;width: 500px;height: 200px">sss</div>
+</div>
 </div>
 <script type="text/javascript" src="../jq/jquery-2.2.3.min.js"></script>
 <script>
@@ -101,12 +173,23 @@
         $("input[type='checkbox']").prop("checked", true)
     }
     function  fanxuan(){
-        a1=$("input[type='checkbox']").prop("checked", true)
-        $("input:not(:checked)").prop("checked",!a1.prop("checked",true))
+        $("input[type='checkbox']").each(function(){
+            if ($(this).prop("checked") == false){
+                $(this).prop("checked",true)
+            }
+            else{
+                $(this).prop("checked",false)
+            }
+        })
+        console.log( $("input[type='checkbox']"))
+
 
     }
     function quxiao() {
         $("input[type='checkbox']").prop("checked", false)
+        $("input[type='text']").attr('disabled','disabled')
+
+
     }
     function bianji() {
         $("input:checked").parent().parent().find('input').removeAttr('disabled')
@@ -115,8 +198,21 @@
 //        if
 //        aa=$('input:disabled').removeAttr('disabled')
 //        console.log(aa)
+    function Func(ths){
+        console.log($)
+        if(!$(ths).next().hasClass('hide')){
+            console.log('aaaaaa')
+            $(ths).next().addClass('hide');
+        }else{
+            $(ths).next().removeClass('hide');
+        }
 
-
+        $(ths).parent().siblings().find('.body').addClass('hide')
+    }
+    function dis_zcgl(){
+       bb= $(".zcgl").removeClass('hide')
+        console.log(bb)
+    }
 
 </script>
 </body>
