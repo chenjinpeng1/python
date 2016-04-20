@@ -136,16 +136,16 @@
                         <input type="checkbox" id="ba" />
                     </td>
                     <td>
-                        <input type="text" value="nginx"  disabled style="width: 100%">
+                        <input id="host_name1" type="text" value="nginx"  disabled style="width: 100%">
                     </td>
                     <td>
-                        <input type="text" value="192.168.1.1" disabled style="width: 100%">
+                        <input id="host_address1" type="text" value="192.168.1.1" disabled style="width: 100%">
                     </td>
                     <td>
-                        <input type="text" value="22" disabled="disabled" style="width: 100%">
+                        <input id="host_port1" type="text" value="22" disabled="disabled" style="width: 100%">
                     </td>
                     <td>
-                        <input for="ba" type="submit" value="编辑" style="width: 100%" onclick="dedit()">
+                        <input for="ba"  type="submit" value="编辑" style="width: 100%" onclick="dedit(this)">
                     </td>
                 </tr>
                 <tr style="text-align: center" id="ab">
@@ -162,7 +162,7 @@
                         <input type="text" value="8080" disabled="disabled" style="width: 100%">
                     </td>
                     <td>
-                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit()">
+                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit(this)">
                     </td>
 
                 </tr>
@@ -180,7 +180,7 @@
                         <input  type="text" value="3306" disabled="disabled" style="width: 100%">
                     </td>
                     <td>
-                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit()">
+                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit(this)">
                     </td>
                 </tr>
                 </table>
@@ -260,10 +260,11 @@
        bb= $(".zcgl").removeClass('hide')
         console.log(bb)
     }
-    function dedit(){
+    function dedit(ths){
         $(".body").addClass("dis2").find("input").removeAttr("disabled")
         $(".zcgl").addClass("hide")
         $(".dis1").removeClass("hide")
+        $(ths).parent().siblings().find("input[type='checkbox']").prop("checked",true)
     }
     function mysubmit(){
         var num = 0
@@ -285,6 +286,8 @@
                     console.log(hostname.val())
                     console.log(h_address.val())
                     console.log(h_port.val())
+                    $("input:checked").parent().siblings().children("#host_name1").attr({value:hostname})
+                    $(".zcgl").removeAttr("hide")
                     return false;
                 }
             else {return false;}
