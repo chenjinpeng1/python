@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>Title</title>
     <style>
     .style1{
@@ -27,33 +27,44 @@
             height: 50px;
         }
         .menu{
-            float: left;width: 200px;height: 400px;background-color: white;
+            float: left;width: 200px;height: 100%;background-color: #f2f5fa;
         }
         /*.content{*/
             /*float: left;width: 70%;height: 500px;background-color: blue;*/
         /*}*/
         .title{
-            background-color: #555555;
-            color: white;
+            background-color: #f2f5fa;
+            /*color: white;*/
+            font-weight: bold;
             height: 50px;
             line-height: 50px;
             cursor: pointer;
+            border-bottom: 1px solid #9E9C9C;
         }
         .hide{
             display: none;
         }
         .zcgl{
-            float: left;
-            position: fixed;
+            /*float: left;*/
+            /*height: 100%;*/
             z-index: 100;
-            margin-left: 300px;
+            /*width: 80%;*/
+            /*height: 50px;*/
+            margin-left: 200px;
             /*top: 70px;*/
             /*text-align: center;*/
             /*margin-top: 10px;*/
         }
+        .bodymain{
+            overflow: auto;
+            height: 1000px;
+        }
         .body{
-            width: 100%;
-            height: 80px;
+            overflow:auto;
+            /*width: 80%;*/
+            /*height: 1000px;*/
+            /*margin-left: 5%;*/
+            margin-right: 5%;
         }
         .dis1{
             background-color: #00a2ca;
@@ -76,16 +87,20 @@
             background-color: #FF6600;
             opacity: 0.5;
         }
+        tr{
+            height: 30px;
+        }
     </style>
 </head>
 <body>
-<div style="width:100%;height: 100%">
-    <div style="height: 50px;background-color: #0095bb">
-        <div style="text-align: center;line-height: 50px">
+
+<div style="min-width: 1024px">
+    <!--<div style="height: 50px;background-color: #0095bb">-->
+        <div style="text-align: center;line-height: 50px;height: 50px;background-color:#428bca">
         <h2 >易随诊CMDB后台管理系统</h2>
         </div>
-    </div>
-    <div class="body">
+    <!--</div>-->
+    <div class="bodymain">
         <div class="menu">
             <div>
                 <div class="title" onclick="Func(this)">资产系统</div>
@@ -115,16 +130,18 @@
 
         </div>
     <div class="zcgl hide">
-        <div style="background-color: #555555;height: 30px;line-height: 30px">
-            <input type="submit" value="全选" onclick="quanxuan()">
-            <input type="submit" value="反选" onclick="fanxuan(this)" >
-            <input type="submit" value="取消" onclick="quxiao()">
-            <input type="submit" value="多编辑" onclick="bianji()">
-            <input type="submit" value="保存">
+        <div style="height: 50px;position: relative">
+            <div style="position: absolute ;top: 25px;left: 10px">
+                <input type="submit" value="全选" onclick="quanxuan()">
+                <input type="submit" value="反选" onclick="fanxuan(this)" >
+                <input type="submit" value="取消" onclick="quxiao()">
+                <input type="submit" value="多编辑" onclick="bianji()">
+                <input type="submit" value="保存" onclick="Write()">
+        </div>
         </div>
         <div id="dis3">
-            <table border="1" style="border: solid black">
-                <tr bgcolor="#5f9ea0">
+            <table border="1" style="border: solid black;width: 100%">
+                <tr bgcolor="#005383">
                     <td  class="style1">选择</td>
                     <td class="style2">主机名</td>
                     <td class="style2">主机地址</td>
@@ -136,51 +153,51 @@
                         <input type="checkbox" id="ba" />
                     </td>
                     <td>
-                        <input id="host_name1" type="text" value="nginx"  disabled style="width: 100%">
+                        <input class="host_name1" type="text" value="nginx"  disabled style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input id="host_address1" type="text" value="192.168.1.1" disabled style="width: 100%">
+                        <input class="host_address1" type="text" value="192.168.1.1" disabled style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input id="host_port1" type="text" value="22" disabled="disabled" style="width: 100%">
+                        <input class="host_port1" type="text" value="22" disabled="disabled" style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input for="ba"  type="submit" value="编辑" style="width: 100%" onclick="dedit(this)">
+                        <input for="ba"  type="submit" value="编辑" style="width: 99%;height: 120%" onclick="dedit(this)">
                     </td>
                 </tr>
                 <tr style="text-align: center" id="ab">
                     <td>
-                        <input type="checkbox" id="bb" />
+                        <input  type="checkbox" id="bb" />
                     </td>
                     <td>
-                        <input type="text" value="zabbix"  disabled style="width: 100%">
+                        <input class="host_name1" type="text" value="zabbix"  disabled style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input  type="text" value="192.168.1.2" disabled style="width: 100%">
+                        <input class="host_address1" type="text" value="192.168.1.2" disabled style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input type="text" value="8080" disabled="disabled" style="width: 100%">
+                        <input  class="host_port1"  type="text" value="8080" disabled="disabled" style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit(this)">
+                        <input  type="submit" value="编辑" style="width: 99%;height: 120%" onclick="dedit(this)">
                     </td>
 
                 </tr>
                 <tr style="text-align: center" id="ac">
                     <td>
-                        <input type="checkbox" id="bc" />
+                        <input  type="checkbox" id="bc" />
                     </td>
                     <td>
-                        <input type="text" value="mysql"  disabled style="width: 100%">
+                        <input class="host_name1" type="text" value="mysql"  disabled style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input type="text" value="192.168.1.3" disabled style="width: 100%">
+                        <input class="host_address1" type="text" value="192.168.1.3" disabled style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input  type="text" value="3306" disabled="disabled" style="width: 100%">
+                        <input  class="host_port1" type="text" value="3306" disabled="disabled" style="width: 99%;height: 100%">
                     </td>
                     <td>
-                        <input type="submit" value="编辑" style="width: 100%" onclick="dedit(this)">
+                        <input type="submit" value="编辑" style="width: 99%;height:120%" onclick="dedit(this)">
                     </td>
                 </tr>
                 </table>
@@ -188,7 +205,7 @@
     </div>
 </div>
 <div class="dis1 hide">
-    <form class="sub" method='get'>
+    <!--<form class="sub" method='get'>-->
         <div style="margin-top: 15px">
             <span id="hostname">主机名</span>
             <input type="text" />
@@ -203,6 +220,7 @@
             <span id="host_port" style="display: block ;float: left ;width: 100px">主机端口</span>
             <input type="text"/>
             <label class="edit_css hide">主机端口不能为空</label>
+            <label class="edit_css hide">端口不合法</label>
         </div>
         <div style="float: left;margin-left: 50px;margin-top: 20px">
             <input type="submit"  onclick="return mysubmit()" value="提交">
@@ -210,7 +228,7 @@
         <div style="float: left;margin-left: 50px;margin-top: 20px">
             <input type="submit"  value="返回">
         </div>
-    </form>
+    <!--</form>-->
 
 </div>
 </div>
@@ -233,9 +251,8 @@
 
     }
     function quxiao() {
+        $("input:checked").parent().parent().find('input').attr('disabled',true)
         $("input[type='checkbox']").prop("checked", false)
-        $("#dis3:input[type='text']").attr('disabled','disabled')
-
 
     }
     function bianji() {
@@ -248,10 +265,10 @@
     function Func(ths){
         console.log($)
         if(!$(ths).next().hasClass('hide')){
-            console.log('aaaaaa')
             $(ths).next().addClass('hide');
         }else{
             $(ths).next().removeClass('hide');
+            $(ths).css('backgroud-color','#0053c7')
         }
 
         $(ths).parent().siblings().find('.body').addClass('hide')
@@ -261,34 +278,54 @@
         console.log(bb)
     }
     function dedit(ths){
-        $(".body").addClass("dis2").find("input").removeAttr("disabled")
+        $(ths).find("input").removeAttr("disabled")
         $(".zcgl").addClass("hide")
         $(".dis1").removeClass("hide")
         $(ths).parent().siblings().find("input[type='checkbox']").prop("checked",true)
+    }
+    function Write(){
+        $("input:checked").parent().parent().find('input[type="text"]').attr("disabled",true)
+        $("input[type='checkbox']").prop("checked", false)
     }
     function mysubmit(){
         var num = 0
         $(".dis1 input[type='text']").each(function(){
             if ($(this).val().length ==0){
-////                alert("不能为空")
-                console.log($(this).val().length)
                 $(this).next().removeClass('hide');
             }
             else {
+                $(this).next().addClass('hide');
                 num = num +1;
             }        })
-
-            console.log(num)
             if(num==3){
-                    var hostname = $("#hostname").next()
-                    var h_address = $("#host_address").next()
-                    var h_port = $("#host_port").next()
-                    console.log(hostname.val())
-                    console.log(h_address.val())
-                    console.log(h_port.val())
-                    $("input:checked").parent().siblings().children("#host_name1").attr({value:hostname})
-                    $(".zcgl").removeAttr("hide")
-                    return false;
+                    var hostname = $("#hostname").next();
+                    var h_address = $("#host_address").next();
+                    var h_port = $("#host_port").next();
+                    if (parseInt(h_port.val())){
+                        if(h_port.val() < 65535){
+                            alert("验证通过")
+
+                        }
+                        else {
+                            alert("端口大于65535")
+                            return false
+                        }
+                    }else{
+//                        console.log(parseInt(h_port),h_port)
+                        alert("不是数字")
+                        return false
+                    }
+//                    if (h_address.val().match(1.1.1.1))
+                    $("input:checked").parent().siblings().children(".host_name1").val(hostname.val());
+                    $("input:checked").parent().siblings().children(".host_address1").val(h_address.val());
+                    $("input:checked").parent().siblings().children(".host_port1").val(h_port.val());
+                    $(".zcgl").removeClass("hide");
+                    $(".dis1").addClass("hide");
+                    $("input[type=checkbox]").prop("checked",false);
+                    hostname.val("");
+                    h_address.val("");
+                    h_port.val("");
+                    return true;
                 }
             else {return false;}
     }
