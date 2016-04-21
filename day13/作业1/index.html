@@ -110,8 +110,8 @@
                     <div>1.3</div>
                 </div>
             </div>
-            <div class="item">
-                 <div class="title" onclick="Func(this);">监控系统</div>
+            <div >
+                <div class="title" onclick="Func(this);">监控系统</div>
                 <div class="body hide">
                     <div>2.1</div>
                     <div>2.2</div>
@@ -119,7 +119,7 @@
                 </div>
             </div>
 
-            <div class="item">
+            <div >
                  <div class="title" onclick="Func(this);">日志系统</div>
                 <div class="body hide">
                     <div>3.1</div>
@@ -137,6 +137,7 @@
                 <input type="submit" value="取消" onclick="quxiao()">
                 <input type="submit" value="多编辑" onclick="bianji()">
                 <input type="submit" value="保存" onclick="Write()">
+                <input type="submit" value="增加" onclick="Addtr()">
         </div>
         </div>
         <div id="dis3">
@@ -223,14 +224,15 @@
             <label class="edit_css hide">端口不合法</label>
         </div>
         <div style="float: left;margin-left: 50px;margin-top: 20px">
-            <input type="submit"  onclick="return mysubmit()" value="提交">
+            <input type="submit"  onclick="mysubmit()" value="提交">
         </div>
         <div style="float: left;margin-left: 50px;margin-top: 20px">
-            <input type="submit"  value="返回">
+            <input type="submit" onclick="exit()" value="返回">
         </div>
     <!--</form>-->
 
 </div>
+    <div>sssss</div>
 </div>
 <script type="text/javascript" src="../jq/jquery-2.2.3.min.js"></script>
 <script>
@@ -251,7 +253,7 @@
 
     }
     function quxiao() {
-        $("input:checked").parent().parent().find('input').attr('disabled',true)
+        $("input:checked").parent().parent().find('input[type="text"]').attr('disabled',true)
         $("input[type='checkbox']").prop("checked", false)
 
     }
@@ -263,15 +265,20 @@
 //        aa=$('input:disabled').removeAttr('disabled')
 //        console.log(aa)
     function Func(ths){
-        console.log($)
+        $(ths).parent().siblings().find('.body').addClass('hide')
+        $(ths).parent().siblings().find(".title").removeAttr("style")
         if(!$(ths).next().hasClass('hide')){
             $(ths).next().addClass('hide');
+            $(ths).removeAttr("style")
+//            console.log($(ths))
         }else{
             $(ths).next().removeClass('hide');
-            $(ths).css('backgroud-color','#0053c7')
+//            $(ths).css('backgroud-color','red')
+            $(ths).attr({style:"background-color:#005383"})
+//            console.log($(ths))
         }
-
-        $(ths).parent().siblings().find('.body').addClass('hide')
+//        $(ths).removeAttr("style")
+//
     }
     function dis_zcgl(){
        bb= $(".zcgl").removeClass('hide')
@@ -286,6 +293,12 @@
     function Write(){
         $("input:checked").parent().parent().find('input[type="text"]').attr("disabled",true)
         $("input[type='checkbox']").prop("checked", false)
+    }
+    function exit(){
+        $(".zcgl").removeClass("hide")
+        $(".dis1").addClass("hide");
+        $("input[type=checkbox]").prop("checked",false);
+//        return true;
     }
     function mysubmit(){
         var num = 0
@@ -315,19 +328,28 @@
                         alert("不是数字")
                         return false
                     }
-//                    if (h_address.val().match(1.1.1.1))
+//                   获取新添加的值
                     $("input:checked").parent().siblings().children(".host_name1").val(hostname.val());
                     $("input:checked").parent().siblings().children(".host_address1").val(h_address.val());
                     $("input:checked").parent().siblings().children(".host_port1").val(h_port.val());
                     $(".zcgl").removeClass("hide");
                     $(".dis1").addClass("hide");
                     $("input[type=checkbox]").prop("checked",false);
+//                    将弹窗重置
                     hostname.val("");
                     h_address.val("");
                     h_port.val("");
                     return true;
                 }
             else {return false;}
+    }
+    function Addtr(){
+        $("table").append('<tr style="text-align: center">'+
+                    '<td><input  type="checkbox" id="bb" /></td>'+
+                    '<td><input class="host_name1" type="text" value="mysql"  disabled style="width: 99%;height: 100%"> </td>'+
+                    '<td><input class="host_address1" type="text" value="192.168.1.3" disabled style="width: 99%;height: 100%"> </td>'+
+                    '<td><input  class="host_port1" type="text" value="3306" disabled="disabled" style="width: 99%;height: 100%"> </td>'+
+                    '<td><input type="submit" value="编辑" style="width: 99%;height:120%" onclick="dedit(this)"></td></tr>')
     }
 </script>
 </body>
