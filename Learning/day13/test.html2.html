@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <span>
+        <input type="text" value="hello jquery">
+        <input type="button" value="提交" onclick="rewrite(this)">
+    </span>
+</div>
+<script src="jquery-2.2.3.min.js"></script>
+<script>
+    function rewrite(ths){
+        console.log($(ths).siblings("input[type='text']").attr("value"))
+    }
+</script>
+</body>
+</html>

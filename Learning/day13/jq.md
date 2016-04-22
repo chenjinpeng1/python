@@ -7,7 +7,7 @@ http://www.php100.com/manual/jquery/
 
 jquery基础用法
 	
-	$("#n1").text("123"); 找到所有id=n1的id更改内容内容为123
+	$("#n1").text("123"); 找到所有id=n1的元素更改内容内容为123
 	$("div").text("321");找到所有的div更改内容为321
 	$(".c1").text("456") 找到所有的class=c1的类更改内容 为456
 	$(".c1,a,#n2").text("ok") 多个匹配修改
@@ -246,3 +246,6 @@ jquery基础用法
 	</html>
 	
 	实例：返回顶部
+
+
+更多属性访问 http://www.php100.com/manual/jquery/
