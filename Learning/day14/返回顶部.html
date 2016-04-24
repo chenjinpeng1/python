@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hide{
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div style="height: 2000px">
+    <h1>顶部</h1>>
+    <div style="position: fixed;right: 0px;bottom: 0px " onclick="gotop()" class="hide aa">
+        返回顶部
+    </div>
+</div>
+<script src="jquery-2.2.3.min.js"></script>
+<script>
+
+
+    window.onscroll = function(){
+        var currentTop=$(window).scrollTop();
+        if(currentTop > 100){
+            $(".aa").removeClass('hide')
+        }else{
+            $(".aa").addClass('hide')
+
+        }
+    }
+    function gotop(){
+        $(window).scrollTop(0)
+    }
+</script>
+</body>
+</html>

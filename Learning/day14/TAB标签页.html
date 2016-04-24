@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .Tab1 {
+            background-color: #00a2ca;
+            border: 1px solid #0095bb;
+        }
+        .Tab2{
+            border: 1px solid #0095bb ;
+        }
+        .hide{
+            display: none;
+        }
+        .C{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="Tab1">
+        <a chen="c1" onclick="changetab(this)">标签一</a>
+        <a chen="c2" onclick="changetab(this)" >标签二</a>
+        <a chen="c3" onclick="changetab(this)" >标签三</a>
+
+    </div>
+    <div class="Tab2">
+        <div id="c1">内容一</div>
+        <div id="c2" class="hide">内容二</div>
+        <div id="c3" class="hide">内容三</div>
+    </div>
+</div>
+<script src="jquery-2.2.3.min.js"></script>
+<script>
+    function changetab(ths){
+        $(ths).addClass("C").siblings().removeClass("C")
+       var curentId =  $(ths).attr("chen")
+        var temp = "#" + curentId
+        $(temp).removeClass("hide").siblings().addClass("hide")
+    }
+</script>
+</body>
+</html>

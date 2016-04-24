@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <input type="button" onclick="selectAll()"  value="全选">
+    <input type="button" onclick="clearAll()"  value="取消">
+    <input type="button" onclick="reverseAll()"  value="反选">
+    <tr>
+        <td>
+            <input type="checkbox"/>
+        </td>
+        <td>123</td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" />
+        </td>
+        <td>123</td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" />
+        </td>
+        <td>123</td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" />
+        </td>
+        <td>123</td>
+    </tr>
+</table>
+<script src="jquery-2.2.3.min.js"></script>
+<script>
+    function selectAll(){
+        $("table input[type=checkbox]").prop("checked",true)
+    }
+    function clearAll(){
+        $("table input[type=checkbox]").prop("checked",false)
+    }
+    function reverseAll(){
+        var Num = [11,22,33,44]
+//        for(var i in Num){
+//            console.log(i,Num[i])
+//        }
+        Num.each(function(){
+
+        })
+        $("table :checkbox").each(function(){
+            var isChecked = $(this).prop("checked")
+            if(isChecked){
+                $(this).prop("checked",false)
+            }else{
+                $(this).prop("checked",true)
+
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="添加">
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+
+</ul>
+<script src="jquery-2.2.3.min.js"></script>
+<script>
+        $("input[type='button']").click(function(){
+            $("ul").append("<li>8</li>")
+        })
+    $(function(){
+        $('ul').delegate('li','click',function(){
+            var temp = $(this).text();
+            alert(temp);
+        })
+    })
+</script>
+</body>
+</html>
