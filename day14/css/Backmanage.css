@@ -1,0 +1,33 @@
+      body{
+        background-color: #d2d6de;
+        }
+      .Global{
+            min-width: 1400px;
+            }
+      .Top .TitleTop span{
+            display: block;
+            height: 50px;
+            background-color: royalblue;
+            text-align: center;
+            line-height: 50px;
+            font-size: 28px;
+            font-weight: bold;
+            }
+      .Body{
+            overflow: auto;
+            height: 1000px;
+      }
+      .LeftMenu{
+            float: left;
+            width: 200px;
+            height: 100%;
+            background-color: #f2f5fa;
+      }
+      .MasterMenu{
+            background-color: #f2f5fa;
+            font-weight: bold;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+            border-bottom: 1px solid #9E9C9C;
+      }

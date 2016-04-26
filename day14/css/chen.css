@@ -1,0 +1,73 @@
+        .Global{
+            min-width: 1400px;
+        }
+    .Top .TitleTop span{
+        display: block;
+        height: 50px;
+        background-color: royalblue;
+        text-align: center;
+        line-height: 50px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .Center{
+        /*height: 500px;*/
+        margin-top: 5%;
+        margin-left: 32%;
+    }
+    .Center .To_Center{
+        /*height: 300px;*/
+        width: 500px;
+        background-color: white;
+        /*position: fixed;*/
+
+
+    }
+    body{
+        background-color: #d2d6de;
+    }
+    .To_Center label{
+        display: block;
+        text-align: center;
+        /*margin: 10px;*/
+        margin-bottom: 20px;
+        padding:  30px 0px 0px 0px;
+        /*margin-top: 200px;*/
+    }
+    .To_Center .R_user,.R_passwd{
+        /*border: 1px solid black;*/
+        width: 300px;
+        /*height: 30px;*/
+        margin-left: 90px;
+        margin-bottom: 20px;
+    }
+    .To_Center .info input{
+        height: 40px;
+        width: 300px;
+    }
+    .info .R_user{
+        /*margin-bottom: 50px;*/
+    }
+
+    .LR_Style{
+        margin-left: 100px;
+    }
+    .LR_Style input,a{
+        height: 40px;
+        width: 80px;
+        color: #00a2ca;
+        margin-left: 30px;
+        /*margin-bottom: 20px;*/
+    }
+        .Hide{
+            display: none;
+        }
+        .info_error{
+           background-color: lightcoral;
+        }
+        .Col-xs-4{
+            width: 33%;
+            /*float: left;*/
+        }
+
+

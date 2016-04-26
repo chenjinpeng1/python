@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Backmanage.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="Global">
+    <div class="Top">
+        <div class="TitleTop">
+            <span>易随诊CMDB平台</span>
+        </div>
+    </div>
+    <div class="Body">
+        <div class="LeftMenu">
+            <div>
+                <div class="MasterMenu" onclick="Func(this)">资产系统</div>
+                <div class="ChildMenu hide">
+                    <div onclick="Dis_Menu()" style="cursor: pointer">资产管理</div>
+                    <div>1.2</div>
+                    <div>1.3</div>
+                </div>
+            </div>
+            <div >
+                <div class="MasterMenu" onclick="Func(this);">监控系统</div>
+                <div class="ChildMenu hide">
+                    <div>2.1</div>
+                    <div>2.2</div>
+                    <div>2.3</div>
+                </div>
+            </div>
+
+            <div >
+                 <div class="MasterMenu" onclick="Func(this);">日志系统</div>
+                <div class="ChildMenu hide">
+                    <div>3.1</div>
+                    <div>3.2</div>
+                    <div>3.3</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+<script>
+    function Func(ths){
+        $(ths).parent().siblings().find('.ChildMenu').addClass('hide')
+        $(ths).parent().siblings().find(".MasterMenu").removeAttr("style")
+        if(!$(ths).next().hasClass('hide')){
+            $(ths).next().addClass('hide');
+            $(ths).removeAttr("style")
+        }else{
+            $(ths).next().removeClass('hide');
+            $(ths).attr({style:"background-color:#005383"})
+        }
+    }
+//    function Dis_Menu(){
+//       bb= $(".zcgl").removeClass('hide')
+//        console.log(bb)
+//    }
+</script>
+</body>
+</html>

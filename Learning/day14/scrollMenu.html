@@ -150,7 +150,7 @@
     window.onscroll = function(){
 //        滚轮的高度
         var ws = $(window).scrollTop();
-        console.log(ws)
+//        console.log(ws)
 //        如果滚轮动了就固定左边框
         if(ws > 50){
             $('.catalog').addClass('fixed');
@@ -166,9 +166,10 @@
 //        console.log($(window).scrollTop)
 ////            浏览器高度
 //        console.log($(window).height())
-////            当前div高度
-//        console.log($(document).height())
-
+////            页面文档的高度
+        console.log($(document).height())
+//                当前div高度
+            //        console.log($(this).height())
         var total = offTop + $(this).height();
         if(ws > offTop && total > ws){
             if($(window).scrollTop()+$(window).height()==$(document).height()){

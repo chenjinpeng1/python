@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/chen.css">
+</head>
+<body>
+<div class="Global">
+<div class="Top">
+    <div class="TitleTop">
+        <span>易随诊CMDB平台</span>
+    </div>
+</div>
+<div class="Center">
+    <div class="To_Center">
+        <label>请输入您登录的账号与密码</label>
+        <hr style="opacity: 0.5">
+        <form action="../Regist/index.html">
+            <div class="info">
+                <div class="R_user has-feedback">
+                    <div class="UP_error Hide alert alert-error ">
+                        账号密码错误
+                    </div>
+                    <input id="username" type="text" placeholder="用户名">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <div class="info_error Hide alert-error">
+                        请输入用户名
+                    </div>
+                    </div>
+                    <div class="R_passwd has-feedback">
+                        <input id="password" type="password" placeholder="密码">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <div class="info_error Hide alert-error ">
+                        请输入密码
+                        </div>
+                    </div>
+            </div>
+            <div class="LR_Style">
+                <input id="Login" class="btn btn-primary  " type="submit" value="登录"  onclick="return Verify()">
+                <a id="Regist" class="btn btn-primary" href="../Regist/index.html">注册</a>
+
+            </div>
+            <!--<div class="LR_Style Col-xs-4" style="float: left;">-->
+            <!--</div>-->
+
+        </form>
+    </div>
+</div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script>
+    function Verify(){
+//        var Tmp = false
+        $(".info input").each(function(){
+            var Value =  $(this).val().trim()
+            if(!Value){
+                Tmp = false
+                console.log("无值")
+                $(this).siblings(".info_error").removeClass("Hide")
+                $(this).attr("val_false","False")
+                return false;
+            }else {
+                console.log("有值")
+                $(this).siblings(".info_error").addClass("Hide")
+                Tmp=true
+
+            }
+//
+        })
+        if(Tmp){
+            console.log("aaaa");
+            return true;
+            }
+        else {
+            console.log("bbb");
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
