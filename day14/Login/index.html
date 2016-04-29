@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/chen.css">
+    <link rel="stylesheet" href="../css/buttons.css">
 </head>
 <body>
 <div class="Global">
@@ -38,13 +39,11 @@
                     </div>
             </div>
             <div class="LR_Style">
-                <a id="Login" class="btn btn-primary" href="../Backstage_manage/index.html">登录</a>
-                <!--<input id="Login" class="btn btn-primary  " type="submit" value="登录"  onclick="return Verify()">-->
-                <a id="Regist" class="btn btn-primary" href="../Regist/index.html">注册</a>
+                <a id="Login" class="button button-royal button-rounded button-giant"  href="../Backstage_manage/index.html" onclick="return Verify()">登录</a>
+                <a id="Regist" class="button button-royal button-rounded button-giant" href="../Regist/index.html">注册</a>
 
             </div>
-            <!--<div class="LR_Style Col-xs-4" style="float: left;">-->
-            <!--</div>-->
+
 
         </form>
     </div>
@@ -54,31 +53,28 @@
 <script>
     function Verify(){
 //        var Tmp = false
-        $(".info input").each(function(){
-            var Value =  $(this).val().trim()
-            if(!Value){
-                Tmp = false
-                console.log("无值")
-                $(this).siblings(".info_error").removeClass("Hide")
-                $(this).attr("val_false","False")
-                return false;
-            }else {
-                console.log("有值")
-                $(this).siblings(".info_error").addClass("Hide")
-                Tmp=true
+             $(".info input").each(function(){
+                var Value =  $(this).val().trim()
+                if(!Value){
+                    Tmp = false
+                    console.log("无值")
+                    $(this).siblings(".info_error").removeClass("Hide")
+                    $(this).attr("val_false","False")
+                    return false;
+                }else {
+                    console.log("有值")
+                    $(this).siblings(".info_error").addClass("Hide")
+                    Tmp=true
 
-            }
-//
+                }
         })
         if(Tmp){
-            console.log("aaaa");
             return true;
             }
         else {
-            console.log("bbb");
             return false;
-        }
-    }
+        }}
+
 </script>
 </body>
 </html>

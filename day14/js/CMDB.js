@@ -6,7 +6,7 @@
             $(this).removeAttr("style")
         }else{
             $(this).next().removeClass('hide');
-            $(this).attr({style:"background-color:#005383"})
+            $(this).attr({style:"background-color:#7B72E9"})
         }
     }
     function HostMenu(){
@@ -78,6 +78,7 @@
                     $(this).children('span').removeClass('hide')
                     $(this).children('input').remove()
                     $("input[type='checkbox']").prop("checked",false)
+                    $("#Reverse").prop("disabled",false)
             })
         })
     }
@@ -142,6 +143,7 @@
                     $(this).children().children("input[type='checkbox']").prop("checked",false)
                     $("input[type='checkbox']").prop("disabled",false)
                     $(".EditStyle").prop("disabled",false)
+                    $("#Reverse").prop("disabled",false)
                 })
             }
         })

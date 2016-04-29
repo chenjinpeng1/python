@@ -45,19 +45,19 @@
         height: 40px;
         width: 300px;
     }
-    .info .R_user{
-        /*margin-bottom: 50px;*/
-    }
 
     .LR_Style{
         margin-left: 100px;
     }
-    .LR_Style input,a{
-        height: 40px;
+    .LR_Style input{
+        /*height: 40px;*/
         width: 80px;
-        color: #00a2ca;
+        color: white;
         margin-left: 30px;
         /*margin-bottom: 20px;*/
+    }
+    .LR_Style a{
+        margin-left: 15px;
     }
         .Hide{
             display: none;
@@ -67,7 +67,6 @@
         }
         .Col-xs-4{
             width: 33%;
-            /*float: left;*/
         }
 
 
