@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" media="screen"  href="styles/show.css"/>
+</head>
+<body>
+    <form>
+        <table>
+            <caption>主机管理系统</caption>
+            <thead>
+            <tr>
+                <th class="option"><div>选择</div></th>
+                <th class="no"><div>序号</div></th>
+                <th class="hostname"><div>主机名</div></th>
+                <th class="ip"><div>IP</div></th>
+                <th class="port"><div>端口</div></th>
+                <th class="group"><div>业务组</div></th>
+                <th class="state"><div>状态</div></th>
+            </tr>
+            </thead>
+            <tbody id="tb-1">
+            <tr id="row-1">
+                <td class="option"><input type="checkbox" /></td>
+                <td class="no">1</td>
+                <td edit="true" edit-type="input" class="hostname">hostname1</td>
+                <td edit="true" edit-type="input" class="ip">111.111.111.111</td>
+                <td class="port">22</td>
+                <td edit="true" edit-type="select" option-key="GROUP" class="group">开发</td>
+                <td edit="true" edit-type="select" option-key="STATUS" class="state">在线</td>
+            </tr>
+            <tr id="row-2">
+                <td class="option"><input type="checkbox" /></td>
+                <td class="no">2</td>
+                <td edit="true" edit-type="input" class="hostname">hostname2</td>
+                <td edit="true" edit-type="input" class="ip">8.8.8.8</td>
+                <td class="port">22</td>
+                <td edit="true" edit-type="select" option-key="GROUP" class="group">测试</td>
+                <td edit="true" edit-type="select" option-key="STATUS" class="state">下线</td>
+            </tr>
+            <tr id="row-3">
+                <td class="option"><input type="checkbox" /></td>
+                <td class="no">3</td>
+                <td edit="true" edit-type="input" class="hostname">hostname3</td>
+                <td edit="true" edit-type="input" class="ip">225.225.255.254</td>
+                <td class="port">22</td>
+                <td edit="true" edit-type="select" option-key="GROUP" class="group">开发</td>
+                <td edit="true" edit-type="select" option-key="STATUS" class="state">在线</td>
+            </tr>
+            <tr id="row-4">
+                <td class="option"><input type="checkbox" /></td>
+                <td class="no">4</td>
+                <td edit="true" edit-type="input" class="hostname">hostname4</td>
+                <td edit="true" edit-type="input" class="ip">10.10.0.1</td>
+                <td class="port">22</td>
+                <td edit="true" edit-type="select" option-key="GROUP" class="group">运维</td>
+                <td edit="true" edit-type="select" option-key="STATUS" class="state">下线</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="button-set">
+            <ul id="select-page">
+                <li><button id="check-all" type="button">全选</button></li>
+                <li><button id="invert-check" type="button">反选</button></li>
+                <li><button id="cancel" type="button">取消</button></li>
+                <li><button id="edit" type="button">进入编辑模式</button></li>
+            </ul>
+        </div>
+    </form>
+    <script src="scripts/jquery-2.2.3.js"></script>
+    <script rel="script" src="scripts/addLoadEvent.js"></script>
+    <script rel="script" src="scripts/stripeTables.js"></script>
+</body>
+</html>
