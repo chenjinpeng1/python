@@ -49,11 +49,12 @@
     .LR_Style{
         margin-left: 100px;
     }
-    .LR_Style input{
+    .LR_Style a{
         /*height: 40px;*/
         width: 80px;
         color: white;
         margin-left: 30px;
+        padding: 12px 38px;
         /*margin-bottom: 20px;*/
     }
     .LR_Style a{

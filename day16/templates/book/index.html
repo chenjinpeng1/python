@@ -1,0 +1,22 @@
+{% extends 'model/model.html' %}
+{% block content %}
+<div>
+<table class="Libinfo">
+    <caption>库名</caption>
+    {%  for libname in libnames %}
+    <tr>
+        <th>
+            <a href="/books/{{ libname }}">{{ libname }}</a>
+        </th>
+        <td>
+            <a href="/books/add{{ libname }}">Add</a>
+        </td>
+        <td>
+            Change
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+    {% include 'formspage/forms.html' %}
+{% endblock %}

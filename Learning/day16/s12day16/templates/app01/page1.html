@@ -1,0 +1,12 @@
+{% extends 'app01/index.html' %}
+{% block header-menu %}
+    <h1>sub menu 1....3..45..5</h1>
+{% endblock %}
+{% block content-container %}
+    <h1>page 1</h1>
+    {% block father-container %}
+
+            {% include 'app01/register_com.html' %}
+
+    {% endblock %}
+{% endblock %}

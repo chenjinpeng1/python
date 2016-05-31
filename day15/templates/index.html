@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/buttons.css">
+    <link rel="stylesheet" href="/static/css/Backmanage.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="Global">
+    <div class="Top">
+        <div class="TitleTop">
+            <span class="button button-primary button-small">易随诊CMDB平台</span>
+        </div>
+    </div>
+    <div class="Body">
+        <div class="LeftMenu">
+            <div>
+                <div class="MasterMenu button button-royal button-giant">资产系统</div>
+                <div class="ChildMenu hide">
+                    <div class="MenuStyle button button-royal button-giant " id="HostMenu" style="cursor: pointer">
+                        <a href="/cmdb/HostManage/">主机管理</a>
+                    </div>
+                    <div class="MenuStyle button button-royal button-giant ">1.2</div>
+                    <div class="MenuStyle button button-royal button-giant ">1.3</div>
+                </div>
+            </div>
+            <div >
+                <div class="MasterMenu button button-royal button-giant">监控系统</div>
+                <div class="ChildMenu hide">
+                    <div class="MenuStyle button button-royal button-giant ">2.1</div>
+                    <div class="MenuStyle button button-royal button-giant ">2.2</div>
+                    <div class="MenuStyle button button-royal button-giant ">2.3</div>
+                </div>
+            </div>
+
+            <div >
+                 <div class="MasterMenu button button-royal button-giant ">日志系统</div>
+                <div class="ChildMenu hide">
+                    <div class="MenuStyle button button-royal button-giant ">3.1</div>
+                    <div class="MenuStyle button button-royal button-giant ">3.2</div>
+                    <div class="MenuStyle button button-royal button-giant ">3.3</div>
+                </div>
+            </div>
+
+        </div>
+
+                </table>
+            </div>
+            </form>
+            <div class="EditWindow hide">
+                <div>
+                    <span id="hostname">主机名:</span>
+                    <input type="text" />
+                    <label class="edit_css hide">不能为空 || 不大于10位</label>
+                </div>
+                <div>
+                    <span id="host_address">主机地址:</span>
+                    <input type="text"/>
+                    <label class="edit_css hide">不能为空 || 不合法</label>
+                </div>
+                <div>
+                    <span id="host_port">主机端口:</span>
+                    <input type="text"/>
+                    <label class="edit_css hide">主机端口不能为空</label>
+                    <label class="edit_css hide">端口不合法</label>
+                </div>
+                <div>
+                    <input class="EditWindowSubmit" type="submit"  value="提交">
+                </div>
+                <div>
+                    <input class="EditWindowCancel" type="submit" value="返回">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/static/js/CMDB.js"></script>
+</body>
+</html>

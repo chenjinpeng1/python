@@ -1,0 +1,15 @@
+{% extends 'model/model.html' %}
+{% block content %}
+<div>
+<table class="Libinfo">
+    <caption>Author</caption>
+    {% for author in Authors %}
+        <tr>
+            <th>
+            <a href="">{{ author.first_name  }}{{ author.last_name }}</a>
+            </th>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

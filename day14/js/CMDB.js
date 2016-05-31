@@ -47,22 +47,26 @@
 }
     function EditSelect() {
         $("#EditSelect").click(function(){
-            //禁用其他功能
-            $("#Reverse").prop("disabled",'true')
-            $("input[type='checkbox']").prop("disabled",true)
-            $(".EditStyle").prop("disabled",true)
-            //获取选中的元素 找到要编辑的元素
             var Tmp = $("input:checked").parent().siblings(".Edit");
-            Tmp.each(function(){
-                //获取原数据
-                var TmpDate=($(this).children('span').text());
-                var IdName = $(this).children('span').attr('IdName')
-                $(this).children('span').addClass('hide')
-                var WriteData="<input class='Input' type='text' IdName='"+ IdName +"' value='" + TmpDate +"'/>";
-                $(this).append(WriteData);
+            if(Tmp.length >= 2) {
+                //禁用其他功能
+                $("#EditSelect").prop("disabled",true)
+                $("#Reverse").prop("disabled", 'true')
+                $("input[type='checkbox']").prop("disabled", true)
+                $(".EditStyle").prop("disabled", true)
+                //获取选中的元素 找到要编辑的元素
+                Tmp.each(function () {
+                    //获取原数据
+                    var TmpDate = ($(this).children('span').text());
+                    var IdName = $(this).children('span').attr('IdName')
+                    $(this).children('span').addClass('hide')
+                    var WriteData = "<input class='Input' type='text' IdName='" + IdName + "' value='" + TmpDate + "'/>";
+                    $(this).append(WriteData);
+                })
+            }
             })
-        })
     }
+
     function Cancel(){
         $("#Cancel").click(function(){
             $("input[type='checkbox']").prop("disabled",false)
@@ -144,6 +148,7 @@
                     $("input[type='checkbox']").prop("disabled",false)
                     $(".EditStyle").prop("disabled",false)
                     $("#Reverse").prop("disabled",false)
+                    $("#EditSelect").prop("disabled",false)
                 })
             }
         })

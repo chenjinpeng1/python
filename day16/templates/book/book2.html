@@ -1,0 +1,15 @@
+{% extends 'model/model.html' %}
+{% block content %}
+<div>
+<table class="Libinfo">
+    <caption>My Book</caption>
+    {% for book in books %}
+        <tr>
+            <th>
+            {{ book.name  }}
+            </th>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

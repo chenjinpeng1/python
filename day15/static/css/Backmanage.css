@@ -1,0 +1,139 @@
+body{
+  /*background-color: #d2d6de;*/
+  }
+.Global{
+      min-width: 1000px;
+      }
+.Top .TitleTop span{
+      display: block;
+      height: 50px;
+      /*background-color: royalblue;*/
+      text-align: center;
+      line-height: 50px;
+      font-size: 28px;
+      font-weight: bold;
+      }
+.Body{
+      overflow: auto;
+      height: 1000px;
+}
+.LeftMenu{
+      float: left;
+      width: 200px;
+      height: 100%;
+      background-color: #f2f5fa;
+}
+.MasterMenu{
+      background-color: #f2f5fa;
+      font-weight: bold;
+      color: black;
+      cursor: pointer;
+      border-bottom: 1px solid black;
+      width: 100%;
+}
+.ChildMenu{
+      background-color: white;
+      color: black;
+      width: 100%;
+      border-bottom: 1px solid black;
+}
+.MenuStyle{
+    height: 40px;
+    width: 100%;
+    background-color: rgba(244, 243, 243, 0.15);
+    color: black;
+    border-bottom: 1px solid black;
+}
+.RightBody{
+      height: 100%;
+      margin-left: 200px;
+}
+.DIS_Info{
+      /*background-color: blue;*/
+    margin-left: 400px;
+    font-size: 20px;
+    font-family: 微软雅黑;
+      /*text-align: center;*/
+}
+.FormClass{
+      width: 100%;
+}
+.TableData{
+      width: 100%;
+}
+.TableData table th,td{
+     border: 1px solid black;
+      width: 300px;
+      height: 30px;
+      text-align: center;
+}
+.TableTopStyle{
+    height: 40px;
+}
+.thcolor{
+        background-color: #1B9AF7;
+
+}
+.EditStyle{
+      border: 0px;
+      width: 100%;
+      height: 100%;
+    background-color: white;
+
+}
+.OptionStyle{
+      background-color: #00a2ca;
+      border: 0px;
+      width: 20px;
+      height: 100%
+}
+.MenuFunction{
+      margin-bottom: 10px;
+      width: 100%;
+      height: 40px;
+}
+.TableData{
+}
+.RightDis input{
+      /*background-color: #005383;*/
+    height: 40px;
+    text-align: center;
+    border: black;
+}
+.EditWindow,.EditWindow2{
+      background-color: white;
+      width: 500px;
+      height: 300px;
+      position: fixed;
+      top: 100px;
+      left: 400px;
+      /*margin-left: 400px;*/
+}
+.EditTop,.EditTop2{
+    background-color: #00A8B3;
+    height: 50px;
+}
+.EditTop,.EditTop2 span{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+    text-align: center;
+}
+.DIS_WIDTH,.DIS_WIDTH2{
+    width: 70px;
+    float: left;
+    margin-left: 30px;
+    margin-right: 20px;
+}
+.InfoNameWidth,.InfoNameWidth2{
+    margin-top: 20px;
+}
+.InfoNameWidth input,.InfoNameWidth2 input{
+    height: 30px;
+}
+
+.EditWindowSubmit,.EditWindowCancel,.AddSubmit,.EditWindowCancel2{
+    margin-top: 15px;
+      float: left;
+      margin-left: 60px;
+}

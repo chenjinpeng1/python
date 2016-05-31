@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .form_control{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post">{% csrf_token %}
+<div>
+    {% for ele in forms %}
+        <div class="form-ele">
+            <label style="width: 100px ;float: left">{{ ele.name }}</label>
+            <label>{{ ele }}{{ ele.errors }}</label>
+        </div>
+    {% endfor %}
+</div>
+<input type="submit" value="submit">
+</form>
+</body>
+</html>

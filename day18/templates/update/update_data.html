@@ -1,0 +1,28 @@
+{% extends 'model/base.html' %} }
+{% block context %}
+    <div class="breadcrumbs">
+    <a href="/crm/">Home</a>
+    ›<a href="/crm/{{ classname }}/"> {{ classname }}</a>
+    › <a>{{ id }}</a>
+     {{ Dis_classname }}
+    </div>
+    <div id="content" class="flex">
+    <form action="" method="post">
+        {{ datas.errors }}
+    {% for data in datas  %}
+        <div>
+        {% if data.field.required %}
+            <label style=" float :left;width: 100px"><label style="color: red">*</label><label>{{ data.label }}</label> </label>
+        {% else %}
+            <label style=" float :left;width: 100px" class="col-sm-2 control-label text-left">{{ data.label }}</label>
+        {% endif %}
+        {{ data }}
+        {% if data.errors %}
+            {{ data.errors }}
+        {% endif %}
+        </div>
+    {% endfor %}
+    <input class="btn btn-default" type="submit" value="Submit">
+    </form>
+    </div>
+{% endblock %}

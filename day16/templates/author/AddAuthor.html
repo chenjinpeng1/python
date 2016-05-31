@@ -1,0 +1,33 @@
+{%  extends 'model/model.html' %}
+{% block content %}
+
+<div class="TopTittle">
+<label>Add Author</label>
+</div>
+<form action="/books/addAuthor/" method="post">
+<div class="Libinfo">
+    <div class="Label">
+    <label>First Name:</label>
+    <input type="text" name="firstname">
+    <hr/>
+    </div>
+</div>
+<div class="Libinfo">
+    <div class="Label">
+    <label>Last Name : </label>
+    <input type="text" name="lastname">
+    <hr/>
+    </div>
+</div>
+<div class="Libinfo">
+    <div class="Label">
+    <label>Email : </label>
+    <input type="text" name="email">
+    <hr/>
+    </div>
+</div>
+   <input type="submit" value="添加">
+
+</form>
+
+{% endblock %}

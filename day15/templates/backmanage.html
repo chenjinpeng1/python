@@ -1,0 +1,107 @@
+{% extends 'enginpage/default.html' %}
+{% block content %}
+        <div  class="RightBody">
+            <div class="DIS_Info">资产管理</div>
+            <hr>
+            <form class="FormClass" action="/cmdb/singledit/" >
+                <div class="MenuFunction">
+                    <div class="RightDis">
+                        <input class="button button-caution button-rounded button-jumbo" id="SelectAll" type="button" value="全选">
+                        <input class="button button-caution button-rounded button-jumbo" id="Reverse" type="button" value="反选">
+                        <input class="button button-caution button-rounded button-jumbo" id="EditSelect" type="button" value="编辑">
+                        <input class="button button-caution button-rounded button-jumbo" id="Cancel" type="button" value="取消">
+                        <input class="button button-caution button-rounded button-jumbo" id="Save" type="button" value="保存">
+                        <input class="button button-caution button-rounded button-jumbo" id="Add" type="button" value="增加">
+
+                    </div>
+                </div>
+                <div class="TableData">
+                <table>
+                    <thead>
+                    <tr class="TableTopStyle">
+                        <th class="button button-caution button-rounded button-jumbo thcolor">选择</th>
+                        <th class="button button-caution button-rounded button-jumbo thcolor">主机名</th>
+                        <th class="button button-caution button-rounded button-jumbo thcolor">主机地址</th>
+                        <th class="button button-caution button-rounded button-jumbo thcolor">主机端口</th>
+                        <th class="button button-caution button-rounded button-jumbo thcolor">编辑</th>
+                    </tr>
+                    </thead>
+                    {% for info in hostinfo %}
+                    <tr>
+                    <td><input class="OptionStyle" type="checkbox"/></td>
+                    <td class="Edit hide"><span IdName="Id">{{ info.id }}</span></td>
+                    <td class="Edit"><span IdName="HostName">{{ info.hostname }}</span></td>
+                    <td class="Edit"><span IdName="IpAddress">{{ info.ip }}</span></td>
+                    <td class="Edit"><span IdName="Port">{{ info.port }}</span></td>
+                    <td><input class="EditStyle" type="button" value="编辑"/></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            </form>
+            <div class="EditWindow hide">
+                <div class="EditTop">
+                    <span>编辑</span>
+                </div>
+                <div class="InfoNameWidth">
+                    <span class="DIS_WIDTH" id="hostname">主机名:</span>
+                    <input type="text"/>
+                    <label class="edit_css hide">不能为空 || 不大于10位</label>
+                </div>
+                <div class="InfoNameWidth">
+                    <span class="DIS_WIDTH" id="host_address">主机地址:</span>
+                    <input type="text"/>
+                    <label class="edit_css hide">不能为空 || 不合法</label>
+                </div>
+                <div class="InfoNameWidth">
+                    <span class="DIS_WIDTH" id="host_port">主机端口:</span>
+                    <input type="text"/>
+                    <label class="edit_css hide">主机端口不能为空</label>
+                    <label class="edit_css hide">端口不合法</label>
+                </div>
+                <div class="">
+                    <input class="EditWindowSubmit Sub button btn btn-success" type="button"  value="提交">
+                </div>
+                <div>
+                    <input class="EditWindowCancel button btn btn-success" type="button" value="返回">
+                </div>
+            </div>
+            <div class="EditWindow2 hide">
+                <form action="/cmdb/AddHost/" method="post">
+                <div class="EditTop2">
+                    <span>添加</span>
+                </div>
+                <div class="InfoNameWidth2">
+                    <span class="DIS_WIDTH2" id="Addhostname">主机名:</span>
+                    <input name="AddHostName" type="text"/>
+                    <label class="edit_css hide">不能为空 || 不大于10位</label>
+                </div>
+                <div class="InfoNameWidth2">
+                    <span class="DIS_WIDTH2" id="Addhost_address">主机地址:</span>
+                    <input name="AddIp" type="text"/>
+                    <label class="edit_css hide">不能为空 || 不合法</label>
+                </div>
+                <div class="InfoNameWidth2">
+                    <span class="DIS_WIDTH2" id="Addhost_port">主机端口:</span>
+                    <input name="AddPort" type="text"/>
+                    <label class="edit_css hide">主机端口不能为空</label>
+                    <label class="edit_css hide">端口不合法</label>
+                </div>
+                <div class="">
+                    <input class="AddSubmit Sub button btn btn-success" type="submit"  value="提交">
+                </div>
+                <div>
+                    <input class="EditWindowCancel2 button btn btn-success" type="button" value="返回">
+                </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+</div>
+<script type="text/javascript" src="/static/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/static/js/CMDB.js"></script>
+</body>
+</html>

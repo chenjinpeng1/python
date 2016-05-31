@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% block page-header %}
+客户信息列表
+{% endblock %}
+{% block page-content %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>QQ</th>
+                <th>姓名</th>
+                <th>渠道</th>
+                <th>咨询课程</th>
+                <th>课程类型</th>
+                <th>客户备注</th>
+                <th>状态</th>
+                <th>课程顾问</th>
+                <th>日期</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for customer in customer_list %}
+        <tr>
+            <td><a href="{% url 'customer_detail' customer.id  %}">{{ customer.id }}</a></td>
+            <td>{{ customer.qq}}</td>
+            <td>{{ customer.name}}</td>
+            <td>{{ customer.source}}</td>
+            <td>{{ customer.course}}</td>
+            <td>{{ customer.get_course_type_display}}</td>
+            <td>{{ customer.consult_memo|truncatechars:50}}</td>
+            <td class="{{ customer.status }}">{{ customer.status|alex_upper }}</td>
+            <td>{{ customer.consultant}}</td>
+            <td>{{ customer.date}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <nav>
+          <ul class="pagination">
+{#          如果前面还有 previous 以前的#}
+            {% if customer_list.has_previous %}
+                <li class="">
+                    <a href="?page={{ customer_list.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif  %}
+              {% for page_num in customer_list.paginator.page_range %}
+{#                  {{ customer_list.number }} {# 当前页面 #}
+{#                  {{ page_num }}{# 循环页面 page 1 of 5类似这样 #}
+                   {%  guess_page customer_list.number page_num  %}
+            {% endfor %}
+{#          如果后面还有#}
+           {% if customer_list.has_next %}
+                <li class=""><a href="?page={{ customer_list.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+           {% endif %}
+          </ul>
+        </nav>
+
+
+    </div>
+{% endblock %}

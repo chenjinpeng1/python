@@ -1,0 +1,51 @@
+.titlename{
+    min-width: 1024px;
+    height: 50px;
+    line-height: 50px;
+    background-color: steelblue;
+    color: white;
+}
+
+.Libinfo,hr{
+    min-width: 512px;
+    margin-top: 20px;
+}
+
+table caption{
+    text-align: left;
+    background-color: steelblue;
+    height: 50px;
+    line-height: 50px;
+    color: white;
+}
+
+table th{
+    padding: 5px;
+    border-color: inherit ;
+    vertical-align: inherit;
+    border-bottom: 1px solid #eee;
+    margin-left: 500px;
+    text-align: left;
+}
+table td{
+    width: 70px;
+}
+.TopTittle{
+    width: 512px;
+    min-width: 512px;
+    margin-top: 20px;
+    height: 50px;
+    line-height: 50px;
+    color: white;
+    background-color: steelblue;
+    /*margin-left: 20px;*/
+}
+.Label{
+    /*margin-left: 20px;;*/
+}
+label{
+    float: left;
+    width: 150px;
+    font-weight: bold;
+    padding: 2px 10px 0 0;
+}

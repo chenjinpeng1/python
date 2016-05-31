@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Site administration | Django site admin</title>
+    <link rel="stylesheet" type="text/css" href="/static/crm/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/crm/css/dashboard.css">
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <link rel="stylesheet" href="/static/crm/js/bootstrap/js/bootstrap.min.js">
+</head>
+<body class=" dashboard">
+<div id="header">
+        <div id="branding">
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+        </div>
+        <div id="user-tools">
+                Welcome,
+                <strong>admin</strong>.
+                    <a href="/">View site</a> /
+                <a href="/admin/password_change/">Change password</a> /
+
+                <a href="/admin/logout/">Log out</a>
+
+        </div>
+    </div>
+{% block context %}
+{% endblock %}
+</body>
+</html>

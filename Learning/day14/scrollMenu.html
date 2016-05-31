@@ -105,7 +105,6 @@
         <div class="wrap clearfix">
             <div class="logo">
                 <a href="#">
-                    <img src="http://core.pc.lietou-static.com/revs/images/common/logo_7012c4a4.pn">
                 </a>
             </div>
             <div class="nav">
@@ -170,7 +169,9 @@
         console.log($(document).height())
 //                当前div高度
             //        console.log($(this).height())
+//            当前DIV距离浏览器的高度 + 当前div本身的高度
         var total = offTop + $(this).height();
+//            如果滚轮的高度大于DIV离浏览器的高度 并且当前div的底部到浏览器的高度 > 滚轴的高度
         if(ws > offTop && total > ws){
             if($(window).scrollTop()+$(window).height()==$(document).height()){
                 $('.catalog').children(':last').css('fontSize','48px').siblings().css('fontSize','12px')

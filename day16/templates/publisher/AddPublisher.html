@@ -1,0 +1,53 @@
+{% extends 'model/model.html' %}
+{% block content %}
+<div class="TopTittle">
+<label>Add Publisher</label>
+</div>
+<form action="/books/addPublisher/" method="post">
+    <div class="Libinfo">
+        <div class="Label">
+        <label>Name:</label>
+        <input type="text" name="name">
+        <hr/>
+        </div>
+    </div>
+    <div class="Libinfo">
+        <div class="Label">
+        <label>Address : </label>
+        <input type="text" name="address">
+        <hr/>
+        </div>
+    </div>
+    <div class="Libinfo">
+        <div class="Label">
+        <label>City : </label>
+        <input type="text" name="city">
+        <hr/>
+        </div>
+    </div>
+    <div class="Libinfo">
+        <div class="Label">
+        <label>所属省 : </label>
+        <input type="text" name="state_province">
+        <hr/>
+        </div>
+    </div>
+    <div class="Libinfo">
+        <div class="Label">
+        <label>国家 : </label>
+        <input type="text" name="country">
+        <hr/>
+        </div>
+    </div>
+    <div class="Libinfo">
+        <div class="Label">
+        <label>Website : </label>
+        <input type="text" name="website">
+        <hr/>
+        </div>
+    </div>
+       <input type="submit" value="添加">
+
+</form>
+
+{% endblock %}

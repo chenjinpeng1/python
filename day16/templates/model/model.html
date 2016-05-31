@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+<div >
+<div class="titlename">图书管理系统</div>
+<div>
+    <a href="/books/index">Home</a>
+    {% for i in Tiers %}
+        <a href="/books/{{ i }}">{{ i }}</a>
+    {% endfor %}
+</div>
+{% block content %}
+{% endblock %}
+</div>
+</body>
+</html>
