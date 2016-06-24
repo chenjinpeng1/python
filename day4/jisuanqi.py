@@ -40,6 +40,7 @@ def chu(num):
     print('调用除函数！')
     while True:
         if '/' in num:
+            print(num)
             bb=re.search('\d+\.?(\d+?){0,1}\/\d+[\.]?[\d]?',num).group()
             print(bb)
             bbb=bb.split('/')
@@ -61,12 +62,6 @@ def Search(list):
         content = re.search('\(([\+\-\*\/]?\d+){2,}\)',list).group()     # 取第一个括号里的计算值
         print('匹配到%s'%content)
         content1=content[1:len(content)-1]       # 去括号
-        try:
-            if type(float(content1)) is float:
-                print('aaaaaaaaaaa')
-                list=list.replace(content,str(content1))
-        except Exception:
-            print('aaaaa')
         if '*' in content1:
             jieguo=cheng(content1)
             print('计算后结果是%s'%jieguo)

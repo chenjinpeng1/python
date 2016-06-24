@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/buttons.css">
+    <link rel="stylesheet" href="/static/css/chen.css">
+
+</head>
+<body>
+<div class="Global">
+<div class="Top">
+    <div class="TitleTop">
+        <span>易随诊CMDB平台</span>
+    </div>
+</div>
+<div class="Center">
+    <div class="To_Center">
+        <label>请输入您登录的账号与密码</label>
+        <hr style="opacity: 0.5">
+        <form action="/login/" method="post">
+            <div class="info">
+                <div class="R_user has-feedback">
+                    <input  name="username" type="text" placeholder="用户名">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <div class="info_error Hide alert-error">
+                        请输入用户名
+                    </div>
+                    </div>
+                <div class="R_passwd has-feedback">
+                        <input id="password" name="passwd" type="password" placeholder="密码">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <div class="info_error Hide alert-error ">
+                        请输入密码
+                        </div>
+                    </div>
+                <a>{{ error }}</a>
+            </div>
+            <div class="LR_Style">
+                <input type="submit" id="Login" class="button button-royal button-rounded button-giant"  onclick="return Verify()" value="提交">
+                <a id="Regist" class="button button-royal button-rounded button-giant" href="regist.html" >注册</a>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+</div>
+<script src="/static/js/jquery-2.2.3.min.js"></script>
+<script>
+    function Verify(){
+//        var Tmp = false
+             $(".info input").each(function(){
+                var Value =  $(this).val().trim()
+                if(!Value){
+                    Tmp = false
+                    console.log("无值")
+                    $(this).siblings(".info_error").removeClass("Hide")
+                    $(this).attr("val_false","False")
+                    return false;
+                }else {
+                    console.log("有值")
+                    $(this).siblings(".info_error").addClass("Hide")
+                    Tmp=true
+
+                }
+        })
+        if(Tmp){
+            return true;
+            }
+        else {
+            return false;
+        }}
+
+</script>
+</body>
+</html>

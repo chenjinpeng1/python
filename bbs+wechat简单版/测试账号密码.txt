@@ -1,0 +1,2 @@
+admin 账号 chen 密码chen123456
+其他所有测试账号(chen,liuyao,wusanjiang)密码均为admin123456

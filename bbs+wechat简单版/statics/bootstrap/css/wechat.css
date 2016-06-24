@@ -1,0 +1,44 @@
+/*for webchar*/
+.chat-container{
+    min-width: 1024px;
+    border: 1px dashed darkgray;
+}
+.left-contact-panel{
+    width: 20%;
+    height: 600px;
+    border: 2px solid blueviolet;
+    float: left;
+}
+.right-chat-panel{
+    width: 75%;
+    height: 600px;
+    border: 2px solid greenyellow;
+    float: left;
+}
+.chat-box-title{
+    height: 50px;
+    border: 2px solid darkslategray;
+}.chat-box-window{
+    height: 400px;
+    border: 2px solid black;
+    overflow: auto;/*内容溢出加滚动条*/
+}
+ .chat-box-emoj{
+    height: 30px;
+    border: 1px solid brown;
+}
+ .chat-box-msg-box{
+    height: 120px;
+    border: 1px solid deeppink;
+}
+
+ .chat-box-msg-box textarea{
+     width: 85%;
+     height:100% ;
+     float: left;
+ }
+  .chat-box-msg-box  button {
+  width: 15%;
+  height: 100%;
+  float: left;
+  }

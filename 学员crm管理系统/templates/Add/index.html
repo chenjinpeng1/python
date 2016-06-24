@@ -1,0 +1,31 @@
+{% extends 'model/base.html' %}
+{% block context %}
+{#{{forms  }}#}
+<div class="breadcrumbs">
+    <a href="/crm/">Home</a>
+    ›<a href="/crm/{{ classname }}/"> {{ classname }}</a>
+     {{ Dis_classname }}
+    </div>
+    <div id="content" class="flex">
+    <h1>Add {{ class_verbose_name }} to change</h1>
+    <form method="post" action="">
+    {% if forms.errors %}
+        {{ forms.errors }}
+    {% endif %}
+    {% for form in forms %}
+    <div>
+    <label style="float: left;width: 100px">{{ form.label }}</label>
+    {{ form }}
+    {% if form.errors %}
+        {% for error in form.errors %}
+        <li style="color: red">{{ error }}</li>
+        {% endfor %}
+    {% endif %}
+{#    {{ form.errors }}#}
+    </div>
+    {% endfor %}
+<input class="btn btn-default" type="submit" value="Submit">
+</form>
+</div>
+
+{% endblock %}

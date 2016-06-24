@@ -42,20 +42,4 @@ aaaaaaaaaaaa
 # if os.path.isfile("作业思路分析.txt") is True:print("aaaaaaaa")
 # CUR_PATH=os.path.dirname(os.path.abspath(__file__)).replace("\\","/")
 # print(CUR_PATH)
-# print(os.stat("./"))
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-#Using GPL v2
-#Author: ihipop@gmail.com
-#2010-10-27 22:07
-"""
-Usage:
-Just A Template
-"""
-
-import time
-for i in range(100000):
-    # percent = 1.0 * i / 100000 * 100
-    # print('complete percent:%10.8s%s'%(str(percent),'%'),end='\r')
-    # time.sleep(0.3)
-    print("aaa",end="\r")
+print(os.stat("./"))

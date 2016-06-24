@@ -1,0 +1,63 @@
+      /*注册页面css*/
+      body{
+        background-color: #d2d6de;
+    }
+      .Global{
+            min-width: 1400px;
+        }
+          .Top .TitleTop span{
+            display: block;
+            height: 50px;
+            background-color: royalblue;
+            text-align: center;
+            line-height: 50px;
+            font-size: 28px;
+            font-weight: bold;
+            }
+      .Center{
+          /*height: 400px;*/
+          opacity: 0.9;
+          margin-top: 5%;
+          width: 400px;
+          margin-left: 35%;
+          background-color: #F0ECEC;
+          border: 1px solid black;
+    }
+        .To_Center2{
+            margin-left: 10%;
+            margin-top: 50px;
+            /*border: 1px solid blue;*/
+        }
+
+        .Center  form div label{
+            width: 70px;
+            text-align: center;
+        }
+        .Center form div input{
+            width: 250px;
+            border: 0px solid #b3b3b3;
+            height: 100%;
+        }
+        .D_sty{
+            height: 40px;
+            margin-top: 20px;
+            width: 326px;
+            border: 1px solid black;
+        }
+        .SUB{
+            margin-top: 30px;
+            margin-bottom: 20px;
+            /*height: 40px;*/
+            margin-left: 35px;
+        }
+        .Hide{
+            display: none;
+        }
+        .info_error{
+           background-color: lightcoral;
+        }
+        .Col-xs-4{
+            width: 33%;
+            /*float: left;*/
+        }
+

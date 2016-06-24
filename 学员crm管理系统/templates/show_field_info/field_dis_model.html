@@ -1,0 +1,80 @@
+{% extends 'model/base.html' %}
+{% block context %}
+<div class="breadcrumbs">
+<a href="/crm">Home</a>
+›<a  href="/crm/{{ classname }}/"> {{ classname }}</a>
+ {{ Dis_classname }}
+</div>
+<div id="content" class="flex">
+<h1>Select {{ class_verbose_name }} to change</h1>
+<div id="content-main">
+<div class="module" id="changelist">
+    <form id="changelist-form" method="get">
+        <div class="actions">
+            <label>Actions:
+                <select name="action">
+                    <option value="delete_selected">deleted_selected</option>
+                    <option value="-------" selected="selected">------------------</option>
+                </select>
+            </label>
+
+            <button type="button" class="btn btn-default select_options" title="Run the selected action" name="index" value="0">
+            Go
+            </button>
+            <a class="btn btn-default"  href="/crm/{{ classname }}/add">Add</a>
+            <label>Search:
+                <input class="AutoSearch" type="text">
+            </label>
+        </div>
+            <table id="result_list">
+                <thead>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="all_selected">
+                        </td>
+                        {% for i in field_verbose_name %}
+                        <td>
+                            {{ i }}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for line in field_values %} {# line表示取出每一行的记录 #}
+                <tr>
+                    <td>
+                        <input  type="checkbox">
+                    </td>
+                {% for list in line %} {# list表示去除第一个字段的值列表 [字段名,值] #}
+                    {% if forloop.first %} {# 如果是第一个id字段 则id字段添加超链接 #}
+                        {% for name_or_value in list %} {# name_or_value 判断是不是第一个值 是的话就设置为name=字段名 不是就添加超链接 #}
+                            {% if forloop.first  %}
+                                <td name={{ name_or_value }}>
+                            {% else %}
+                                <a href="{{ name_or_value }}">{{ name_or_value }}</a>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %} {# 否则相反 #}
+                        {% for name_or_value in list %}
+                            {% if forloop.first %}
+                                <td name="{{ name_or_value }}">
+                            {% else %}
+                                <label>{{ name_or_value }}</label>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    {% endif %}
+
+                {% endfor %}
+                {% endfor %}
+                </tr>
+            </tbody>
+            </table>
+{#        </div>#}
+
+    </form>
+</div>
+</div>
+</div>
+{% endblock %}

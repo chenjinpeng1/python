@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load custom %}
+{% block page-container %}
+<div class="chat-container">
+    <div class="left-contact-panel">
+        <div>
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#crontact-tab"  data-toggle="tab">好友</a></li>
+            <li role="presentation"><a href="#group-tab" data-toggle="tab">群组</a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="crontact-tab">
+                <ul class="list-group">
+                {% for friend in request.user.userprofile.friends.select_related %}
+                      <li contact-type="single" contact-id="{{ friend.id }}" onclick="OpenChatWindow(this)" class="list-group-item">
+                        <span class="badge hide">0</span>
+                        <span><img class="small_img" src='/static/{{ friend.head_img | truncate_url }}'></span>
+                        <span class="name">{{ friend.name }}</span>
+                      </li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="group-tab">
+                <ul class="list-group">
+                {% for group in request.user.userprofile.group_members.select_related %}
+                  <li contact-type="group" contact-id="{{ group.id }}" onclick="OpenChatWindow(this)" class="list-group-item">
+                    <span class="badge hide">0</span>
+                    <span class="name">{{ group.name }}</span>
+                  </li>
+                {% endfor %}
+                </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="right-chat-panel">
+        <div class="chat-box-title" contact-type="" contact-id="">
+        </div>
+        <div class="chat-box-window">
+        </div>
+        <div class="chat-box-emoj">
+            emoj
+        </div>
+        <div class="chat-box-msg-box">
+            <textarea id="msg"></textarea>
+            <button class="btn btn-success">发送消息</button>
+        </div>
+    </div>
+    <div class="clear-both"></div>
+</div>
+{% endblock %}
+{% block bottom-js %}
+    <script type="application/javascript" src="/static/bootstrap/js/wechat.js"></script>
+    <script type="application/javascript">
+$(document).ready(function(){
+
+function test(){
+    $(".list-group").children().click(function(){
+        dis_msg_window()
+    })
+}
+    test()
+     msg_count_list = []
+function dis_msg_window(){
+        $(".chat-box-window").children().remove()
+{#        $(".chat-box-window").removeData('data')#}
+        var user = $(".list-group").children(".active").children(":last").text()
+        current_windows_msg_count =  parseInt($(".list-group").children(".active").children(":first").text())
+        if($(".chat-box-title").attr("contact-type")=="single"){
+            console.log("添加useridhtml")
+            userid =$(".list-group").children(".active").attr("contact-id")
+            $(".chat-box-window").append($(".chat-box-window").data(userid))
+            $(".chat-box-window").removeData(userid)
+        }
+        else{
+            console.log('添加groupidhtml')
+            groupid =$(".list-group").children(".active").attr("contact-id")
+            $(".chat-box-window").append($(".chat-box-window").data(groupid))
+            $(".chat-box-window").removeData(groupid)
+        }
+
+        if(current_windows_msg_count >0 && msg_count_list.length > 0){
+            console.log(msg_count_list)
+            $(msg_count_list).each(function() {
+                console.log("数据的id",$(this)[0]['form'])
+                if ($(this)[0]['form'] == userid) {
+                    {#                send_time = $(this)[0]['timestamp']//new Date().toLocaleString()获取当前时间#}
+                    msg_content = $(this)[0]['msg']
+                    var new_msg_ele = '<div class="msg-item">' +
+                            '<span><img class="small_img" src="' + $(this)[0]["img"] + '"></span>' +
+                            '<span>' + user + '</span>' +
+                            '<span>' + $(this)[0]["timestamp"] + '</span>' +
+                            '<div class="msg-text">' + msg_content + '</div>' + '</div>'
+                    $(".chat-box-window").append(new_msg_ele)
+                    $(".list-group").children(".active").children(":first").text("0")
+                    $(".list-group").children(".active").children(":first").addClass("hide")
+                    $(".chat-box-window").animate({ //animate 动画效果,对匹配到的元素做什么动画效果
+                        scrollTop: $(".chat-box-window")[0].scrollHeight
+                    }, 50)
+                }
+                })
+            }
+            if($(".chat-box-title").attr("contact-type")=="single"){
+                userid_html = $(".chat-box-window").html()
+                console.log("user___id",userid_html.length)
+                $(".chat-box-window").data(userid,userid_html)
+
+            }
+            else{
+                groupid_html = $(".chat-box-window").html()
+                console.log("group___id",groupid_html.length)
+                $(".chat-box-window").data(groupid,groupid_html)
+            }
+                }
+
+
+    msg_count_list = []
+    GetNewMsg();//开始取消息
+    function GetNewMsg(){
+        console.log('-----开始取消息了-----')
+        $.get("{% url 'get_new_msgs' %}",function(callback_data){
+            var callback = eval(callback_data)
+{#            $.each(callback,function(){#}
+{#                msg_count_list.push($(this))#}
+{#            })#}
+            if(callback.length > 0){ {# 如果消息不是空的 #}
+                    is_this_friend = callback[0]['form'] {# 消息来自谁 #}
+                    console.log('---------------',is_this_friend)
+                    if(parseInt($(".chat-box-title").attr("contact-id")) == is_this_friend ){ {# 判断如果聊天窗口是这个人 #}
+                        var user = $(".list-group").children(".active").children(":last").text()
+                        var new_msg_ele = '<div class="msg-item">' +
+                            '<span><img class="small_img" src="' + callback[0]["img"] +'"></span>'+
+                            '<span>' + user + '</span>' +
+                            '<span>' +callback[0]["timestamp"] + '</span>' +
+                            '<div class="msg-text">' + callback[0]['msg'] + '</div>' + '</div>'
+                            $(".chat-box-window").append(new_msg_ele)
+                            $(".list-group").children(".active").children(":first").text("0")
+                            $(".chat-box-window").animate({ //animate 动画效果,对匹配到的元素做什么动画效果
+                            scrollTop: $(".chat-box-window")[0].scrollHeight
+                        }, 50)
+                    }
+                    else{
+                        var msg_count = callback.length
+                        console.log("字典数据：",msg_count_list)
+                        if (callback.length > 1){
+                            $(callback).each(function(){
+                                msg_count_list.push($(this))
+                            })
+                        }
+                        else{
+                            msg_count_list.push(callback)
+                        }
+                        $(".list-group").children().each(function () {
+                        if ($(this).attr("contact-id") == callback[0]['form']) {
+                                this_length =parseInt($(this).children(":first").text()) + msg_count
+                                console.log("消息数目----",this_length)
+                                $(this).children(":first").text(this_length)
+                                $(this).children(":first").removeClass("hide")
+                                }
+                            })
+                    }
+            }
+        GetNewMsg();
+        })//end get
+    }
+})
+
+    </script>
+{% endblock %}

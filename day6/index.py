@@ -3,7 +3,6 @@
 #作者：S12-陈金彭
 import os,sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-print(sys.path)
 from LOL_Game import Game_Life
 
 if __name__ == '__main__':

@@ -161,17 +161,16 @@ class FtpClient(object):
                     client_res=self.connection.recv(50) # 我知道你接收完了
                     self.connection.sendall(bytes("ok","utf8")) # OK 你发给我百分比吧
                     baifenbi=self.connection.recv(50) # 接收百分比
-                    # print(baifenbi.decode())
-                    self.jindutiao(baifenbi.decode())
-            print("\n")
+                    print(baifenbi.decode())
+                    # self.jindutiao(baifenbi.decode(),a)
             break
 
-    def jindutiao(self,num):
-        a="###########"
-        # for i in range(10):
-        # b=a*num2
-        sys.stdout.write("\r%s | %s"%(a,num))
-        sys.stdout.flush()
-        time.sleep(0.01)
+    # def jindutiao(self,num,num2):
+    #     a="#"
+    #     # for i in range(10):
+    #     b=a*num2
+    #     sys.stdout.write("%s | %s"%(b,num))
+    #     sys.stdout.flush()
+    #     time.sleep(0.3)
     def q(self,func):
         pass

@@ -1,4 +1,5 @@
-#__auth__ chenjinpeng
+﻿#__auth__ chenjinpeng
+#select 在博客
 #程序最初实现在python3 环境下，需安装模块paramiko，yaml
 # 主要实现了批量的执行命令以及上传文件功能，实际批量下载用不上，暂为开发
 程序结构

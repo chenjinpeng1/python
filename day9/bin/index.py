@@ -21,9 +21,9 @@ if __name__=="__main__":
             funcs=args[1].split(".")[1] # 获取方法名
             modle=__import__("modules.%s"%modles) #____import__函数 是把用户输入的字符串转换为模块,因为不在同级目录，所在需要加上目录名
             # print(modle)
-            modle_func=getattr(modle,modles) # import 该模块
+            modle_func=getattr(modle,modles) # 等同于import 模块
             # print(modle_func)
-            func_slh=getattr(modle_func,modles) # 获取类下的类
+            func_slh=getattr(modle_func,modles) # 获取模块下的类信息
             # print(func_slh)
             A=func_slh(*args) #实例化
             B=getattr(A,funcs) #

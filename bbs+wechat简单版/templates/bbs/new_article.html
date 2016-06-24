@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load custom %}
+{% block page-container %}
+    <div class="wrap-left">
+{#    在线文本编辑器 ueditor 百度出 默认不支持django，想支持需要改很多东西#}
+{#        ckeditor #}
+    {# enctype="multipart/form-data" 在这里用作： 当你要向后台传输文件或者图片时，必须用enctype封装 #}
+        <form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
+            {% for field in article_form  %}
+                <div>
+                {{ field.label }}{{ field.errors }}
+                {{ field }}
+            {% endfor %}
+            </div>
+{#            {{ article_form }}#}
+        <div style="margin-top: 20px; text-align: center">
+            <input style="width: 40%" class="btn btn-success" type="submit" value="发帖">
+        </div>
+        </form>
+    </div>
+    <div class="clear-both"></div>
+{% endblock %}
+{% block bottom-js %}
+    <script src="/static/plugins/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+    CKEDITOR.replace('id_content'){# id_content这里是内容的class名这里替换了 #}
+    </script>
+{% endblock %}

@@ -1,5 +1,6 @@
-  chen:
-    - webserver
-    - test
-  alex:
-    - test
+  userprofile_group:
+    chen:
+      - webserver
+      - test
+    alex:
+      - test

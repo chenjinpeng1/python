@@ -1,2 +1,2 @@
-chenjinpeng 123 10000
-aa aa 0
+chenjinpeng 123 5000
+qiulunan    456 6000

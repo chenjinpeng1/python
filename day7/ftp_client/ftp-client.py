@@ -18,10 +18,10 @@ while AUTH:
     Passwd = input("Password:")
     MD5=hashlib.md5()
     MD5.update(bytes(Passwd,"utf8"))
-    Passwd1=MD5.hexdigest() #将密码加密传入实例
+    Passwd1=MD5.hexdigest()
     client.sendall(bytes("%s|%s"%(User,Passwd1),"utf8"))
     UP_RES = client.recv(1024)
-    if UP_RES.decode() == "ACK_OK": # 如果密码正确
+    if UP_RES.decode() == "ACK_OK":
         print("login success")
         while True:
             try:
@@ -40,6 +40,7 @@ while AUTH:
             except Exception:
                 print("error...")
                 break
-    else: # 密码错误 打印error
+    else:
         print("login error!")
+        del MD5# 重新定义MD5变量 防止继续更新  坑中
 

@@ -1,0 +1,14 @@
+{% extends 'model/model.html' %}
+{% block content %}
+<div>
+     <table class="Libinfo">
+         <caption>Publisher</caption>
+          {% for publisher in publishers %}
+         <tr>
+             <th>{{ publisher.name }}</th>
+         </tr>
+          {% endfor %}
+     </table>
+
+</div>
+{% endblock %}

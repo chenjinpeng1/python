@@ -17,8 +17,7 @@ def createhost(argv):
         info = yaml.load(f)
         for key,val in info.items():
             from modules.data_init import Hosts
-            print(key,info[key]["ipaddress"],type(info[key]["port"]))
-            # print("sasasa")
+            print(key,info[key]["ipaddress"],info[key]["port"])
             # for i in val:
             u1 = Hosts(hostname=key,address=info[key]["ipaddress"],port=info[key]["port"])
             session.add(u1)
@@ -61,7 +60,6 @@ def creategroup(argv):
             for i in val:
                 from modules.data_init import Groups
                 # for i in key:
-                print(i)
                 g1 = Groups(groupname=i)
                 session.add(g1)
                 session.commit()
@@ -77,16 +75,14 @@ def userprofile_bind_group(argv):
         f = open(filename,"r")
         info = yaml.load(f)
         for key,val in info.items():
-            # print(key)
-            # print(val)
+            print(key)
+            print(val)
             from modules.data_init import Userprofiles,Groups
             userprofile_2_group = session.query(Userprofiles).filter(Userprofiles.user==key).first()
-            print(userprofile_2_group)
-            for i in val:
-                group = session.query(Groups).filter(Groups.groupname==i).first()
-                print(group)
-                userprofile_2_group.group.append(group)
-                session.commit()
+            group = session.query(Groups).filter(Groups.groupname==val).first()
+            userprofile_2_group.group = [group]
+            # session.add(g1)
+            session.commit()
     else:
         print('''
         -f 指定配置文件
@@ -99,10 +95,8 @@ def createhostuser(argv):
         f = open(filename,"r")
         info = yaml.load(f)
         for key,val in info.items():
-            from modules.data_init import Hostusers,Hosts
-            host=session.query(Hosts).filter(Hosts.hostname==info[key]['hostname']).first()
-            hostid=host.id
-            u1 = Hostusers(user=key,passwd=info[key]['password'],hostid=hostid)
+            from modules.data_init import Hostusers
+            u1 = Hostusers(user=key,passwd=info[key]['password'])
             session.add(u1)
             session.commit()
     else:

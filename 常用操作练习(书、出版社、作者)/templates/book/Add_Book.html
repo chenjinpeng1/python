@@ -1,0 +1,17 @@
+{% extends 'model/model.html' %}
+{% block content %}
+<form method="post" action="/books/addbook/"> {% csrf_token %}
+        book name:<input type="text" name="name">
+        <input type="submit" value="创建新书">
+        <select name="publisher_id">
+            {% for publisher in publishers %}
+            <option value="{{ publisher.id }}">{{ publisher.name }}</option>
+            {% endfor %}
+        </select>
+        <select name="author_ids" multiple="multiple">
+            {% for author in authors %}
+                <option value="{{ author.id }}">{{ author.first_name }} {{author.last_name  }}</option>
+            {% endfor %}
+        </select>
+    </form>
+{% endblock %}

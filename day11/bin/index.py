@@ -16,14 +16,13 @@ actions = {
 def help():
     print('''
     运行程序的初始化操作
-    initdb                  - init mysql data
-    create_userprofile      - create remote user        | file : new_userprofile
-    create_group            - create group              | file : new_group
-    create_host             - create hosts              | file : new_host
-    create_hostuser         - create server user        | file : new_hostuser
-    userprofile_bind_group  - userprofile_bing_group    | file : userprofile_bind_group
-    userprofile_bind_user   - userprofile bind user     | file : userprofile_bind_hostuser
-    hostuser_bind_group     - hostuser_bind_group       | file : hostuser_bind_group
+    initdb              - init mysql data
+    create_userprofile         - create remote user
+    create_group        - create group and bind userprofile,
+    create_host         - create hosts
+    create_hostuser      - create server user
+    bind_userprofile    -initdata.userprofile_bind_group
+    userprofile_bind_user   - userprofile bind user
     ''')
 if __name__=="__main__":
     if len(sys.argv) < 2:

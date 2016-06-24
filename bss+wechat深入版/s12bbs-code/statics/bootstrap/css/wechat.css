@@ -1,0 +1,103 @@
+/*for webchar*/
+.chat-container{
+    min-width: 1024px;
+    border: 1px dashed darkgray;
+}
+.left-contact-panel{
+    width: 25%;
+    height: 600px;
+    border: 2px solid blueviolet;
+    float: left;
+    background-color: #2e3238;
+}
+.msg-item-self{
+    background-color: #4cae4c;
+    margin-left: 70%;
+    margin-bottom: 20px;
+}
+.left_panel_to_left{
+    width: 20%;
+}
+.ele_margin_right{
+    margin-right: 10px;
+}
+.left_panel_to_right{
+    width: 100%;
+}
+.search_bar .frm_search{
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    border: 0px;
+    background-color: #26292E;
+    color: #fff;
+    padding-left: 30px;
+    font-size: 12px;
+}
+.web_wechat_search{
+    position: absolute;
+    z-index: 101;
+    top: 177px;
+    margin-left: 10px;
+    color: white;
+}
+.right-chat-panel{
+    width: 75%;
+    height: 600px;
+    border: 2px solid greenyellow;
+    float: left;
+}
+.chat-box-title{
+    height: 50px;
+    border: 2px solid darkslategray;
+}.chat-box-window{
+    height: 400px;
+    border: 2px solid black;
+    overflow: auto;/*内容溢出加滚动条*/
+}
+ .chat-box-emoj{
+    height: 30px;
+    border: 1px solid brown;
+     padding: 0px;
+}
+ .chat-box-emoj span{
+     width: 40px;
+     height: 29px;
+     display: inherit;
+     float: left;
+ }
+ #file_upload{
+     display: inline;
+ }
+ .chat-box-msg-box{
+    height: 120px;
+    border: 1px solid deeppink;
+}
+
+ .chat-box-msg-box textarea{
+     width: 85%;
+     height:100% ;
+     float: left;
+ }
+  .chat-box-msg-box  button {
+  width: 15%;
+  height: 100%;
+  float: left;
+  }
+.list-user{
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+.comment{width:680px; margin:20px auto; position:relative; background:#fff; padding:20px 50px 50px; border:1px solid #DDD; border-radius:5px;}
+.comment h3{height:28px; line-height:28px}
+.com_form{width:100%; position:relative}
+.input{width:99%; height:60px; border:1px solid #ccc}
+.com_form p{height:28px; line-height:28px; position:relative; margin-top:10px;}
+.chat-box-emoj .emotion{width:42px; height:25px; background:url('/static/bootstrap/arclist/sprite2e4e03.png') no-repeat 2px -806px; padding-left:20px; cursor:pointer}
+/*.chat-box-emoj .emotion:hover{background-position:2px -28px}*/
+.chat-box-emoj .input_file{width:42px; height:25px; background:url('/static/bootstrap/arclist/sprite2e4e03.png') no-repeat 2px -1639px; padding-left:20px; cursor:pointer}
+/*.chat-box-emoj .input_file:hover{background-position:2px -28px}*/
+.qqFace{margin-top:4px;background:#fff;padding:2px;border:1px #dfe6f6 solid;}
+.qqFace table td{padding:0px;}
+.qqFace table td img{cursor:pointer;border:1px #fff solid;}
+.qqFace table td img:hover{border:1px #0066cc solid;}
