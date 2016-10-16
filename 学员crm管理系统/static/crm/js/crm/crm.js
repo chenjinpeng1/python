@@ -20,6 +20,7 @@ function deleted_selected(){
 
         if (select_true == "True"){
             base_url=window.location.pathname;
+            alert(base_url)
             var jsondata = JSON.stringify({'id':ID})
             $.ajax({
                 type:"POST",

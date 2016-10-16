@@ -54,7 +54,20 @@ from crm import Model_Forms
 # for i in dir(models):
 #     model_obj = getattr(models,i)
 #     print (model_obj._meta.app_label)
-u1 = models.UserProfile.objects.get(id=1)
-print(u1.user.password)
-ret = u1.user.has_perm("crm.view_task")
-print(ret)
+u1 = models.ClassList.objects.get(id=28)# 外键查询
+print(u1)
+print(u1.course)
+u2 = models.Course.objects.get(id=1) # 反向查询
+print(u2.customer_set.select_related())
+
+#多对多查询
+a1 = models.UserProfile.objects.get(id=2) # 反向查询
+print(a1)
+print(a1.school_set.select_related())
+
+a2 = models.School.objects.get(id=1)
+print(a2)
+print(a2.staffs.select_related())
+
+
+

@@ -8,6 +8,7 @@ import hashlib
 from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 def index(request):
+    print(request.GET)
     classnames = collections.OrderedDict()
     for i in dir(models):
         if isinstance(getattr(models,i),ModelBase):
@@ -106,7 +107,9 @@ def func(request,obj):
 def addfunc(request,obj):
     if hasattr(models,obj):
         func=getattr(models,obj)
+        print("-----------",func,obj)
         objs = Model_Forms.get_form(func)
+        print("objs------------",objs)
         if request.method == 'POST':
             objs = Model_Forms.get_form(func,request.POST)
             if objs.is_valid():
@@ -144,6 +147,7 @@ def changefunc(request,obj,id):
                                                          })
 
 def ac_login(request):
+    print(request.POST)
     if request.method =='POST':
         username = request.POST['username']
         passwd = request.POST['password']

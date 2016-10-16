@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# Author:Alex Li
-
+# Author:chen
 from django import template
 from django.utils.html import format_html
 
@@ -9,8 +8,9 @@ register = template.Library()
 
 @register.filter
 def truncate_url(img_obj):
-
-    return  img_obj.name.split("/",maxsplit=1)[-1]
+    print("111111111111111111111111",type(img_obj))
+    print ('---------------%s---------------'%img_obj)
+    return img_obj.name.split("/",maxsplit=1)[-1]
 
 
 @register.simple_tag

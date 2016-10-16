@@ -1,0 +1,48 @@
+{% extends 'cmdb/model/base.html' %}
+{% block panel-title %}
+    资产列表
+{% endblock %}
+{% block context %}
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">资产列表</div>
+  <div class="panel-body">
+      <select >
+          <option>  功能区  </option>
+      </select>
+  </div>
+<table class="table table-hover">
+  <thead>
+      <th><input type="checkbox" class="allselect"></th>
+      <th>主机名</th>
+      <th>主机IP</th>
+      <th>机房</th>
+      <th>业务线</th>
+      <th>操作系统</th>
+      <th>CPU</th>
+      <th>内存</th>
+      <th>硬盘</th>
+      <th>操作</th>
+  </thead>
+   {% for host in hostsdata %}
+   <tr>
+       <th><input type="checkbox"></th>
+       <td>{{ host.hostname }}</td>
+       <td>{{ host.manageip }}</td>
+       <td>{{ host.idc }}</td>
+       <td>{{ host.business_unit }}</td>
+       <td>{{ host.os }}</td>
+       <td>{{ host.cpu_count }}</td>
+       <td>{{ host.ram_size }}</td>
+       <td>{{ host.disk_size }}</td>
+       <td>
+       <a href="{% url 'hostdetail'  host.hostid %}" class="btn btn-xs btn-info">详细</a>
+       <a name="update" value="{{ host.hostid }}" class=" btn btn-xs btn-warning">更新</a>
+       </td>
+
+
+    </tr>
+   {% endfor %}
+</table>
+</div>
+{% endblock %}

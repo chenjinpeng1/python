@@ -103,8 +103,6 @@ def new_article(request):
         article_form = form.ArticleModelForm()
         return render(request,'bbs/new_article.html',{"article_form":article_form})
     elif request.method == 'POST':
-        # print(request.POST)
-        # print('---------request_file:',request.FILES)
         article_form = form.ArticleModelForm(request.POST,request.FILES)
         if article_form.is_valid():
             print('----',article_form.cleaned_data)

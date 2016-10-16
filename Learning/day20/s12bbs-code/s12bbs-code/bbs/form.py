@@ -6,7 +6,8 @@ from django.forms import ModelForm
 class ArticleModelForm(ModelForm):
     class Meta:
         model = models.Article
-        exclude = ("pub_date",'author','priority')
+        exclude=()
+        # exclude = ("pub_date",'author','priority')
     def __init__(self,*args,**kwargs):
         super(ArticleModelForm,self).__init__(*args,**kwargs)
         print("base_fields:",self.base_fields)

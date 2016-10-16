@@ -1,0 +1,6 @@
+2016-07-17 18:21:12,607 - TEST-LOG - WARNING - warn message
+2016-07-17 18:21:12,607 - TEST-LOG - ERROR - error message
+2016-07-17 18:21:12,607 - TEST-LOG - CRITICAL - critical message
+2016-07-17 18:22:01,207 - TEST-LOG - WARNING - warn message
+2016-07-17 18:22:01,207 - TEST-LOG - ERROR - error message
+2016-07-17 18:22:01,207 - TEST-LOG - CRITICAL - critical message

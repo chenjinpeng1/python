@@ -1,5 +1,5 @@
 #_*_coding:utf-8_*_
-__author__ = 'Alex Li'
+__author__ = 'chen'
 from django.forms import ModelForm
 
 from bbs import models

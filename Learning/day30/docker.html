@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)http://192.168.11.130:8193/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>
+   Made with Remarkable!
+  </title>
+  <link href="./docker_files/github.min.css" rel="stylesheet">
+  <style type="text/css">
+   html{font-size:100%;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}body{color:#444;font-family:Georgia,Palatino,"Palatino Linotype",Times,"Times New Roman",serif;font-size:12px;line-height:1.5em;padding:1em;margin:auto;max-width:42em;background:#fefefe}a{color:#0645ad;text-decoration:none}a:visited{color:#0b0080}a:hover{color:#06e}a:active{color:#faa700}a:focus{outline:dotted thin}a:active,a:hover{outline:0}::-moz-selection{background:rgba(255,255,0,.3);color:#000}::selection{background:rgba(255,255,0,.3);color:#000}a::-moz-selection{background:rgba(255,255,0,.3);color:#0645ad}a::selection{background:rgba(255,255,0,.3);color:#0645ad}p{margin:1em 0}img{max-width:100%}h1,h2,h3,h4,h5,h6{font-weight:400;color:#111;line-height:1em}h4,h5,h6{font-weight:700}h1{font-size:2.5em}h2{font-size:2em}h3{font-size:1.5em}h4{font-size:1.2em}h5{font-size:1em}h6{font-size:.9em}blockquote{color:#666;margin:0;padding-left:3em;border-left:.5em #EEE solid}hr{display:block;height:2px;border:0;border-top:1px solid #aaa;border-bottom:1px solid #eee;margin:1em 0;padding:0}code,kbd,pre,samp{color:#000;font-family:monospace,monospace;font-size:.98em}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}b,strong{font-weight:700}dfn{font-style:italic}ins{background:#ff9;color:#000;text-decoration:none}mark{background:#ff0;color:#000;font-style:italic;font-weight:700}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}ol,ul{margin:1em 0;padding:0 0 0 2em}li p:last-child{margin:0}dd{margin:0 0 0 2em}img{border:0;-ms-interpolation-mode:bicubic;vertical-align:middle}table{border-collapse:collapse;border-spacing:0}td{vertical-align:top}@media only screen and (min-width:480px){body{font-size:14px}}@media only screen and (min-width:768px){body{font-size:16px}}@media print{*{background:0 0!important;color:#000!important;filter:none!important;-ms-filter:none!important}body{font-size:12pt;max-width:100%}a,a:visited{text-decoration:underline}hr{height:1px;border:0;border-bottom:1px solid #000}a[href]:after{content:" (" attr(href) ")"}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}blockquote,pre{border:1px solid #999;padding-right:1em;page-break-inside:avoid}img,tr{page-break-inside:avoid}img{max-width:100%!important}@page :left{margin:15mm 20mm 15mm 10mm}@page :right{margin:15mm 10mm 15mm 20mm}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}}table{padding:0}table tr{border-top:1px solid #ccc;background-color:#fff;margin:0;padding:0}table tr:nth-child(2n){background-color:#aaa}table tr th{font-weight:700;border:1px solid #ccc;text-align:left;margin:0;padding:6px 13px}table tr td{border:1px solid #ccc;text-align:left;margin:0;padding:6px 13px}table tr td :first-child,table tr th :first-child{margin-top:0}table tr td:last-child,table tr th :last-child{margin-bottom:0}
+  </style>
+ </head>
+ <body>
+  <h1 id="1-docker">
+   第1章 Docker原理介绍
+  </h1>
+  <p>
+   本章主要介绍容器的基本原理。在了解基础原理，并且对容器有一些认识之后，掌握容器相关的一些基本操作。
+  </p>
+  <h1 id="11">
+   1.1容器原理介绍
+  </h1>
+  <h2 id="_1">
+   什么是容器技术
+  </h2>
+  <p>
+   容器技术是轻量级虚拟化技术。利用该技术能够将应用打包发布到不同的容器化服务器上运行。在此过程中，可以减少繁琐的应用环境构建，大大加快从源码到应用上线的过程。
+  </p>
+  <h2 id="_2">
+   原理
+  </h2>
+  <p>
+   容器技术最近很火，是各大公司争先使用的技术，首先整体来看容器是什么。
+   <br>
+   <img alt="" src="./docker_files/1.1-container-1.png" title="container-2">
+   <br>
+   图1-1 容器及其ID
+  </p>
+  <p>
+   从图1-1可以看出，运行了一个容器，而且这个容器中运行的父进程的ID为2483。
+  </p>
+  <p>
+   <img alt="" src="./docker_files/1.1-container-2.png" title="container-2">
+   <br>
+   图1-2 容器ID及其父子进程
+  </p>
+  <p>
+   从图1-2中可以看出，容器2483进程的父进程是2243，是以daemon运行的docker engine。同时它还派生了一个子进程2494。
+  </p>
+  <p>
+   <strong>
+    通过上面的介绍可以得到一个简单的概念：容器是受到资源限制的进程及其子进程。
+   </strong>
+  </p>
+  <p>
+   这是从微观上来看容器的定义，从操作系统宏观上来看容器所处的位置则是图1-3
+   <br>
+   <img alt="" src="./docker_files/1.1-container-3.png" title="container-3">
+   <br>
+   图1-3 容器层次
+  </p>
+  <p>
+   图13中实际是包含容器A和容器B，每个容器都包含了Bins或Libs（必要的保证应用运行的库文件）。而容器之下是Docker Engine，保证每个容器都运行在独立的名字空间中。其中还存在另外一个概念：容器镜像，App+Bins/Libs 构成容器的镜像。这个是在容器运行前的一种状态。当然，容器在运行时也可以添加参数，实际运行比现在复杂。
+  </p>
+  <p>
+   因为大家对虚拟机比较熟悉，做一个容器跟虚拟机在操作系统上所处层次的对比：
+   <br>
+   <img alt="" src="./docker_files/1.1-container-4.png" title="容器系统层次">
+   <br>
+   图 1-4 容器 vs VM层次对比
+  </p>
+  <p>
+   从图1-4中可以看出，虚拟机比容器多一层Guest OS层，这样是容器能够快速启停，性能上比虚拟机好的一个因素。
+  </p>
+  <p>
+   <strong>
+    Docker组成
+   </strong>
+  </p>
+  <ul>
+   <li>
+    registry：Docker镜像库，制作好的Docker镜像存储的地方，方便拉取、推送。registry能够分层存储，类似于git对代码的管理。
+   </li>
+   <li>
+    image：将App和Libs打包之后的格式，类似于虚拟机的镜像文件。
+   </li>
+   <li>
+    container：image启动运行后的一种状态。
+   </li>
+  </ul>
+  <p>
+   <img alt="" src="./docker_files/docker-registry-img-container.png">
+   <br>
+   图1-5 registry、image和container的关系
+  </p>
+  <p>
+   从图1-5上可以很清楚看到registry、image和container三者之间的关系。而且registry、image和container三个组件构成了整个容器工具栈，实现了迭代打包镜像，镜像推送发布，对象快速部署的功能，使得对于应用的持续集成发布成为可能。
+  </p>
+  <p>
+   <strong>
+    本节参考
+   </strong>
+   <br>
+   -
+   <a href="http://dockone.io/article/76">
+    http://dockone.io/article/76
+   </a>
+   <br>
+   -
+   <a href="http://coolshell.cn/articles/17010.html">
+    http://coolshell.cn/articles/17010.html
+   </a>
+   <br>
+   -
+   <a href="http://coolshell.cn/articles/17029.html">
+    http://coolshell.cn/articles/17029.html
+   </a>
+  </p>
+  <h1 id="12">
+   1.2 容器操作
+  </h1>
+  <h2 id="ubuntu-docker">
+   Ubuntu 系列安装Docker
+  </h2>
+  <p>
+   Ubuntu 14.04 版本系统中自带了Docker二进制包，可以直接安装
+  </p>
+  <pre><code class="sh">$ sudo apt-get update
+$ sudo apt-get install -y docker.io
+$ sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
+$ sudo sed -i '$acomplete -F  _docker docker' /etc/bash_completion.d/docker.io
+</code></pre>
+  <p>
+   目前从Ubuntu官方系统带的二进制包比较老是1.6.2版本，有些新特性不一定能够使用到，稳定性上也存在一些问题，建议安装最新版容器技术包。
+  </p>
+  <p>
+   从Docker官方源安装
+  </p>
+  <pre><code class="sh">$ sudo apt-get install apt-transport-https
+$ sudo apt-key  adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D857
+$ sudo bash -c "echo deb https://get.docker.io/ubuntu docker main" &gt; /etc/apt/sources.list.d/docker.li
+$ sudo apt-get update
+$ sudo apt-get install lxc-docker
+</code></pre>
+  <p>
+   或者采用Docker官方使用的安装脚本
+  </p>
+  <pre><code class="sh"># curl -sSL https://get.docker.com/ |sh
+</code></pre>
+  <p>
+   当前的最新版本是1.2.0，可以使用到Docker 的很多新特性，方便我们的快速上手和开发使用。
+  </p>
+  <p>
+   在实际操作容器时，需要明确三个概念：
+  </p>
+  <ul>
+   <li>
+    镜像
+   </li>
+   <li>
+    容器
+   </li>
+   <li>
+    仓库
+   </li>
+  </ul>
+  <h2 id="_3">
+   镜像
+  </h2>
+  <p>
+   类比虚拟机机中镜像，但是比虚拟机镜像要轻量很多，容器镜像只需要libs+app就行。对于特定的app，只需要此app使用的动态库即可，通常镜像只有几百兆。
+  </p>
+  <p>
+   镜像是容器在没有运行时的一种状态，镜像制作可以遵循Docker官方的DockerFile语法进行。
+  </p>
+  <p>
+   <img alt="" src="./docker_files/docker-images.png">
+  </p>
+  <p>
+   图1-6 容器镜像
+   <br>
+   从图1-6中可以看到镜像的几个属性，repository、tag、image ID、created、size。利用这些信息可以很好的区分不同的镜像，有利于发布不同的应用。
+  </p>
+  <h2 id="_4">
+   容器
+  </h2>
+  <p>
+   容器是镜像在运行时的一种状态。镜像在打包好之后，放到镜像库中，当需要运行时，采用Docker的特定指令加上一些额外的参数就能够运行起来。镜像一旦运行起来就进入容器状态。
+  </p>
+  <p>
+   在容器状态，存在生命周期管理的概念。容器可以start，stop，restart和destroy。
+  </p>
+  <p>
+   <img alt="" src="./docker_files/docker-container.png">
+  </p>
+  <p>
+   图1-7 容器
+  </p>
+  <p>
+   图1-7显示了一个正在运行的容器。
+  </p>
+  <h2 id="_5">
+   仓库
+  </h2>
+  <p>
+   存储镜像有两种方式，一是本地镜像存储，二是中心库存储。当使用Dockerfile制作好镜像后，存储在本地镜像库中。之后可以将本地镜像库中的镜像推送到远程中心仓库中存储。同理，可以从中心仓库拉取镜像到本地仓库。实现镜像的制作，存储，分发。
+  </p>
+  <p>
+   Docker有官方镜像库，也允许在使用Docker的公司或者个人搭建私用仓库。可以利用发布的registry代码搭建私有中心仓库，存储私有镜像。
+  </p>
+  <p>
+   <img alt="" src="./docker_files/docker-registry.png">
+  </p>
+  <p>
+   图1-8 镜像库
+   <br>
+   图1-8显示了自建的私有仓库信息。可以查看到每个使用的镜像，以及镜像的tag（版本）信息。
+  </p>
+  <h2 id="_6">
+   实战
+  </h2>
+  <h3 id="_7">
+   镜像管理
+  </h3>
+  <pre><code>显示所有镜像
+docker images
+查询镜像
+docker search ubuntu:14.04
+拉取镜像
+docker pull ubuntu:14.04
+推送镜像到库中
+docker push
+删除镜像
+docker rmi
+制作镜像
+docker build
+需要编写Dockerfile文件，虽然比较简单，需要另外讲解。
+</code></pre>
+  <h3 id="_8">
+   容器生命控制
+  </h3>
+  <pre><code>获取帮助
+docker --help
+展示所有镜像
+docker images
+运行镜像 
+docker run
+显示所有容器
+docker ps
+显示容器详细信息
+docker inspect containerid
+停止容器
+docker stop containerid
+开启容器
+docker start containerid
+删除容器
+docker rm -f containerid
+</code></pre>
+  <h1 id="2">
+   第2章 容器管理系统
+  </h1>
+  <p>
+   本章主要介绍容器管理系统要使用到的接口、管理系统概要设计和详细设计。通过本章的学习将认识到管理系统的重要性，也将了解到怎样设计这个管理系统。
+  </p>
+  <h2 id="21">
+   2.1 概要设计
+  </h2>
+  <h3 id="_9">
+   系统背景
+  </h3>
+  <p>
+   容器使用的不同阶段：
+  </p>
+  <ul>
+   <li>
+    <p>
+     手工阶段：全部靠手工来启停创建容器。对于单个应用来说没有问题，简单的一行命令就能够操作容器。（例如：用容器启动一个nginx服务）
+    </p>
+   </li>
+   <li>
+    <p>
+     半自动阶段：对于大量需要部署的应用。编写大量的脚本来编排容器，完成比较复杂的应用的发布。只需要编写相对复杂的脚本就能够完成工作。（例如：使用容器部署nginx和java服务）
+    </p>
+   </li>
+   <li>
+    <p>
+     规模阶段：一次对多个节点（3个以上服务器节点）进行应用高可用部署。需要在编写编排脚本的基础上，运用自动化工具来推送容器镜像，管理容器的启停。（例如：部署10套nginx和java服务）
+    </p>
+   </li>
+   <li>
+    <p>
+     自动化规模阶段：大规模阶段，需要有大的管理系统来管理整个集群的应用部署，而且能够同时对多个应用操作。管理的容器达到几百上千。（例如：部署多个应用的多套nginx和java服务）
+    </p>
+   </li>
+   <li>
+    <p>
+     最终目的：将日常大量的手工工作自动化，最大的节约人力成本。将有限的人力放置在更加广阔的服务上。
+    </p>
+   </li>
+  </ul>
+  <h3 id="_10">
+   组成
+  </h3>
+  <p>
+   容器管理系统由前端页面、后端操作和数据库表组成，即所谓的view、control和model。
+  </p>
+  <ul>
+   <li>
+    前端页面用来展示被管理的节点，展示管理节点上的容器，并且保证用户能够对管理的容器进行生命周期管理。
+   </li>
+   <li>
+    后端操作，除了对接web请求外，还需要对web请求做二次包装，转化为能够调用Docker容器python接口的代码，并做一些容错处理，保证在容器管理过程中的稳定可靠。
+   </li>
+   <li>
+    数据库表用来实现用户管理、记录管理节点和管理容器用途。
+   </li>
+  </ul>
+  <h3 id="_11">
+   总体设计
+  </h3>
+  <p>
+   <img alt="" src="./docker_files/2-1-shipman-structure1.png" title="shipman-structure1">
+   <br>
+   图2-1 整体架构图
+  </p>
+  <p>
+   从图2-1中可以看出，用户跟UI做交互，所有动作都会到Handler做过滤，在handler阶段对各个url做解释，调用MySwarm或者Docker-py，将操作最终落地到被管理的各个Docker engine上。从而实现容器的生命管理操作。
+  </p>
+  <p>
+   图2-1中没有加入调度模块，不能够实现程序资源的自动分配，而是由管理者根据资源统计情况人工调度。这是该系统需要进一步演化的一个重点。
+  </p>
+  <p>
+   如果需要添加资源自动调度模块，只需要在MySwarm层做进一步开发Scheduler即可。资源调度和管理是容器管理中相对比较核心和困难的地方，可以参考社区Mesos和Marathon方案。当前，已经有比较成熟的解决方案。
+  </p>
+  <h3 id="_12">
+   登录界面
+  </h3>
+  <p>
+   <img alt="" src="./docker_files/2-2-docker-login.png">
+   <br>
+   图2-2 登录界面
+  </p>
+  <p>
+   图2-2是从Bootstrap上获取的登录界面，简单实用。在登录界面主要实现对用户的认证和权限控制。用户认证解决是否可以访问该平台；权限控制解决可以访问该平台的那些部分。用户登录需要跟数据库做交互，有数据库表需求。
+  </p>
+  <p>
+   用户表有四个字段：id、name、password、user_group。id为关键字int型，name、password和user_group都是字符串字段。
+  </p>
+  <h3 id="_13">
+   管理界面
+  </h3>
+  <p>
+   管理界面采用左右分栏方式，左边为管理栏，右边为展示栏，比较符合实际管理操作系统的风格。
+  </p>
+  <p>
+   <img alt="" src="./docker_files/2-3-management-dashboard.png">
+   <br>
+   图2-3 管理界面
+  </p>
+  <p>
+   图2-3 管理界面上分为两个部分，上部分为资源管理，下部分为容器生命周期的实际操作。
+  </p>
+  <h3 id="_14">
+   容器节点管理
+  </h3>
+  <p>
+   容器节点管理主要是需要管理的节点做增加和删除操作，添加到管理系统中的节点，其节点上的容器就添加到了管理系统中。
+  </p>
+  <p>
+   <img alt="" src="./docker_files/2-4-node-management.png">
+   <br>
+   图2-4 节点管理
+  </p>
+  <p>
+   节点管理中有增加和删除节点操作，需要在后面的开发中添加功能。
+  </p>
+  <h3 id="_15">
+   容器用途管理
+  </h3>
+  <p>
+   由管理系统创建的容器，需要对使用情况做记录，该部分即是完成这部分工作，保证容器用途和使用人可查。
+  </p>
+  <p>
+   <img alt="" src="./docker_files/2-5-container-usage.png">
+   <br>
+   图2-5 容器用途管理
+  </p>
+  <h3 id="_16">
+   容器生命周期控制
+  </h3>
+  <p>
+   容器生命周期管理包括容器的创建、启动、停止、删除四个操作，这是整个管理系统中的核心部分。
+   <br>
+   <img alt="" src="./docker_files/2-6-container-create.png">
+   <br>
+   图2-6 容器创建
+  </p>
+  <p>
+   <img alt="" src="./docker_files/2-7-container-operation.png">
+   <br>
+   图2-7 容器生命周期控制
+  </p>
+  <p>
+   图2-6是容器的创建部分，主要用来设置容器创建过程中的各个系统资源参数。图2-7是对创建后的容器的操作，包括启动、停止、重启和销毁。
+  </p>
+  <p>
+   <strong>
+    实战 展示管理系统
+   </strong>
+  </p>
+  <h2 id="22">
+   2.2 容器接口
+  </h2>
+  <h3 id="dockerpython">
+   Docker的Python接口
+  </h3>
+  <p>
+   Docker 的官方Python接口是用python编写的，对容器操作命令做了封装后的接口。本质还是Docker engine的Restful接口的调用。只是用Python封装后，操作起来更加方面简洁。
+   <br>
+   可以采用源码安装，
+  </p>
+  <pre><code class="sh">wget https://github.com/docker/docker-py/archive/1.8.1.zip
+cd 1.8.1
+python setup.py
+</code></pre>
+  <p>
+   也可以使用pip install来安装
+  </p>
+  <pre><code class="sh">     pip install dokcer-py
+</code></pre>
+  <p>
+   安装后，直接使用import命令即可使用
+  </p>
+  <pre><code>import docker
+</code></pre>
+  <p>
+   引入Docker模块之后，就可以利用Docker模块提供的方法。
+  </p>
+  <p>
+   <strong>
+    实战 利用python api创建容器
+   </strong>
+  </p>
+  <pre><code class="python">import docker
+
+client_ins = docker.Client(base_url='tcp://127.0.0.1:2375', version='1.20', timeout=10)
+print ("      Create the container......")
+container_ret = client_ins.create_container(image=conf['Image'],
+                            stdin_open=conf['OpenStdin'],
+                            tty=conf['Tty'],
+                            command=conf['Cmd'],
+                            name=conf['Name'],
+                            hostname=conf['Hostname'],
+                            host_config=conf['HostConfig'])
+</code></pre>
+  <p>
+   以上代码中可以看出，引入Docker模块之后，需要初始化Client对象，然后可以调用Client对象中的方法。
+   <br>
+   这些方法跟Docker cli的方法相差不大，包括我们要用到的各种方法。
+  </p>
+  <p>
+   增加各个方法的详细解释（或者将不用到的删掉，详细的介绍要使用的方法）
+  </p>
+  <pre><code class="sh">
+    docker ps 功能，列举所有的容器
+    containers(self, quiet=False, all=False, trunc=False, 
+              latest=False, since=None, before=None, limit=-1,
+              size=False, filters=None)
+
+    docker cp 功能，从容器中拷贝数据
+    copy(self, resource_id=None, *args, **kwargs)
+
+    创建容器，之后可以使用start命令启动容器
+    create_container(self, image, command=None, hostname=None,
+                     user=None, detach=False,
+                     stdin_open=False,tty=False,mem_limit=None, 
+                     ports=None, environment=None,
+                     dns=None,volumes=None,volumes_from=None,
+                     network_disabled=False, name=None,
+                     entrypoint=None,cpu_shares=None,working_dir=None,
+                     domainname=None, memswap_limit=None,
+                     cpuset=None,host_config=None,mac_address=None,
+                     labels=None, volume_driver=None, stop_signal=None,
+                     networking_config=None)
+
+    重启容器
+    restart(self, resource_id=None, *args, **kwargs)
+
+    启动容器
+    start(self, resource_id=None, *args, **kwargs)
+
+    查看容器运行数据
+    stats(self, *args, **kwargs)
+
+    停止容器
+    stop(self, resource_id=None, *args, **kwargs)
+
+    展示容器中运行的进程
+    top(self, resource_id=None, *args, **kwargs)
+
+    启动容器中所有的进程
+    unpause(self, resource_id=None, *args, **kwargs)
+
+    更新容器配置
+    update_container(self, *args, **kwargs)
+
+    阻塞直到容器停止，进入exit状态
+    wait(self, resource_id=None, *args, **kwargs)  
+</code></pre>
+  <p>
+   具体可以上https://docker-py.readthedocs.io/en/latest/api/查看各个方法的介绍。
+   <br>
+   以上代码块中的方法，基本都是比较常用的方法，对Docker的开发有很大的帮助。
+   <br>
+   另外，有些性能或者监控相关的数据，在Docker官方提供的接口中并没有很好的实现，需要我们直接从Docker engine中获取数据，此时就可以使用Docker engine提供的原生Restful接口了。
+   <br>
+   如以下代码：
+  </p>
+  <pre><code class="python">def _container_list_more(self, node_ip, node_port, containers_id):
+        url = ('http://' + node_ip + ":" + node_port + "/containers/" +
+                  containers_id + "/json")
+        container_more_url = Curl(url)
+        ret_json = container_more_url.get_value()
+        return ret_json
+</code></pre>
+  <p>
+   以上代码块用来获得某个节点上的容器的详细信息。该方法没有调用Docker 的python接口，而是直接从Docker engine获取。
+  </p>
+  <p>
+   关于docker engine提供的restful 接口可以参考官方文档。
+  </p>
+  <p>
+   <strong>
+    实战 操作docker engine的restful接口
+   </strong>
+  </p>
+  <p>
+   <img alt="" src="./docker_files/docker-restful-api-info.png">
+  </p>
+  <p>
+   图2-8 docker restful接口
+  </p>
+  <p>
+   图2-8是利用docker engine restful来查看其中一个被管理节点的信息。返回的全部为json格式数据，可以方便之后的操作。
+  </p>
+  <h2 id="23">
+   2.3 详细设计
+  </h2>
+  <h3 id="web">
+   web框架
+  </h3>
+  <p>
+   选择tornado作为管理系统的Web框架。跟Django比起来，tornado更加简单，灵活性也更大。
+   <br>
+   tornado有两种安装方式：
+  </p>
+  <pre><code class="sh">pip install tornado
+</code></pre>
+  <p>
+   或者采用ubuntu内部工具apt-get来安装：
+  </p>
+  <pre><code class="sh">apt-get install python-tornado
+</code></pre>
+  <h3 id="_17">
+   前端选择
+  </h3>
+  <p>
+   前端使用jquery和bootstrap框架，样式和表格等全部采用bootstrap风格，比较适合当前流行色，同时也能够自适应手机模式，方便在手机上操作容器。
+  </p>
+  <h3 id="_18">
+   数据库表
+  </h3>
+  <p>
+   后端数据库采用mysql，数据库表一共有四个，分别是节点表、IP资源表、容器用途表和用户表。
+   <br>
+   四个表的设计如下：
+  </p>
+  <p>
+   详细的介绍每个表字段。
+  </p>
+  <p>
+   节点表
+  </p>
+  <pre><code class="python">class NodeDB(Base):
+    __tablename__ = 'node'
+    id         = Column(Integer, primary_key=True)  //自增关键字
+    name       = Column(String(32))                  //节点的hostname
+    ip         = Column(String(32))                        //节点IP地址
+    port       = Column(String(32))                     //节点的管理端口
+    cpus       = Column(String(32))                    //节点CPU个数
+    mem        = Column(String(32))                  //节点内存数
+    images     = Column(String(32))                 //节点上的镜像数
+    state      = Column(String(32))                     //节点状态
+    node_group = Column(String(32))           //节点所在的组 
+    containers = Column(String(32))              //节点上的容器数
+    os_version = Column(String(32))              //节点操作系统版本
+    kernel_version = Column(String(32))       //节点内核版本
+    docker_version = Column(String(32))      //节点上Docker engine版本
+</code></pre>
+  <p>
+   容器用途表
+  </p>
+  <pre><code class="python">class ConUsageDB(Base):
+    __tablename__ = 'con_usage'
+    id        = Column(Integer, primary_key=True)  //自增关键字
+    con_id    = Column(String(64))           //容器ID
+    con_addr  = Column(String(32))       //容器IP地址
+    node_ip   = Column(String(32))         //容器所在节点IP
+    user_name = Column(String(32))     //容器用户名
+    con_app   = Column(String(32))        //容器上运行app
+    con_desc  = Column(String(256))     //容器其他描述
+</code></pre>
+  <p>
+   用户表
+  </p>
+  <pre><code class="python">class UserDB(Base):
+    __tablename__ = 'user'
+    id         = Column(Integer, primary_key=True)  //自增关键字
+    name       = Column(String(32))         //用户名
+    password   = Column(String(64))     //用户密码
+    user_group = Column(String(32))    //用户所在组
+</code></pre>
+  <p>
+   节点表、容器用途表和用户表组成整个管理系统的数据库表。对这三个表的操作，构成整个系统的40%功能，剩下的数据展示和操作是管理系统直接对节点操作完成。
+  </p>
+  <h1 id="3">
+   第3章 管理系统开发
+  </h1>
+  <p>
+   本章详细的介绍系统的实际编码过程。
+  </p>
+  <h2 id="31">
+   3.1 构建环境
+  </h2>
+  <h3 id="ide">
+   IDE选择
+  </h3>
+  <p>
+   初步使用Pycharm作为python开发的IDE环境，目前有付费版和社区版，都能够提高开发效率。同时结合python的虚拟环境，对系统自由环境影响较小，也能够快速重建开发环境。
+  </p>
+  <h3 id="_19">
+   代码结构
+  </h3>
+  <p>
+   代码初步采用MVC架构，分为handlers，model，static，templates 4个目录，4个目录的功能分别如下：
+  </p>
+  <ul>
+   <li>
+    handlers：负责处理url逻辑，保证指定url展示正确
+   </li>
+   <li>
+    model：负责跟数据交互，并且格式化数据
+   </li>
+   <li>
+    static：负责存储css，js，images
+   </li>
+   <li>
+    templates： 负责存储静态html文件模板
+   </li>
+  </ul>
+  <h3 id="_20">
+   容器环境
+  </h3>
+  <p>
+   容器环境采用已经做好的虚拟机镜像的方式发送，简化大家安装容器，下载镜像的操作，快速构建开发对应的应用环境。在实际生产中，这部分工作可以由系统工程师来完成。虚拟化环境软件为virtualbox，可以根据官网来安装。虚拟机为ubuntu server 14.04 lts版本，具有很好的稳定性和易用性。容器版本为最新的1.11版，docker在1.9版本后并没有发行2.0版，而是采用了1.10版，预示着1.x将是长期版本。
+  </p>
+  <h2 id="32">
+   3.2 用户管理
+  </h2>
+  <p>
+   用户管理主要使用了tornado的安全认证方式。不仅解决了权限的控制，而且节约了大量的认证开发的时间。
+  </p>
+  <p>
+   整体访问流程如下：
+  </p>
+  <pre><code>User--------&gt; '/'(已经认证)---------&gt;WelcomeHandler(展示欢迎页面)
+                     |
+                     |
+             没有认证或cookie超时-------&gt;login(登录页面登录)
+</code></pre>
+  <p>
+   从流程图上可以看见，tornado的认证系统主要是使用cookie来识别用户和做安全保护。当用户首次登录页面或者用户cookie过期后，将需要重新登录系统。
+   <br>
+   整个过程中涉及到的方法和函数有：
+  </p>
+  <pre><code class="python">import tornado.web
+
+class BaseHandler(tornado.web.RequestHandler):
+    def get_current_user(self):
+        return self.get_secure_cookie("username")
+
+class LoginHandler(BaseHandler):
+    def get(self):
+        self.render('login.html')
+
+    def post(self):
+        self.set_secure_cookie("username", self.get_argument("username"))
+        self.redirect("/")
+
+//调用tornado.web.authenticated装饰器来完成认证，保证在做get方法的时候先验证用户的cookie
+class WelcomeHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        self.render('index.html', user=self.current_user)
+
+class LogoutHandler(BaseHandler):
+    def get(self):
+        if (self.get_argument("logout", None)):
+            self.clear_cookie("username")
+            self.redirect("/")
+</code></pre>
+  <p>
+   跟url相关的代码：
+  </p>
+  <pre><code class="python">application = tornado.web.Application([
+    (r'/', WelcomeHandler),
+    (r'/login', LoginHandler),
+    (r'/logout', LogoutHandler)
+</code></pre>
+  <p>
+   <strong>
+    实战：利用tornado的安全认证来编写登录
+   </strong>
+   <br>
+   整个编码过程以tornado框架为基础，实际展示
+  </p>
+  <h2 id="33">
+   3.3 节点管理
+  </h2>
+  <h3 id="_21">
+   节点管理
+  </h3>
+  <p>
+   节点管理的整个流程图：
+  </p>
+  <p>
+   <img alt="" src="./docker_files/node-management.png">
+   <br>
+   图3-1 节点管理的整个流程图
+  </p>
+  <h3 id="_22">
+   节点添加
+  </h3>
+  <p>
+   这部分功能放到myswarm.py单独的模块中实现，在之后的很多操作中都要用到，便于重用。
+   <br>
+   涉及到几个关键点
+  </p>
+  <ul>
+   <li>
+    页面展示的信息是从数据库获得保证节点信息能够长期存储
+   </li>
+   <li>
+    添加节点直接插入到数据库
+   </li>
+   <li>
+    <p>
+     检查添加节点是否有效并且刷新数据库信息
+     <br>
+     使用多线程来后台刷新节点信息，并且将节点信息写入数据库，保证页面能够快速返回数据
+    </p>
+    <p>
+     节点添加--------&gt;采集节点信息----&gt;update DB-------&gt;展示节点信息
+    </p>
+   </li>
+  </ul>
+  <p>
+   采集节点信息后，需要将所有信息update到数据库中，然后从数据库中获得节点信息展示给前端页面。这样流程上保证每次都能够获得节点的最新信息，特别实在节点镜像和容器数得到更新后。
+  </p>
+  <h3 id="_23">
+   节点删除
+  </h3>
+  <pre><code>采集节点信息--------&gt;update DB---------&gt;展示节点--------&gt;删除节点---------&gt;删除成功
+</code></pre>
+  <p>
+   删除节点时，首先是对节点信息刷新，然后利用提供的删除按钮删除节点。
+  </p>
+  <p>
+   此外，管理系统在登录时会自动刷新节点信息，保证每次登录到系统后看到最新的节点统计信息（包括节点是否可以接通，节点上的镜像数，节点上容器数）
+  </p>
+  <p>
+   <strong>
+    实战：编写节点操作代码
+   </strong>
+  </p>
+  <h2 id="34">
+   3.4 容器创建启动
+  </h2>
+  <h3 id="_24">
+   容器创建启动
+  </h3>
+  <p>
+   容器创建启动的整个流程：
+   <br>
+   <img alt="" src="./docker_files/container-create-start.png">
+   <br>
+   图3-2 容器创建启动
+  </p>
+  <p>
+   图3-2中简单的展示了容器创建和启动2个过程，首先容器的创建，之后是容器的启动。创建的过程中需要传输一定限定参数，而启动则是直接从创建完成的容器开始的。
+  </p>
+  <h3 id="_25">
+   容器创建
+  </h3>
+  <p>
+   容器在创建过程中，首先选择容器的规格，包括容器的CPU、内存、运行命令和容器镜像选择。
+  </p>
+  <pre><code>CPU值：      包括CPU时间，CPU配额，CPU相对值
+CPU时间：    相对值，基准值
+CPU配额：   CPU时间的倍数，表示在基准时间上的时间数，用来表示逻辑CPU核数
+CPU相对值：  CPU出现竞争时占用CPU的比例
+内存大小：    容器占用内存的上限
+运行命令：    容器启动时运行的命令
+容器镜像：    运行时基准镜像
+</code></pre>
+  <p>
+   选择了以上这些值之后，将这些参数传递到后台进行处理。创建容器的过程如下：
+  </p>
+  <p>
+   user--------handler--------myswarm----------docker engine
+  </p>
+  <p>
+   用户发送容器创建的参数给容器engine，容器engine拿到了这些参数后创建好容器，等待下一步操作。
+   <br>
+   <strong>
+    实战: 容器创建编码
+   </strong>
+  </p>
+  <h3 id="_26">
+   容器启动
+  </h3>
+  <p>
+   容器启动操作相对比较简单，仅仅是给创建的容器发送运行命令，让创建后的容器启动起来。容器启动之后将创建后的容器插入到数据库中，保证后续的操作能够顺利进行。
+  </p>
+  <p>
+   user--------handler--------myswarm（DB）----------docker engine
+  </p>
+  <p>
+   容器启动是在容器创建之后进行的，得到了容器的ID之后，发送启动指令给容器engine启动容器。容器启动之后将从启动的容器中获得容器分配的桥接IP。
+  </p>
+  <p>
+   <strong>
+    实战：容器启动编码
+   </strong>
+  </p>
+  <h2 id="35">
+   3.5 容器关闭删除
+  </h2>
+  <h3 id="_27">
+   容器关闭和删除
+  </h3>
+  <p>
+   <img alt="" src="./docker_files/container-stop-delete.png">
+  </p>
+  <p>
+   图3-3 容器关闭和删除
+   <br>
+   图3-3是容器的关闭和删除流程图。容器的关闭和删除实际操作过程比较相似，都是容器生命周期控制中的操作，主要区别是删除操作需要将容器用途中的容器信息删掉。
+  </p>
+  <h3 id="_28">
+   容器关闭
+  </h3>
+  <p>
+   容器关闭相对比较简单，仅仅需要将关闭命令发送给容器 engine。该命令同样可以利用容器的python api。整个过程如下：
+  </p>
+  <p>
+   user-----------handler---------myswarm--------------docker engine
+  </p>
+  <p>
+   <strong>
+    实战：容器关闭
+   </strong>
+  </p>
+  <h3 id="_29">
+   容器删除
+  </h3>
+  <p>
+   容器删除过程同样是发送关闭命令给容器engine，也是利用容器的python api。整个过程如下：
+  </p>
+  <p>
+   user------------handler---------myswarm（DB）-------------docker engine
+  </p>
+  <p>
+   删除操作需要额外的读写数据库操作，需要将容器用途中对应的容器删掉，保证容器用途表中的数据完整性。
+  </p>
+  <p>
+   <strong>
+    实战：容器删除
+   </strong>
+  </p>
+  <h2 id="36">
+   3.6 用途管理
+  </h2>
+  <h3 id="_30">
+   容器用途
+  </h3>
+  <p>
+   <img alt="" src="./docker_files/container-usage-modify.png">
+  </p>
+  <p>
+   图3-4 容器用途修改
+  </p>
+  <p>
+   图3-4 容器修改过程中需要修改数据库，将指定容器的用途信息存储到数据库中，方便日后对信息的查询。
+  </p>
+  <h3 id="_31">
+   添加容器信息
+  </h3>
+  <p>
+   在容器创建后，容器相关信息需要记录下来，记录的信息包括容器使用者，容器用途，容器描述。整个过程只需要读写数据库，没有其他操作。
+  </p>
+  <p>
+   <strong>
+    实战：添加容器信息
+   </strong>
+   <br>
+   此操作实际在容器创建过程中已经完成。
+  </p>
+  <h3 id="_32">
+   修改容器信息
+  </h3>
+  <p>
+   先搜索到指定容器，然后修改容器相关信息，最后提交到数据库表中
+  </p>
+  <p>
+   <strong>
+    实战：修改容器信息
+   </strong>
+  </p>
+  <script src="./docker_files/highlight.min.js">
+  </script>
+  <script>
+   hljs.initHighlightingOnLoad();
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+  </script></body></html>
